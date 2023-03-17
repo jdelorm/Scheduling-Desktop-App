@@ -1,6 +1,7 @@
 module delorme.john {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens delorme.john to javafx.fxml;
