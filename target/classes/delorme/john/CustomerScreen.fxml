@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="delorme.john.Controllers.CustomerScreenController">
+   <children>
+      <TableView prefHeight="208.0" prefWidth="775.0">
+        <columns>
+          <TableColumn fx:id="customerScreenIDCol" prefWidth="56.33332824707031" text="ID" />
+          <TableColumn fx:id="customerScreenNameCol" prefWidth="145.3333282470703" text="Name" />
+            <TableColumn fx:id="customerScreenAddressCol" prefWidth="166.0" text="Address" />
+            <TableColumn fx:id="customerScreenPostalCodeCol" prefWidth="80.99996948242188" text="Postal Code" />
+            <TableColumn fx:id="customerScreenPhoneCol" minWidth="0.0" prefWidth="109.66665649414062" text="Phone #" />
+            <TableColumn fx:id="customerScreenCountryCol" minWidth="0.0" prefWidth="103.0" text="Country" />
+            <TableColumn fx:id="customerScreenStateCol" prefWidth="113.33331298828125" text="State/Province" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="215.0" text="ID" />
+      <TextField fx:id="customerScreenID" layoutX="79.0" layoutY="211.0" onAction="#onCustomerScreenID" />
+      <TextField fx:id="customerScreenName" layoutX="79.0" layoutY="243.0" onAction="#onCustomerScreenName" />
+      <TextField fx:id="customerScreenAddress" layoutX="79.0" layoutY="275.0" onAction="#onCustomerScreenAddress" />
+      <TextField fx:id="customerScreenPostalCode" layoutX="79.0" layoutY="308.0" onAction="#onCustomerScreenPostalCode" />
+      <TextField fx:id="customerScreenPhoneNumber" layoutX="345.0" layoutY="211.0" onAction="#onCustomerScreenPhoneNumber" />
+      <ComboBox fx:id="customerScreenStateDropDown" layoutX="344.0" layoutY="275.0" onAction="#onCustomerScreenStateDropDown" prefWidth="150.0" />
+      <Label layoutX="14.0" layoutY="247.0" text="Name" />
+      <Label layoutX="14.0" layoutY="279.0" text="Address" />
+      <Label layoutX="14.0" layoutY="312.0" text="Postal Code" />
+      <Label layoutX="262.0" layoutY="215.0" text="Phone Number" />
+      <Label layoutX="262.0" layoutY="247.0" text="Country" />
+      <Label layoutX="262.0" layoutY="279.0" text="State/Province" />
+      <ComboBox fx:id="customerScreenCountryDropDown" layoutX="344.0" layoutY="243.0" onAction="#onCustomerScreenCountryDropDown" prefWidth="150.0" />
+      <Button fx:id="customerScreenAddButton" layoutX="35.0" layoutY="347.0" mnemonicParsing="false" onAction="#onCustomerScreenAddButton" prefHeight="25.0" prefWidth="70.0" text="Add" />
+      <Button fx:id="customerScreenUpdateButton" layoutX="134.0" layoutY="347.0" mnemonicParsing="false" onAction="#onCustomerScreenUpdateButton" prefHeight="25.0" prefWidth="70.0" text="Update" />
+      <Button fx:id="customerScreenDeleteButton" layoutX="227.0" layoutY="347.0" mnemonicParsing="false" onAction="#onCustomerScreenDeleteButton" prefHeight="25.0" prefWidth="70.0" text="Delete" />
+      <Button fx:id="customerScreenBackButton" layoutX="321.0" layoutY="347.0" mnemonicParsing="false" onAction="#onCustomerScreenBackButton" prefHeight="25.0" prefWidth="70.0" text="Back" />
+   </children>
+</AnchorPane>

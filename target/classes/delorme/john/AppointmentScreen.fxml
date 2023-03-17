@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="delorme.john.Controllers.AppointmentScreenController">
+    <children>
+        <TableView prefHeight="208.0" prefWidth="775.0">
+            <columns>
+                <TableColumn fx:id="appointmentScreenAptIDCol" prefWidth="48.33332824707031" text="Apt ID" />
+                <TableColumn fx:id="appointmentScreenTitleCol" prefWidth="62.33332824707031" text="Title" />
+                <TableColumn fx:id="appointmentScreenDescriptionCol" prefWidth="92.0" text="Description" />
+                <TableColumn fx:id="appointmentScreenLocationCol" prefWidth="63.333343505859375" text="Location" />
+                <TableColumn fx:id="appointmentScreenContactCol" minWidth="0.0" prefWidth="75.99996948242188" text="Contact" />
+                <TableColumn fx:id="appointmentScreenTypeCol" minWidth="0.0" prefWidth="60.0" text="Type" />
+                <TableColumn fx:id="appointmentScreenStartDateTimeCol" prefWidth="114.0" text="Start Date/Time" />
+            <TableColumn fx:id="appointmentScreenEndDateTimeCol" prefWidth="109.0" text="End Date/Time" />
+            <TableColumn fx:id="appointmentScreenCustomerIDCol" prefWidth="79.0" text="Customer ID" />
+            <TableColumn fx:id="appointmentScreenUserIDCol" prefWidth="75.0" text="User ID" />
+            </columns>
+        </TableView>
+        <Label layoutX="14.0" layoutY="215.0" text="Appointment_ID" />
+        <TextField fx:id="appointmentScreenAptID" layoutX="105.0" layoutY="211.0" onAction="#onAppointmentScreenAptID" />
+        <TextField fx:id="appointmentScreenTitle" layoutX="105.0" layoutY="243.0" onAction="#onAppointmentScreenTitle" />
+        <TextField fx:id="appointmentScreenDescription" layoutX="105.0" layoutY="275.0" onAction="#onAppointmentScreenDescription" />
+        <TextField fx:id="appointmentScreenLocation" layoutX="105.0" layoutY="308.0" onAction="#onAppointmentScreenLocation" />
+        <ComboBox fx:id="appointmentScreenStartTime" layoutX="344.0" layoutY="308.0" onAction="#onAppointmentScreenStartTime" prefWidth="150.0" />
+        <Label layoutX="14.0" layoutY="247.0" text="Title" />
+        <Label layoutX="14.0" layoutY="279.0" text="Description" />
+        <Label layoutX="14.0" layoutY="312.0" text="Location" />
+        <Label layoutX="262.0" layoutY="215.0" text="Contact" />
+        <Label layoutX="262.0" layoutY="247.0" text="Type" />
+        <Label layoutX="262.0" layoutY="279.0" text="Start Date" />
+        <ComboBox fx:id="appointmentScreenEndTime" layoutX="600.0" layoutY="243.0" onAction="#onAppointmentScreenEndTime" prefWidth="150.0" />
+        <Button fx:id="appointmentScreenAddButton" layoutX="35.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAppointmentScreenAddButton" prefHeight="25.0" prefWidth="70.0" text="Add" />
+        <Button fx:id="appointmentScreenUpdateButton" layoutX="134.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAppointmentScreenUpdateButton" prefHeight="25.0" prefWidth="70.0" text="Update" />
+        <Button fx:id="appointmentScreenDeleteButton" layoutX="227.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAppointmentScreenDeleteButton" prefHeight="25.0" prefWidth="70.0" text="Delete" />
+        <Button fx:id="appointmentScreenBackButton" layoutX="321.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAppointmentScreenBackButton" prefHeight="25.0" prefWidth="70.0" text="Back" />
+      <Label layoutX="261.0" layoutY="312.0" text="Start Time" />
+      <Label layoutX="524.0" layoutY="215.0" text="End Date" />
+      <Label layoutX="524.0" layoutY="247.0" text="End Time" />
+      <Label layoutX="524.0" layoutY="279.0" text="Customer_ID" />
+      <Label layoutX="524.0" layoutY="312.0" text="User_ID" />
+      <TextField fx:id="appointmentScreenType" layoutX="345.0" layoutY="243.0" onAction="#onAppointmentScreenType" />
+      <TextField fx:id="appointmentScreenCustomerID" layoutX="601.0" layoutY="275.0" onAction="#onAppointmentScreenCustomerID" />
+      <TextField fx:id="appointmentScreenUserID" layoutX="601.0" layoutY="308.0" onAction="#onAppointmentScreenUserID" />
+      <DatePicker fx:id="appointmentScreenStartDate" layoutX="344.0" layoutY="275.0" onAction="#onAppointmentScreenStartDate" prefHeight="25.0" prefWidth="150.0" />
+      <DatePicker fx:id="appointmentScreenEndDate" layoutX="600.0" layoutY="211.0" onAction="#onAppointmentScreenEndDate" prefHeight="25.0" prefWidth="150.0" />
+      <RadioButton fx:id="appointmentsScreenAllButton" layoutX="432.0" layoutY="351.0" mnemonicParsing="false" onAction="#onAppointmentScreenAllButton" selected="true" text="All Apts">
+         <toggleGroup>
+            <ToggleGroup fx:id="appointmentGroup" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="appointmentsScreenWeeklyButton" layoutX="515.0" layoutY="351.0" mnemonicParsing="false" onAction="#onAppointmentsScreenWeeklyButton" text="Weekly Apts" toggleGroup="$appointmentGroup" />
+      <RadioButton fx:id="appointmentsScreenMonthlyButton" layoutX="617.0" layoutY="351.0" mnemonicParsing="false" onAction="#onAppointmentScreenMonthlyButton" text="Monthly Apts" toggleGroup="$appointmentGroup" />
+      <ComboBox fx:id="appointmentScreenContactDropDown" layoutX="344.0" layoutY="211.0" onAction="#onAppointmentScreenContactDropDown" prefWidth="150.0" />
+    </children>
+</AnchorPane>
