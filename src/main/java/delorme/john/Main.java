@@ -1,6 +1,6 @@
 package delorme.john;
 
-import delorme.john.Helper.JDBC;
+import delorme.john.helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

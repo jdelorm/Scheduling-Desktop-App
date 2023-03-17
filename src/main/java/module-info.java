@@ -6,11 +6,11 @@ module delorme.john {
 
     opens delorme.john to javafx.fxml;
     exports delorme.john;
-    exports delorme.john.Controllers;
-    opens delorme.john.Controllers to javafx.fxml;
+    exports delorme.john.controllers;
+    opens delorme.john.controllers to javafx.fxml;
 
-    opens delorme.john.Models to javafx.fxml;
-    exports delorme.john.Models;
+    opens delorme.john.models to javafx.fxml;
+    exports delorme.john.models;
 
 
 }

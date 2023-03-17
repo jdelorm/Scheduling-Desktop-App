@@ -1,4 +1,4 @@
-package delorme.john.Controllers;
+package delorme.john.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

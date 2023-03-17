@@ -1,6 +1,5 @@
-package delorme.john.Controllers;
+package delorme.john.controllers;
 
-import delorme.john.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

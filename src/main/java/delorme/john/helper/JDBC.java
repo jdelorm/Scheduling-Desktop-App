@@ -1,4 +1,4 @@
-package delorme.john.Helper;
+package delorme.john.helper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

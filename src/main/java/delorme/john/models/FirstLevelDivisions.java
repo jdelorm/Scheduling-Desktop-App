@@ -1,4 +1,4 @@
-package delorme.john.Models;
+package delorme.john.models;
 
 public class FirstLevelDivisions {
 }
