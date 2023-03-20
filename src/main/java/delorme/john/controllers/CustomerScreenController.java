@@ -1,19 +1,27 @@
 package delorme.john.controllers;
 
+import delorme.john.helper.JDBC;
+import delorme.john.models.Customers;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class CustomerScreenController {
+public class CustomerScreenController implements Initializable {
+
+    static ObservableList<Customers> customers;
+
     public TableColumn customerScreenIDCol;
     public TableColumn customerScreenNameCol;
     public TableColumn customerScreenAddressCol;
@@ -32,6 +40,7 @@ public class CustomerScreenController {
     public Button customerScreenUpdateButton;
     public Button customerScreenDeleteButton;
     public Button customerScreenBackButton;
+    public TableView customerTable;
 
     public void onCustomerScreenID(ActionEvent actionEvent) {
     }
@@ -64,11 +73,18 @@ public class CustomerScreenController {
     }
 
     public void onCustomerScreenBackButton(ActionEvent actionEvent) throws IOException {
+
         Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/DirectoryScreen.fxml"));
         Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Directory");
         stage.setScene(scene);
         stage.show();
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

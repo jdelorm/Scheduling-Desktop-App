@@ -2,6 +2,7 @@ package delorme.john.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,8 +10,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AppointmentScreenController {
+public class AppointmentScreenController implements Initializable {
     public DatePicker appointmentScreenEndDate;
     public DatePicker appointmentScreenStartDate;
     public TextField appointmentScreenUserID;
@@ -41,6 +44,7 @@ public class AppointmentScreenController {
     public RadioButton appointmentsScreenWeeklyButton;
     public RadioButton appointmentsScreenMonthlyButton;
     public ComboBox appointmentScreenContactDropDown;
+    public TableView appointmentTable;
 
     public void onAppointmentScreenAptID(ActionEvent actionEvent) {
     }
@@ -73,12 +77,14 @@ public class AppointmentScreenController {
     }
 
     public void onAppointmentScreenBackButton(ActionEvent actionEvent) throws IOException {
+
         Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/DirectoryScreen.fxml"));
         Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Directory");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public void onAppointmentScreenType(ActionEvent actionEvent) {
@@ -106,5 +112,10 @@ public class AppointmentScreenController {
     }
 
     public void onAppointmentScreenContactDropDown(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

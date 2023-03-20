@@ -2,6 +2,7 @@ package delorme.john.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,8 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainScreenController {
+public class MainScreenController implements Initializable {
 
     public Button loginButtonMain;
     public TextField userNameMain;
@@ -34,5 +37,10 @@ public class MainScreenController {
     }
 
     public void onPasswordMain(ActionEvent actionEvent) {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
