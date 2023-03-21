@@ -1,5 +1,8 @@
 package delorme.john.controllers;
 
+import delorme.john.helper.appointmentsJDBC;
+import delorme.john.models.Appointments;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,11 +10,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static delorme.john.helper.appointmentsJDBC.getAllAppointments;
 
 public class AppointmentScreenController implements Initializable {
     public DatePicker appointmentScreenEndDate;
@@ -114,8 +121,46 @@ public class AppointmentScreenController implements Initializable {
     public void onAppointmentScreenContactDropDown(ActionEvent actionEvent) {
     }
 
+    /*public void initialize() throws SQLException {
+
+        ObservableList<Appointments> allAppointmentsList = appointmentsJDBC.getAllAppointments();
+
+        appointmentScreenAptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+        appointmentScreenTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+        appointmentScreenDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        appointmentScreenLocationCol.setCellValueFactory(new PropertyValueFactory<>( "appointmentLocation"));
+        appointmentScreenTypeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        appointmentScreenStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentStartTime"));
+        appointmentScreenEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentEndTime"));
+        appointmentScreenCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
+        appointmentScreenUserIDCol.setCellValueFactory(new PropertyValueFactory<>("usersID"));
+        appointmentScreenContactCol.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
+
+        appointmentTable.setItems(allAppointmentsList);
+    }*/
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        try {
+
+        appointmentTable.setItems(appointmentsJDBC.getAllAppointments());
+
+            appointmentScreenAptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
+            appointmentScreenTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+            appointmentScreenDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+            appointmentScreenLocationCol.setCellValueFactory(new PropertyValueFactory<>( "appointmentLocation"));
+            appointmentScreenTypeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+            appointmentScreenStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentStartTime"));
+            appointmentScreenEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentEndTime"));
+            appointmentScreenCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
+            appointmentScreenUserIDCol.setCellValueFactory(new PropertyValueFactory<>("usersID"));
+            appointmentScreenContactCol.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
+
+        } catch (SQLException e) {
+
+            throw new RuntimeException(e);
+
+        }
     }
 }

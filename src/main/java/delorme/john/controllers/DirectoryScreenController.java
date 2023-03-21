@@ -1,5 +1,6 @@
 package delorme.john.controllers;
 
+import delorme.john.helper.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -54,6 +55,7 @@ public class DirectoryScreenController implements Initializable {
 
     public void onExitDirectory(ActionEvent actionEvent) {
 
+        JDBC.closeConnection();
         System.exit(0);
 
     }

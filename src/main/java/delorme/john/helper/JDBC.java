@@ -2,8 +2,10 @@ package delorme.john.helper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-public abstract class JDBC {
+public class JDBC {
 
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -15,6 +17,8 @@ public abstract class JDBC {
     private static String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
 
+
+
     public static void openConnection() {
 
         try {
@@ -25,7 +29,7 @@ public abstract class JDBC {
 
         }
 
-        catch (Exception e) {
+        catch(Exception e) {
 
             System.out.println("Error:" + e.getMessage());
 
@@ -46,6 +50,25 @@ public abstract class JDBC {
             System.out.println("Error:" + e.getMessage());
 
         }
+    }
+
+    public static Connection getConnection() {
+
+        return connection;
+    }
+
+    public static PreparedStatement getPreparedStatement() {
+
+        return statement;
+
+    }
+
+    private static PreparedStatement statement;
+
+    public static void setPreparedStatement(Connection connection, String sqlDbStatement) throws SQLException {
+
+        statement = connection.prepareStatement(sqlDbStatement);
+
     }
 }
 

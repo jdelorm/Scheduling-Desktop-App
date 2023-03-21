@@ -1,14 +1,7 @@
 package delorme.john.models;
 
-import delorme.john.helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Customers {
 
@@ -17,20 +10,18 @@ public class Customers {
     private String customerAddress;
     private String customerPostalCode;
     private String customerPhoneNumber;
-    private String customerDivision;
-    private String customerCountry;
     private int customerDivisionID;
+    private String divisionName;
 
-    public Customers(int customerID, String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, String customerDivision, String customerCountry, int customerDivisionID) {
+    public Customers(int customerID, String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, int customerDivisionID, String divisionName) {
 
         this.customerID = customerID;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerPostalCode = customerPostalCode;
         this.customerPhoneNumber = customerPhoneNumber;
-        this.customerDivision = customerDivision;
-        this.customerCountry = customerCountry;
         this.customerDivisionID = customerDivisionID;
+        this.divisionName = divisionName;
 
     }
 
@@ -64,15 +55,9 @@ public class Customers {
 
     }
 
-    public String getCustomerDivision() {
+    public String getDivisionName() {
 
-        return customerDivision;
-
-    }
-
-    public String getCustomerCountry() {
-
-        return customerCountry;
+        return divisionName;
 
     }
 
@@ -112,15 +97,9 @@ public class Customers {
 
     }
 
-    public void setCustomerDivision(String customerDivision) {
+    public void setDivisionName(String divisionName) {
 
-        this.customerDivision = customerDivision;
-
-    }
-
-    public void setCustomerCountry(String customerCountry) {
-
-        this.customerCountry = customerCountry;
+        this.divisionName = divisionName;
 
     }
 
@@ -130,27 +109,21 @@ public class Customers {
 
     }
 
-    /*public static ObservableList<Customers> getAllCustomers(Connection connection) throws SQLException {
+    private static ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
 
-        String query = "SELECT customers.Customer_ID, customers.Customer_Name, customers.Address, customers.Postal_Code, customers.Phone, customers.Division_ID, first_level_divisions.Division from customers INNER JOIN  first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID";
+    public static ObservableList<Customers> getAllCustomers() {
 
-        PreparedStatement ps = JDBC.getConnection().prepareStatement(query);
-        ResultSet rs = ps.executeQuery();
+        return allCustomers;
 
-        ObservableList<Customers> customersObservableList = FXCollections.observableArrayList();
+    }
 
-        while (rs.next()) {
-            int customerID = rs.getInt("Customer_ID");
-            String customerName = rs.getString("Customer_Name");
-            String customerAddress = rs.getString("Address");
-            String customerPostalCode = rs.getString("Postal_Code");
-            String customerPhone = rs.getString("Phone");
-            int divisionID = rs.getInt("Division_ID");
-            String divisionName = rs.getString("Division");
-            Customers customer = new Customers(customerID, customerName, customerAddress, customerPostalCode, customerPhone, divisionID, divisionName);
-            customersObservableList.add(customer);
-        }
-        return customersObservableList;
-    }*/
+    public static void setAllCustomers(ObservableList<Customers> allCustomers) {
+        Customers.allCustomers = allCustomers;
+    }
+
+    public static void addCustomers(Customers newCustomers) {
+
+        allCustomers.add(newCustomers);
+    }
 
 }

@@ -1,7 +1,9 @@
 package delorme.john.controllers;
 
-import delorme.john.helper.JDBC;
+import delorme.john.helper.appointmentsJDBC;
+import delorme.john.helper.customersJDBC;
 import delorme.john.models.Customers;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
+import java.sql.*;
+import java.util.*;
 
 public class CustomerScreenController implements Initializable {
 
@@ -85,6 +87,24 @@ public class CustomerScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+
+            customerTable.setItems(customersJDBC.getAllCustomers());
+
+            customerScreenIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+            customerScreenNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+            customerScreenAddressCol.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
+            customerScreenPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>( "customerPostalCode"));
+            customerScreenPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customerPhoneNumber"));
+            customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("divisionName"));
+            customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customerDivisionID"));
+
+        } catch (SQLException e) {
+
+            throw new RuntimeException(e);
+
+        }
 
     }
 }
