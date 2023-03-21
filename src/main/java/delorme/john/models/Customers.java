@@ -5,107 +5,107 @@ import javafx.collections.ObservableList;
 
 public class Customers {
 
-    private int customerID;
-    private String customerName;
-    private String customerAddress;
-    private String customerPostalCode;
-    private String customerPhoneNumber;
-    private int customerDivisionID;
-    private String divisionName;
+    private int customersID;
+    private String customersName;
+    private String customersAddress;
+    private String customersPostalCode;
+    private String customersPhoneNumber;
+    private int customersDivisionID;
+    private String customersCountryData;
 
-    public Customers(int customerID, String customerName, String customerAddress, String customerPostalCode, String customerPhoneNumber, int customerDivisionID, String divisionName) {
+    public Customers(int customersID, String customersName, String customersAddress, String customersPostalCode, String customersPhoneNumber, int customersDivisionID, String customersCountryData) {
 
-        this.customerID = customerID;
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
-        this.customerPostalCode = customerPostalCode;
-        this.customerPhoneNumber = customerPhoneNumber;
-        this.customerDivisionID = customerDivisionID;
-        this.divisionName = divisionName;
-
-    }
-
-    public Integer getCustomerID() {
-
-        return customerID;
+        this.customersID = customersID;
+        this.customersName = customersName;
+        this.customersAddress = customersAddress;
+        this.customersPostalCode = customersPostalCode;
+        this.customersPhoneNumber = customersPhoneNumber;
+        this.customersDivisionID = customersDivisionID;
+        this.customersCountryData = customersCountryData;
 
     }
 
-    public String getCustomerName() {
+    public Integer getCustomersID() {
 
-        return customerName;
-
-    }
-
-    public String getCustomerAddress() {
-
-        return customerAddress;
+        return customersID;
 
     }
 
-    public String getCustomerPostalCode() {
+    public String getCustomersName() {
 
-        return customerPostalCode;
-
-    }
-
-    public String getCustomerPhoneNumber() {
-
-        return customerPhoneNumber;
+        return customersName;
 
     }
 
-    public String getDivisionName() {
+    public String getCustomersAddress() {
 
-        return divisionName;
-
-    }
-
-    public Integer getCustomerDivisionID() {
-
-        return customerDivisionID;
+        return customersAddress;
 
     }
 
-    public void setCustomerID(int customerID) {
+    public String getCustomersPostalCode() {
 
-        this.customerID = customerID;
-
-    }
-
-    public void setCustomerName(String customerName) {
-
-        this.customerName = customerName;
+        return customersPostalCode;
 
     }
 
-    public void setCustomerAddress(String customerAddress) {
+    public String getCustomersPhoneNumber() {
 
-        this.customerAddress = customerAddress;
-
-    }
-
-    public void setCustomerPostalCode(String customerPostalCode) {
-
-        this.customerPostalCode = customerPostalCode;
+        return customersPhoneNumber;
 
     }
 
-    public void setCustomerPhoneNumber(String customerPhoneNumber) {
+    public String getCustomersCountryData() {
 
-        this.customerPhoneNumber = customerPhoneNumber;
-
-    }
-
-    public void setDivisionName(String divisionName) {
-
-        this.divisionName = divisionName;
+        return customersCountryData;
 
     }
 
-    public void setCustomerDivisionID(int customerDivisionID) {
+    public Integer getCustomersDivisionID() {
 
-        this.customerDivisionID = customerDivisionID;
+        return customersDivisionID;
+
+    }
+
+    public void setCustomersID(int customersID) {
+
+        this.customersID = customersID;
+
+    }
+
+    public void setCustomersName(String customersName) {
+
+        this.customersName = customersName;
+
+    }
+
+    public void setCustomersAddress(String customersAddress) {
+
+        this.customersAddress = customersAddress;
+
+    }
+
+    public void setCustomersPostalCode(String customersPostalCode) {
+
+        this.customersPostalCode = customersPostalCode;
+
+    }
+
+    public void setCustomersPhoneNumber(String customersPhoneNumber) {
+
+        this.customersPhoneNumber = customersPhoneNumber;
+
+    }
+
+    public void setCustomersCountryData(String customersCountryData) {
+
+        this.customersCountryData = customersCountryData;
+
+    }
+
+    public void setCustomersDivisionID(int customersDivisionID) {
+
+        this.customersDivisionID = customersDivisionID;
 
     }
 

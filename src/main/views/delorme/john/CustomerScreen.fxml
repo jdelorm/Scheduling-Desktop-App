@@ -12,8 +12,8 @@
             <TableColumn fx:id="customerScreenAddressCol" prefWidth="166.0" text="Address" />
             <TableColumn fx:id="customerScreenPostalCodeCol" prefWidth="80.99996948242188" text="Postal Code" />
             <TableColumn fx:id="customerScreenPhoneCol" minWidth="0.0" prefWidth="109.66665649414062" text="Phone #" />
-            <TableColumn fx:id="customerScreenCountryCol" minWidth="0.0" prefWidth="103.0" text="Country" />
-            <TableColumn fx:id="customerScreenStateCol" prefWidth="113.33331298828125" text="State/Province" />
+            <TableColumn fx:id="customerScreenCountryCol" minWidth="0.0" prefWidth="103.0" text="State/Province" />
+            <TableColumn fx:id="customerScreenStateCol" prefWidth="113.33331298828125" text="Country Data" />
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="215.0" text="ID" />

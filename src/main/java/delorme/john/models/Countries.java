@@ -40,4 +40,22 @@ public class Countries {
         this.countries = countries;
 
     }
+
+    private static ObservableList<Countries> allCountries = FXCollections.observableArrayList();
+
+    public static ObservableList<Countries> getAllCountries() {
+
+        return allCountries;
+
+    }
+
+    public static void setAllCountries(ObservableList<Countries> allCountries) {
+        Countries.allCountries = allCountries;
+    }
+
+    public static void addCountries(Countries newCountries) {
+
+        allCountries.add(newCountries);
+
+    }
 }

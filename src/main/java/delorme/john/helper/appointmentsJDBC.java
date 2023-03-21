@@ -13,29 +13,34 @@ public class appointmentsJDBC {
 
     public static ObservableList<Appointments> getAllAppointments() throws SQLException {
 
-        ObservableList<Appointments> appointmentsObservableList = FXCollections.observableArrayList();
+        ObservableList<Appointments> appointmentsListQuery = FXCollections.observableArrayList();
 
         String sql = "SELECT * from appointments";
-        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            int appointmentID = rs.getInt("Appointment_ID");
-            String appointmentTitle = rs.getString("Title");
-            String appointmentDescription = rs.getString("Description");
-            String appointmentLocation = rs.getString("Location");
-            String appointmentType = rs.getString("Type");
-            //LocalDateTime start = convertTimeDateLocal(rs.getTimestamp("Start").toLocalDateTime());
-            LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
-            //LocalDateTime end = convertTimeDateLocal(rs.getTimestamp("End").toLocalDateTime());
-            LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
-            int customerID = rs.getInt("Customer_ID");
-            int userID = rs.getInt("User_ID");
-            int contactID = rs.getInt("Contact_ID");
+
+        PreparedStatement preparedStatementAppointment = JDBC.getConnection().prepareStatement(sql);
+
+        ResultSet results = preparedStatementAppointment.executeQuery();
+
+        while (results.next()) {
+
+            int appointmentID = results.getInt("Appointment_ID");
+            String appointmentTitle = results.getString("Title");
+            String appointmentDescription = results.getString("Description");
+            String appointmentLocation = results.getString("Location");
+            String appointmentType = results.getString("Type");
+            LocalDateTime start = results.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime end = results.getTimestamp("End").toLocalDateTime();
+            int customerID = results.getInt("Customer_ID");
+            int userID = results.getInt("User_ID");
+            int contactID = results.getInt("Contact_ID");
+
             Appointments appointment = new Appointments(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, start, end, customerID, userID, contactID);
-            appointmentsObservableList.add(appointment);
+
+            appointmentsListQuery.add(appointment);
+
         }
 
-        return appointmentsObservableList;
-    }
+        return appointmentsListQuery;
 
+    }
 }

@@ -8,63 +8,61 @@ import java.time.LocalDateTime;
 
 public class Appointments {
 
-    private int appointmentID;
-    private String appointmentTitle;
-    private String appointmentDescription;
-    private String appointmentLocation;
-    private String appointmentType;
+    private int appointmentsID;
+    private String appointmentsTitle;
+    private String appointmentsDescription;
+    private String appointmentsLocation;
+    private String appointmentsType;
     private LocalDate appointmentStartDate;
-    private LocalDateTime appointmentStartTime;
+    private LocalDateTime appointmentsStartTime;
     private LocalDate appointmentEndDate;
-    private LocalDateTime appointmentEndTime;
+    private LocalDateTime appointmentsEndTime;
     public int customersID;
     public int usersID;
     public int contactsID;
 
-    public Appointments(int appointmentID, String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, /*LocalDate appointmentStartDate,*/ LocalDateTime appointmentStartTime, /*LocalDate appointmentEndDate,*/ LocalDateTime appointmentEndTime, int customersID, int usersID, int contactsID) {
+    public Appointments(int appointmentsID, String appointmentsTitle, String appointmentsDescription, String appointmentsLocation, String appointmentsType, /*LocalDate appointmentStartDate,*/ LocalDateTime appointmentsStartTime, /*LocalDate appointmentEndDate,*/ LocalDateTime appointmentsEndTime, int customersID, int usersID, int contactsID) {
 
-        this.appointmentID = appointmentID;
-        this.appointmentTitle = appointmentTitle;
-        this.appointmentDescription = appointmentDescription;
-        this.appointmentLocation = appointmentLocation;
-        this.appointmentType = appointmentType;
-        //this.appointmentStartDate = appointmentStartDate;
-        this.appointmentStartTime = appointmentStartTime;
-        //this.appointmentEndDate = appointmentEndDate;
-        this.appointmentEndTime = appointmentEndTime;
+        this.appointmentsID = appointmentsID;
+        this.appointmentsTitle = appointmentsTitle;
+        this.appointmentsDescription = appointmentsDescription;
+        this.appointmentsLocation = appointmentsLocation;
+        this.appointmentsType = appointmentsType;
+        this.appointmentsStartTime = appointmentsStartTime;
+        this.appointmentsEndTime = appointmentsEndTime;
         this.customersID = customersID;
         this.usersID = usersID;
         this.contactsID = contactsID;
 
     }
 
-    public int getAppointmentID() {
+    public int getAppointmentsID() {
 
-        return appointmentID;
-
-    }
-
-    public String getAppointmentTitle() {
-
-        return appointmentTitle;
+        return appointmentsID;
 
     }
 
-    public String getAppointmentDescription() {
+    public String getAppointmentsTitle() {
 
-        return appointmentDescription;
-
-    }
-
-    public String getAppointmentLocation() {
-
-        return appointmentLocation;
+        return appointmentsTitle;
 
     }
 
-    public String getAppointmentType() {
+    public String getAppointmentsDescription() {
 
-        return appointmentType;
+        return appointmentsDescription;
+
+    }
+
+    public String getAppointmentsLocation() {
+
+        return appointmentsLocation;
+
+    }
+
+    public String getAppointmentsType() {
+
+        return appointmentsType;
 
     }
 
@@ -74,9 +72,9 @@ public class Appointments {
 
     }
 
-    public LocalDateTime getAppointmentStartTime() {
+    public LocalDateTime getAppointmentsStartTime() {
 
-        return appointmentStartTime;
+        return appointmentsStartTime;
 
     }
 
@@ -86,9 +84,9 @@ public class Appointments {
 
     }
 
-    public LocalDateTime getAppointmentEndTime() {
+    public LocalDateTime getAppointmentsEndTime() {
 
-        return appointmentEndTime;
+        return appointmentsEndTime;
 
     }
 
@@ -111,40 +109,40 @@ public class Appointments {
 
     }
 
-    public void setAppointmentID(int appointmentID) {
-        this.appointmentID = appointmentID;
+    public void setAppointmentsID(int appointmentsID) {
+        this.appointmentsID = appointmentsID;
     }
 
-    public void setAppointmentTitle(String appointmentTitle) {
-        this.appointmentTitle = appointmentTitle;
+    public void setAppointmentsTitle(String appointmentsTitle) {
+        this.appointmentsTitle = appointmentsTitle;
     }
 
-    public void setAppointmentDescription(String appointmentDescription) {
-        this.appointmentDescription = appointmentDescription;
+    public void setAppointmentsDescription(String appointmentsDescription) {
+        this.appointmentsDescription = appointmentsDescription;
     }
 
-    public void setAppointmentLocation(String appointmentLocation) {
-        this.appointmentLocation = appointmentLocation;
+    public void setAppointmentsLocation(String appointmentsLocation) {
+        this.appointmentsLocation = appointmentsLocation;
     }
 
-    public void setAppointmentType(String appointmentType) {
-        this.appointmentType = appointmentType;
+    public void setAppointmentsType(String appointmentsType) {
+        this.appointmentsType = appointmentsType;
     }
 
     public void setAppointmentStartDate(LocalDate appointmentStartDate) {
         this.appointmentStartDate = appointmentStartDate;
     }
 
-    public void setAppointmentStartTime(LocalDateTime appointmentStartTime) {
-        this.appointmentStartTime = appointmentStartTime;
+    public void setAppointmentsStartTime(LocalDateTime appointmentsStartTime) {
+        this.appointmentsStartTime = appointmentsStartTime;
     }
 
     public void setAppointmentEndDate(LocalDate appointmentEndDate) {
         this.appointmentEndDate = appointmentEndDate;
     }
 
-    public void setAppointmentEndTime(LocalDateTime appointmentEndTime) {
-        this.appointmentEndTime = appointmentEndTime;
+    public void setAppointmentsEndTime(LocalDateTime appointmentsEndTime) {
+        this.appointmentsEndTime = appointmentsEndTime;
     }
 
     public void setCustomersID(int customersID) {
@@ -173,9 +171,9 @@ public class Appointments {
         Appointments.allAppointments = allAppointments;
     }
 
-    public static void addAppointment(Appointments newAppointment) {
+    public static void addAppointments(Appointments newAppointments) {
 
-        allAppointments.add(newAppointment);
+        allAppointments.add(newAppointments);
     }
 
 }

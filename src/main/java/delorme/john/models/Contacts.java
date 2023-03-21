@@ -1,5 +1,8 @@
 package delorme.john.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Contacts {
 
     public int contactsID;
@@ -48,5 +51,22 @@ public class Contacts {
 
         this.contactsEmail = contactsEmail;
 
+    }
+
+    private static ObservableList<Contacts> allContacts = FXCollections.observableArrayList();
+
+    public static ObservableList<Contacts> getAllContacts() {
+
+        return allContacts;
+
+    }
+
+    public static void setAllContacts(ObservableList<Contacts> allContacts) {
+        Contacts.allContacts = allContacts;
+    }
+
+    public static void addContacts(Contacts newContacts) {
+
+        allContacts.add(newContacts);
     }
 }

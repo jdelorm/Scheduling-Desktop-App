@@ -3,54 +3,70 @@ package delorme.john.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.*;
-
 public class FirstLevelDivisions {
 
-    private int divisionID;
-    private String division;
-    public int countryID;
+    private int divisionsID;
+    private String divisions;
+    public int countriesID;
 
-    public FirstLevelDivisions(int divisionID, String division, int countryID) {
+    public FirstLevelDivisions(int divisionsID, String divisions, int countriesID) {
 
-        this.divisionID = divisionID;
-        this.division = division;
-        this.countryID = countryID;
-
-    }
-
-    public int getDivisionID() {
-
-        return divisionID;
+        this.divisionsID = divisionsID;
+        this.divisions = divisions;
+        this.countriesID = countriesID;
 
     }
 
-    public String getDivision() {
+    public int getDivisionsID() {
 
-        return division;
-
-    }
-
-    public int getCountryID() {
-
-        return countryID;
-    }
-
-    public void setDivisionID(int divisionID) {
-
-        this.divisionID = divisionID;
+        return divisionsID;
 
     }
 
-    public void setDivision(String division) {
+    public String getDivisions() {
 
-        this.division = division;
+        return divisions;
+
+    }
+
+    public int getCountriesID() {
+
+        return countriesID;
+    }
+
+    public void setDivisionsID(int divisionsID) {
+
+        this.divisionsID = divisionsID;
 
     }
 
-    public void setCountryID(int countryID) {
+    public void setDivisions(String divisions) {
 
-        this.countryID = countryID;
+        this.divisions = divisions;
 
     }
+
+    public void setCountriesID(int countriesID) {
+
+        this.countriesID = countriesID;
+
+    }
+
+    private static ObservableList<FirstLevelDivisions> allFirstLevelDivisions = FXCollections.observableArrayList();
+
+    public static ObservableList<FirstLevelDivisions> getAllFirstLevelDivisions() {
+
+        return allFirstLevelDivisions;
+
+    }
+
+    public static void setAllFirstLevelDivisions(ObservableList<FirstLevelDivisions> allFirstLevelDivisions) {
+        FirstLevelDivisions.allFirstLevelDivisions = allFirstLevelDivisions;
+    }
+
+    public static void addFirstLevelDivisions(FirstLevelDivisions newFirstLevelDivisions) {
+
+        allFirstLevelDivisions.add(newFirstLevelDivisions);
+    }
+
 }

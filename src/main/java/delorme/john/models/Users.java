@@ -1,5 +1,8 @@
 package delorme.john.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Users {
 
     public int usersID;
@@ -48,5 +51,22 @@ public class Users {
 
         this.usersPassword = usersPassword;
 
+    }
+
+    private static ObservableList<Users> allUsers = FXCollections.observableArrayList();
+
+    public static ObservableList<Users> getAllUsers() {
+
+        return allUsers;
+
+    }
+
+    public static void setAllUsers(ObservableList<Users> allUsers) {
+        Users.allUsers = allUsers;
+    }
+
+    public static void addUsers(Users newUsers) {
+
+        allUsers.add(newUsers);
     }
 }

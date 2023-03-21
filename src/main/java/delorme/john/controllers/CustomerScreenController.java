@@ -92,13 +92,13 @@ public class CustomerScreenController implements Initializable {
 
             customerTable.setItems(customersJDBC.getAllCustomers());
 
-            customerScreenIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-            customerScreenNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-            customerScreenAddressCol.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
-            customerScreenPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>( "customerPostalCode"));
-            customerScreenPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customerPhoneNumber"));
-            customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("divisionName"));
-            customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customerDivisionID"));
+            customerScreenIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
+            customerScreenNameCol.setCellValueFactory(new PropertyValueFactory<>("customersName"));
+            customerScreenAddressCol.setCellValueFactory(new PropertyValueFactory<>("customersAddress"));
+            customerScreenPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>( "customersPostalCode"));
+            customerScreenPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customersPhoneNumber"));
+            customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("customersCountryData"));
+            customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customersDivisionID"));
 
         } catch (SQLException e) {
 
