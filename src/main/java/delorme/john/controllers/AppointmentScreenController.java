@@ -1,8 +1,6 @@
 package delorme.john.controllers;
 
-import delorme.john.helper.appointmentsJDBC;
-import delorme.john.models.Appointments;
-import javafx.collections.ObservableList;
+import delorme.john.helper.AppointmentsJDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,8 +15,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
-import static delorme.john.helper.appointmentsJDBC.getAllAppointments;
 
 public class AppointmentScreenController implements Initializable {
     public DatePicker appointmentScreenEndDate;
@@ -144,7 +140,7 @@ public class AppointmentScreenController implements Initializable {
 
         try {
 
-        appointmentTable.setItems(appointmentsJDBC.getAllAppointments());
+        appointmentTable.setItems(AppointmentsJDBC.getAllAppointments());
 
             appointmentScreenAptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsID"));
             appointmentScreenTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsTitle"));

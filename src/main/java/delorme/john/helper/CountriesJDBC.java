@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class countriesJDBC {
+public class CountriesJDBC {
 
     public static ObservableList<Countries> getCountries() throws SQLException {
 

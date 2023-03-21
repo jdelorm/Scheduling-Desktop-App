@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class usersJDBC {
+public class UsersJDBC {
 
     public static ObservableList<Users> getAllUsers() throws SQLException {
 

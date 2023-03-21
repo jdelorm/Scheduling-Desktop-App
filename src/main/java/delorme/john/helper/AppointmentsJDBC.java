@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-public class appointmentsJDBC {
+public class AppointmentsJDBC {
 
     public static ObservableList<Appointments> getAllAppointments() throws SQLException {
 

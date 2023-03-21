@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class contactsJDBC {
+public class ContactsJDBC {
 
     public static ObservableList<Contacts> getAllContacts() throws SQLException {
 

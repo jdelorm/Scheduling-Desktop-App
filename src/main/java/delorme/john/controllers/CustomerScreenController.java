@@ -1,9 +1,7 @@
 package delorme.john.controllers;
 
-import delorme.john.helper.appointmentsJDBC;
-import delorme.john.helper.customersJDBC;
+import delorme.john.helper.CustomersJDBC;
 import delorme.john.models.Customers;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -90,7 +88,7 @@ public class CustomerScreenController implements Initializable {
 
         try {
 
-            customerTable.setItems(customersJDBC.getAllCustomers());
+            customerTable.setItems(CustomersJDBC.getAllCustomers());
 
             customerScreenIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
             customerScreenNameCol.setCellValueFactory(new PropertyValueFactory<>("customersName"));
