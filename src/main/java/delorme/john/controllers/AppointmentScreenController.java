@@ -72,10 +72,38 @@ public class AppointmentScreenController implements Initializable {
     public void onAppointmentScreenEndTime(ActionEvent actionEvent) {
     }
 
-    public void onAppointmentScreenAddButton(ActionEvent actionEvent) {
+    public void onAppointmentScreenAddButton(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/AppointmentAddScreen.fxml"));
+        Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 775, 400);
+        stage.setTitle("Add Customer Appointment");
+        stage.setScene(scene);
+        stage.show();
+
     }
 
-    public void onAppointmentScreenUpdateButton(ActionEvent actionEvent) {
+    public void onAppointmentScreenUpdateButton(ActionEvent actionEvent) throws IOException {
+
+        Appointments appointmentToModify = (Appointments) appointmentTable.getSelectionModel().getSelectedItem();
+
+        if (appointmentToModify == null) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("No appointment selected to update");
+            alert.showAndWait();
+
+        } else {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/AppointmentUpdateScreen.fxml"));
+            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 775, 400);
+            stage.setTitle("Update Appointment");
+            stage.setScene(scene);
+            stage.show();
+
+        }
     }
 
     public void onAppointmentScreenDeleteButton(ActionEvent actionEvent) {

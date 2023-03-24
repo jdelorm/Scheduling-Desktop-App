@@ -7,7 +7,7 @@
    <children>
       <TableView fx:id="customerTable" prefHeight="208.0" prefWidth="775.0">
         <columns>
-          <TableColumn fx:id="customerScreenIDCol" prefWidth="56.33332824707031" text="ID" />
+          <TableColumn fx:id="customerScreenIDCol" prefWidth="56.33332824707031" text="Cust ID" />
           <TableColumn fx:id="customerScreenNameCol" prefWidth="145.3333282470703" text="Name" />
             <TableColumn fx:id="customerScreenAddressCol" prefWidth="166.0" text="Address" />
             <TableColumn fx:id="customerScreenPostalCodeCol" prefWidth="80.99996948242188" text="Postal Code" />

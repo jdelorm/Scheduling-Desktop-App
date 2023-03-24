@@ -1,8 +1,9 @@
 package delorme.john.controllers;
 
-import delorme.john.helper.CustomersJDBC;
-import delorme.john.models.Appointments;
+import delorme.john.models.Countries;
 import delorme.john.models.Customers;
+import delorme.john.models.FirstLevelDivisions;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.*;
 
 public class CustomerScreenController implements Initializable {
@@ -62,12 +63,67 @@ public class CustomerScreenController implements Initializable {
     }
 
     public void onCustomerScreenCountryDropDown(ActionEvent actionEvent) {
+
+        /*ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
+
+        try {
+
+            ObservableList<FirstLevelDivisions> divisions = FirstLevelDivisions.getDivisionsByCountry(customerScreenCountryDropDown.getSelectionModel().getSelectedItem());
+
+            if (divisions != null) {
+
+                for (FirstLevelDivisions div: divisions) {
+
+                    firstLevelDivisionsList.add(div.getDivisionname());
+
+                }
+
+            }
+
+            customerScreenCountryDropDown.setItems(firstLevelDivisionsList);
+
+        }
+
+        catch (SQLException expt){
+
+            expt.printStackTrace();
+
+        }*/
+
     }
 
-    public void onCustomerScreenAddButton(ActionEvent actionEvent) {
+    public void onCustomerScreenAddButton(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/CustomerAddScreen.fxml"));
+        Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 775, 400);
+        stage.setTitle("Add Customer Record");
+        stage.setScene(scene);
+        stage.show();
+
     }
 
-    public void onCustomerScreenUpdateButton(ActionEvent actionEvent) {
+    public void onCustomerScreenUpdateButton(ActionEvent actionEvent) throws IOException {
+
+        Customers customerToModify = (Customers) customerTable.getSelectionModel().getSelectedItem();
+
+        if (customerToModify == null) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("No customer record selected to update");
+            alert.showAndWait();
+
+        } else {
+
+            Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/CustomerUpdateScreen.fxml"));
+            Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 775, 400);
+            stage.setTitle("Update Customer Record");
+            stage.setScene(scene);
+            stage.show();
+
+        }
     }
 
     public void onCustomerScreenDeleteButton(ActionEvent actionEvent) {
@@ -117,6 +173,36 @@ public class CustomerScreenController implements Initializable {
         customerScreenPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customersPhoneNumber"));
         customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("customersCountryData"));
         customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customersDivisionID"));
+
+        ObservableList<String> countryList = FXCollections.observableArrayList();
+
+        ObservableList<Countries> countries = Countries.getAllCountries();
+
+        if (countries != null) {
+
+            for (Countries country: countries) {
+
+                countryList.add(country.getCountries());
+
+            }
+        }
+
+        customerScreenCountryDropDown.setItems(countryList);
+
+        ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
+
+        ObservableList<FirstLevelDivisions> divisions = FirstLevelDivisions.getAllFirstLevelDivisions();
+
+        if (divisions != null) {
+
+            for (FirstLevelDivisions division: divisions) {
+
+                firstLevelDivisionsList.add(division.getDivisions());
+
+            }
+        }
+
+        customerScreenStateDropDown.setItems(firstLevelDivisionsList);
 
     }
 }
