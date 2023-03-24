@@ -1,5 +1,6 @@
 package delorme.john.controllers;
 
+import delorme.john.models.Appointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,6 +61,19 @@ public class ReportScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        reportTable.setItems(Appointments.getAllAppointments());
+
+        reportScreenAptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsID"));
+        reportScreenTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsTitle"));
+        reportScreenDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsDescription"));
+        //appointmentScreenLocationCol.setCellValueFactory(new PropertyValueFactory<>( "appointmentsLocation"));
+        reportScreenTypeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsType"));
+        reportScreenStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsStartTime"));
+        reportScreenEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsEndTime"));
+        reportScreenCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
+        //appointmentScreenUserIDCol.setCellValueFactory(new PropertyValueFactory<>("usersID"));
+        //appointmentScreenContactCol.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
 
     }
 }

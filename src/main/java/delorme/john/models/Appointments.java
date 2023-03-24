@@ -159,6 +159,26 @@ public class Appointments {
 
     }
 
+    public static boolean deleteAppointments(Appointments selectedAppointments) {
+
+        if (allAppointments.contains(selectedAppointments)) {
+
+            allAppointments.remove(selectedAppointments);
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    public static void updateAppointments(int index, Appointments selectedAppointments) {
+
+        allAppointments.set(index, selectedAppointments);
+
+    }
+
     private static ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
 
     public static ObservableList<Appointments> getAllAppointments() {
@@ -168,12 +188,14 @@ public class Appointments {
     }
 
     public static void setAllAppointments(ObservableList<Appointments> allAppointments) {
+
         Appointments.allAppointments = allAppointments;
+
     }
 
     public static void addAppointments(Appointments newAppointments) {
 
         allAppointments.add(newAppointments);
-    }
 
+    }
 }

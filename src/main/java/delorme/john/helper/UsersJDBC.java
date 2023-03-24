@@ -1,5 +1,6 @@
 package delorme.john.helper;
 
+import delorme.john.models.Appointments;
 import delorme.john.models.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,9 +27,10 @@ public class UsersJDBC {
             String userName = results.getString("User_Name");
             String userPassword = results.getString("Password");
 
-            Users user = new Users(userID, userName, userPassword);
+            Users newUser = new Users(userID, userName, userPassword);
 
-            usersListQuery.add(user);
+            //usersListQuery.add(user);
+            Users.addUsers(newUser);
 
         }
 

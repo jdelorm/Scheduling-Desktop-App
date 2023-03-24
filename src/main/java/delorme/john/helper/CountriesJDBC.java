@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class CountriesJDBC {
 
-    public static ObservableList<Countries> getCountries() throws SQLException {
+    public static ObservableList<Countries> getAllCountries() throws SQLException {
 
         ObservableList<Countries> countriesListQuery = FXCollections.observableArrayList();
 
@@ -25,9 +25,11 @@ public class CountriesJDBC {
             int countryID = results.getInt("Country_ID");
             String countryName = results.getString("Country");
 
-            Countries country = new Countries(countryID, countryName);
+            Countries newCountry = new Countries(countryID, countryName);
 
-            countriesListQuery.add(country);
+            //countriesListQuery.add(country);
+
+            Countries.addCountries(newCountry);
 
         }
 

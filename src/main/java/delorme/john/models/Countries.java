@@ -41,6 +41,26 @@ public class Countries {
 
     }
 
+    public static boolean deleteCountries(Countries selectedCountries) {
+
+        if (allCountries.contains(selectedCountries)) {
+
+            allCountries.remove(selectedCountries);
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    public static void updateCountries(int index, Countries selectedCountries) {
+
+        allCountries.set(index, selectedCountries);
+
+    }
+
     private static ObservableList<Countries> allCountries = FXCollections.observableArrayList();
 
     public static ObservableList<Countries> getAllCountries() {
@@ -50,7 +70,9 @@ public class Countries {
     }
 
     public static void setAllCountries(ObservableList<Countries> allCountries) {
+
         Countries.allCountries = allCountries;
+
     }
 
     public static void addCountries(Countries newCountries) {

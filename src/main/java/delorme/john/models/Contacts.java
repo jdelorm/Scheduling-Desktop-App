@@ -53,6 +53,26 @@ public class Contacts {
 
     }
 
+    public static boolean deleteContacts(Contacts selectedContacts) {
+
+        if (allContacts.contains(selectedContacts)) {
+
+            allContacts.remove(selectedContacts);
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    public static void updateContacts(int index, Contacts selectedContacts) {
+
+        allContacts.set(index, selectedContacts);
+
+    }
+
     private static ObservableList<Contacts> allContacts = FXCollections.observableArrayList();
 
     public static ObservableList<Contacts> getAllContacts() {
@@ -62,11 +82,14 @@ public class Contacts {
     }
 
     public static void setAllContacts(ObservableList<Contacts> allContacts) {
+
         Contacts.allContacts = allContacts;
+
     }
 
     public static void addContacts(Contacts newContacts) {
 
         allContacts.add(newContacts);
+
     }
 }

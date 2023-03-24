@@ -53,6 +53,26 @@ public class Users {
 
     }
 
+    public static boolean deleteUsers(Users selectedUsers) {
+
+        if (allUsers.contains(selectedUsers)) {
+
+            allUsers.remove(selectedUsers);
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    public static void updateUsers(int index, Users selectedUsers) {
+
+        allUsers.set(index, selectedUsers);
+
+    }
+
     private static ObservableList<Users> allUsers = FXCollections.observableArrayList();
 
     public static ObservableList<Users> getAllUsers() {
@@ -68,5 +88,6 @@ public class Users {
     public static void addUsers(Users newUsers) {
 
         allUsers.add(newUsers);
+
     }
 }
