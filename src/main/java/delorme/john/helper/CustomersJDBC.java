@@ -1,5 +1,6 @@
 package delorme.john.helper;
 
+import delorme.john.models.Appointments;
 import delorme.john.models.Customers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,9 +31,10 @@ public class CustomersJDBC {
                 int divisionID = results.getInt("Division_ID");
                 String divisionName = results.getString("Division");
 
-                Customers customer = new Customers(customerID, customerName, customerAddress, customerPostalCode, customerPhone, divisionID, divisionName);
+                Customers newCustomer = new Customers(customerID, customerName, customerAddress, customerPostalCode, customerPhone, divisionID, divisionName);
 
-                customersListQuery.add(customer);
+                //customersListQuery.add(customer);
+                Customers.addCustomers(newCustomer);
 
             }
 

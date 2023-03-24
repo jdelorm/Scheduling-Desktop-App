@@ -1,6 +1,7 @@
 package delorme.john.controllers;
 
 import delorme.john.helper.CustomersJDBC;
+import delorme.john.models.Appointments;
 import delorme.john.models.Customers;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,6 +71,27 @@ public class CustomerScreenController implements Initializable {
     }
 
     public void onCustomerScreenDeleteButton(ActionEvent actionEvent) {
+
+        delorme.john.models.Customers selectedCustomers = (Customers) customerTable.getSelectionModel().getSelectedItem();
+
+        if (selectedCustomers == null) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("Select a customer record to delete");
+            alert.showAndWait();
+
+        } else {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete customer record? Associated customer appointments will also be deleted. Action cannot be undone");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+
+                Customers.deleteCustomers(selectedCustomers);
+
+            }
+        }
     }
 
     public void onCustomerScreenBackButton(ActionEvent actionEvent) throws IOException {
@@ -86,23 +108,15 @@ public class CustomerScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        try {
+        customerTable.setItems(Customers.getAllCustomers());
 
-            customerTable.setItems(CustomersJDBC.getAllCustomers());
-
-            customerScreenIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
-            customerScreenNameCol.setCellValueFactory(new PropertyValueFactory<>("customersName"));
-            customerScreenAddressCol.setCellValueFactory(new PropertyValueFactory<>("customersAddress"));
-            customerScreenPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>( "customersPostalCode"));
-            customerScreenPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customersPhoneNumber"));
-            customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("customersCountryData"));
-            customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customersDivisionID"));
-
-        } catch (SQLException e) {
-
-            throw new RuntimeException(e);
-
-        }
+        customerScreenIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
+        customerScreenNameCol.setCellValueFactory(new PropertyValueFactory<>("customersName"));
+        customerScreenAddressCol.setCellValueFactory(new PropertyValueFactory<>("customersAddress"));
+        customerScreenPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>( "customersPostalCode"));
+        customerScreenPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customersPhoneNumber"));
+        customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("customersCountryData"));
+        customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customersDivisionID"));
 
     }
 }

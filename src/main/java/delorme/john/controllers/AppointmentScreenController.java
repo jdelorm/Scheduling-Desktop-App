@@ -1,6 +1,7 @@
 package delorme.john.controllers;
 
 import delorme.john.helper.AppointmentsJDBC;
+import delorme.john.models.Appointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
@@ -77,6 +79,27 @@ public class AppointmentScreenController implements Initializable {
     }
 
     public void onAppointmentScreenDeleteButton(ActionEvent actionEvent) {
+
+        delorme.john.models.Appointments selectedAppointments = (Appointments) appointmentTable.getSelectionModel().getSelectedItem();
+
+        if (selectedAppointments == null) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("Select an appointment to delete");
+            alert.showAndWait();
+
+        } else {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Delete appointment? Action cannot be undone");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+
+                Appointments.deleteAppointments(selectedAppointments);
+
+            }
+        }
     }
 
     public void onAppointmentScreenBackButton(ActionEvent actionEvent) throws IOException {
@@ -117,46 +140,21 @@ public class AppointmentScreenController implements Initializable {
     public void onAppointmentScreenContactDropDown(ActionEvent actionEvent) {
     }
 
-    /*public void initialize() throws SQLException {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ObservableList<Appointments> allAppointmentsList = appointmentsJDBC.getAllAppointments();
+        appointmentTable.setItems(Appointments.getAllAppointments());
 
-        appointmentScreenAptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
-        appointmentScreenTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
-        appointmentScreenDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
-        appointmentScreenLocationCol.setCellValueFactory(new PropertyValueFactory<>( "appointmentLocation"));
-        appointmentScreenTypeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
-        appointmentScreenStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentStartTime"));
-        appointmentScreenEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentEndTime"));
+        appointmentScreenAptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsID"));
+        appointmentScreenTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsTitle"));
+        appointmentScreenDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsDescription"));
+        appointmentScreenLocationCol.setCellValueFactory(new PropertyValueFactory<>( "appointmentsLocation"));
+        appointmentScreenTypeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsType"));
+        appointmentScreenStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsStartTime"));
+        appointmentScreenEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsEndTime"));
         appointmentScreenCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
         appointmentScreenUserIDCol.setCellValueFactory(new PropertyValueFactory<>("usersID"));
         appointmentScreenContactCol.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
 
-        appointmentTable.setItems(allAppointmentsList);
-    }*/
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        try {
-
-        appointmentTable.setItems(AppointmentsJDBC.getAllAppointments());
-
-            appointmentScreenAptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsID"));
-            appointmentScreenTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsTitle"));
-            appointmentScreenDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsDescription"));
-            appointmentScreenLocationCol.setCellValueFactory(new PropertyValueFactory<>( "appointmentsLocation"));
-            appointmentScreenTypeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsType"));
-            appointmentScreenStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsStartTime"));
-            appointmentScreenEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsEndTime"));
-            appointmentScreenCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
-            appointmentScreenUserIDCol.setCellValueFactory(new PropertyValueFactory<>("usersID"));
-            appointmentScreenContactCol.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
-
-        } catch (SQLException e) {
-
-            throw new RuntimeException(e);
-
-        }
     }
 }

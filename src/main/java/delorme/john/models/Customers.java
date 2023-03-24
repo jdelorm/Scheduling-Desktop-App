@@ -109,6 +109,26 @@ public class Customers {
 
     }
 
+    public static boolean deleteCustomers(Customers selectedCustomers) {
+
+        if (allCustomers.contains(selectedCustomers)) {
+
+            allCustomers.remove(selectedCustomers);
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    public static void updateCustomers(int index, Customers selectedCustomers) {
+
+        allCustomers.set(index, selectedCustomers);
+
+    }
+
     private static ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
 
     public static ObservableList<Customers> getAllCustomers() {
@@ -118,12 +138,14 @@ public class Customers {
     }
 
     public static void setAllCustomers(ObservableList<Customers> allCustomers) {
+
         Customers.allCustomers = allCustomers;
+
     }
 
     public static void addCustomers(Customers newCustomers) {
 
         allCustomers.add(newCustomers);
-    }
 
+    }
 }

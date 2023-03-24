@@ -1,12 +1,14 @@
 package delorme.john;
 
-import delorme.john.helper.JDBC;
+import delorme.john.helper.*;
+import delorme.john.models.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Main extends Application {
 
@@ -24,6 +26,43 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         JDBC.openConnection();
+
+        try {
+            AppointmentsJDBC.getAllAppointments();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            ContactsJDBC.getAllContacts();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            CountriesJDBC.getAllCountries();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            CustomersJDBC.getAllCustomers();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            FirstLevelDivisionsJDBC.getAllFirstLevelDivisions();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            UsersJDBC.getAllUsers();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         launch();
         JDBC.closeConnection();
 

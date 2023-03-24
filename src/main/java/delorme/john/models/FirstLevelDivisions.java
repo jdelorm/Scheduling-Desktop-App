@@ -52,6 +52,26 @@ public class FirstLevelDivisions {
 
     }
 
+    public static boolean deleteFirstLevelDivisions(FirstLevelDivisions selectedFirstLevelDivisions) {
+
+        if (allFirstLevelDivisions.contains(selectedFirstLevelDivisions)) {
+
+            allFirstLevelDivisions.remove(selectedFirstLevelDivisions);
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+    }
+
+    public static void updateFirstLevelDivisions(int index, FirstLevelDivisions selectedFirstLevelDivisions) {
+
+        allFirstLevelDivisions.set(index, selectedFirstLevelDivisions);
+
+    }
+
     private static ObservableList<FirstLevelDivisions> allFirstLevelDivisions = FXCollections.observableArrayList();
 
     public static ObservableList<FirstLevelDivisions> getAllFirstLevelDivisions() {
@@ -61,12 +81,14 @@ public class FirstLevelDivisions {
     }
 
     public static void setAllFirstLevelDivisions(ObservableList<FirstLevelDivisions> allFirstLevelDivisions) {
+
         FirstLevelDivisions.allFirstLevelDivisions = allFirstLevelDivisions;
+
     }
 
     public static void addFirstLevelDivisions(FirstLevelDivisions newFirstLevelDivisions) {
 
         allFirstLevelDivisions.add(newFirstLevelDivisions);
-    }
 
+    }
 }

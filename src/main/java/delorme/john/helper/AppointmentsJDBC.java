@@ -34,9 +34,10 @@ public class AppointmentsJDBC {
             int userID = results.getInt("User_ID");
             int contactID = results.getInt("Contact_ID");
 
-            Appointments appointment = new Appointments(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, start, end, customerID, userID, contactID);
+            Appointments newAppointment = new Appointments(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, start, end, customerID, userID, contactID);
 
-            appointmentsListQuery.add(appointment);
+            //appointmentsListQuery.add(appointment);
+            Appointments.addAppointments(newAppointment);
 
         }
 
