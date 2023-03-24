@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="delorme.john.controllers.AppointmentUpdateScreenController">
+    <children>
+        <Label layoutX="14.0" layoutY="215.0" text="Appointment_ID" />
+        <TextField fx:id="appointmentScreenAptID" layoutX="105.0" layoutY="211.0" onAction="#onAppointmentScreenAptID" />
+        <TextField fx:id="appointmentScreenTitle" layoutX="105.0" layoutY="243.0" onAction="#onAppointmentScreenTitle" />
+        <TextField fx:id="appointmentScreenDescription" layoutX="105.0" layoutY="275.0" onAction="#onAppointmentScreenDescription" />
+        <TextField fx:id="appointmentScreenLocation" layoutX="105.0" layoutY="308.0" onAction="#onAppointmentScreenLocation" />
+        <ComboBox fx:id="appointmentScreenStartTime" layoutX="344.0" layoutY="308.0" onAction="#onAppointmentScreenStartTime" prefWidth="150.0" />
+        <Label layoutX="14.0" layoutY="247.0" text="Title" />
+        <Label layoutX="14.0" layoutY="279.0" text="Description" />
+        <Label layoutX="14.0" layoutY="312.0" text="Location" />
+        <Label layoutX="262.0" layoutY="215.0" text="Contact" />
+        <Label layoutX="262.0" layoutY="247.0" text="Type" />
+        <Label layoutX="262.0" layoutY="279.0" text="Start Date" />
+        <ComboBox fx:id="appointmentScreenEndTime" layoutX="600.0" layoutY="243.0" onAction="#onAppointmentScreenEndTime" prefWidth="150.0" />
+        <Button fx:id="appointmentScreenUpdateButton" layoutX="134.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAppointmentScreenUpdateButton" prefHeight="25.0" prefWidth="70.0" text="Update" />
+        <Button fx:id="appointmentScreenBackButton" layoutX="321.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAppointmentScreenBackButton" prefHeight="25.0" prefWidth="70.0" text="Back" />
+        <Label layoutX="261.0" layoutY="312.0" text="Start Time" />
+        <Label layoutX="524.0" layoutY="215.0" text="End Date" />
+        <Label layoutX="524.0" layoutY="247.0" text="End Time" />
+        <Label layoutX="524.0" layoutY="279.0" text="Customer_ID" />
+        <Label layoutX="524.0" layoutY="312.0" text="User_ID" />
+        <TextField fx:id="appointmentScreenType" layoutX="345.0" layoutY="243.0" onAction="#onAppointmentScreenType" />
+        <TextField fx:id="appointmentScreenCustomerID" layoutX="601.0" layoutY="275.0" onAction="#onAppointmentScreenCustomerID" />
+        <TextField fx:id="appointmentScreenUserID" layoutX="601.0" layoutY="308.0" onAction="#onAppointmentScreenUserID" />
+        <DatePicker fx:id="appointmentScreenStartDate" layoutX="344.0" layoutY="275.0" onAction="#onAppointmentScreenStartDate" prefHeight="25.0" prefWidth="150.0" />
+        <DatePicker fx:id="appointmentScreenEndDate" layoutX="600.0" layoutY="211.0" onAction="#onAppointmentScreenEndDate" prefHeight="25.0" prefWidth="150.0" />
+        <ComboBox fx:id="appointmentScreenContactDropDown" layoutX="344.0" layoutY="211.0" onAction="#onAppointmentScreenContactDropDown" prefWidth="150.0" />
+    </children>
+</AnchorPane>
