@@ -17,6 +17,14 @@ public class Contacts {
 
     }
 
+    private static int contactID = 1000;
+
+    public static int getNewPartID() {
+
+        return contactID++;
+
+    }
+
     public int getContactsID() {
 
         return contactsID;

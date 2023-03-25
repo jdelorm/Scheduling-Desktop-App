@@ -36,6 +36,14 @@ public class Appointments {
 
     }
 
+    private static int AppointmentID = 1000;
+
+    public static int getNewPartID() {
+
+        return AppointmentID++;
+
+    }
+
     public int getAppointmentsID() {
 
         return appointmentsID;

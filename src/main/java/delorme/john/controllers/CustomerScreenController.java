@@ -43,6 +43,13 @@ public class CustomerScreenController implements Initializable {
     public Button customerScreenDeleteButton;
     public Button customerScreenBackButton;
     public TableView customerTable;
+    private static Customers customerToModify;
+
+    public static Customers getCustomerToModify() {
+
+        return customerToModify;
+
+    }
 
     public void onCustomerScreenID(ActionEvent actionEvent) {
     }
@@ -63,33 +70,6 @@ public class CustomerScreenController implements Initializable {
     }
 
     public void onCustomerScreenCountryDropDown(ActionEvent actionEvent) {
-
-        /*ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
-
-        try {
-
-            ObservableList<FirstLevelDivisions> divisions = FirstLevelDivisions.getDivisionsByCountry(customerScreenCountryDropDown.getSelectionModel().getSelectedItem());
-
-            if (divisions != null) {
-
-                for (FirstLevelDivisions div: divisions) {
-
-                    firstLevelDivisionsList.add(div.getDivisionname());
-
-                }
-
-            }
-
-            customerScreenCountryDropDown.setItems(firstLevelDivisionsList);
-
-        }
-
-        catch (SQLException expt){
-
-            expt.printStackTrace();
-
-        }*/
-
     }
 
     public void onCustomerScreenAddButton(ActionEvent actionEvent) throws IOException {
@@ -105,7 +85,7 @@ public class CustomerScreenController implements Initializable {
 
     public void onCustomerScreenUpdateButton(ActionEvent actionEvent) throws IOException {
 
-        Customers customerToModify = (Customers) customerTable.getSelectionModel().getSelectedItem();
+        customerToModify = (Customers) customerTable.getSelectionModel().getSelectedItem();
 
         if (customerToModify == null) {
 
@@ -166,43 +146,15 @@ public class CustomerScreenController implements Initializable {
 
         customerTable.setItems(Customers.getAllCustomers());
 
+        //int customerId = Customers.getNewCustomerID();
+
         customerScreenIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
         customerScreenNameCol.setCellValueFactory(new PropertyValueFactory<>("customersName"));
         customerScreenAddressCol.setCellValueFactory(new PropertyValueFactory<>("customersAddress"));
-        customerScreenPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>( "customersPostalCode"));
+        customerScreenPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("customersPostalCode"));
         customerScreenPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customersPhoneNumber"));
         customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("customersCountryData"));
         customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customersDivisionID"));
-
-        ObservableList<String> countryList = FXCollections.observableArrayList();
-
-        ObservableList<Countries> countries = Countries.getAllCountries();
-
-        if (countries != null) {
-
-            for (Countries country: countries) {
-
-                countryList.add(country.getCountries());
-
-            }
-        }
-
-        customerScreenCountryDropDown.setItems(countryList);
-
-        ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
-
-        ObservableList<FirstLevelDivisions> divisions = FirstLevelDivisions.getAllFirstLevelDivisions();
-
-        if (divisions != null) {
-
-            for (FirstLevelDivisions division: divisions) {
-
-                firstLevelDivisionsList.add(division.getDivisions());
-
-            }
-        }
-
-        customerScreenStateDropDown.setItems(firstLevelDivisionsList);
 
     }
 }

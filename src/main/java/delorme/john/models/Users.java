@@ -17,6 +17,14 @@ public class Users {
 
     }
 
+    private static int userID = 1000;
+
+    public static int getNewPartID() {
+
+        return userID++;
+
+    }
+
     public int getUsersID() {
 
         return usersID;

@@ -28,7 +28,7 @@ public class CustomersJDBC {
                 String customerAddress = results.getString("Address");
                 String customerPostalCode = results.getString("Postal_Code");
                 String customerPhone = results.getString("Phone");
-                int divisionID = results.getInt("Division_ID");
+                String divisionID = results.getString("Division_ID");
                 String divisionName = results.getString("Division");
 
                 Customers newCustomer = new Customers(customerID, customerName, customerAddress, customerPostalCode, customerPhone, divisionID, divisionName);

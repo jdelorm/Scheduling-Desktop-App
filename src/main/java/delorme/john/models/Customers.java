@@ -10,10 +10,10 @@ public class Customers {
     private String customersAddress;
     private String customersPostalCode;
     private String customersPhoneNumber;
-    private int customersDivisionID;
+    private String customersDivisionID;
     private String customersCountryData;
 
-    public Customers(int customersID, String customersName, String customersAddress, String customersPostalCode, String customersPhoneNumber, int customersDivisionID, String customersCountryData) {
+    public Customers(int customersID, String customersName, String customersAddress, String customersPostalCode, String customersPhoneNumber, String customersDivisionID, String customersCountryData) {
 
         this.customersID = customersID;
         this.customersName = customersName;
@@ -22,6 +22,14 @@ public class Customers {
         this.customersPhoneNumber = customersPhoneNumber;
         this.customersDivisionID = customersDivisionID;
         this.customersCountryData = customersCountryData;
+
+    }
+
+    private static int customerID = 1;
+
+    public static int getNewCustomerID() {
+
+        return customerID++;
 
     }
 
@@ -61,7 +69,7 @@ public class Customers {
 
     }
 
-    public Integer getCustomersDivisionID() {
+    public String getCustomersDivisionID() {
 
         return customersDivisionID;
 
@@ -103,7 +111,7 @@ public class Customers {
 
     }
 
-    public void setCustomersDivisionID(int customersDivisionID) {
+    public void setCustomersDivisionID(String customersDivisionID) {
 
         this.customersDivisionID = customersDivisionID;
 
