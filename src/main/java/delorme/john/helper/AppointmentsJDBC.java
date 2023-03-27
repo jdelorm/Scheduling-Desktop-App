@@ -36,7 +36,6 @@ public class AppointmentsJDBC {
 
             Appointments newAppointment = new Appointments(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, start, end, customerID, userID, contactID);
 
-            //appointmentsListQuery.add(appointment);
             Appointments.addAppointments(newAppointment);
 
         }

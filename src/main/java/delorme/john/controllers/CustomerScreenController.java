@@ -1,10 +1,6 @@
 package delorme.john.controllers;
 
-import delorme.john.models.Countries;
 import delorme.john.models.Customers;
-import delorme.john.models.FirstLevelDivisions;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,12 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.*;
 
 public class CustomerScreenController implements Initializable {
-
-    static ObservableList<Customers> customers;
 
     public TableColumn customerScreenIDCol;
     public TableColumn customerScreenNameCol;
@@ -31,13 +24,6 @@ public class CustomerScreenController implements Initializable {
     public TableColumn customerScreenPhoneCol;
     public TableColumn customerScreenCountryCol;
     public TableColumn customerScreenStateCol;
-    public TextField customerScreenID;
-    public TextField customerScreenName;
-    public TextField customerScreenAddress;
-    public TextField customerScreenPostalCode;
-    public TextField customerScreenPhoneNumber;
-    public ComboBox customerScreenStateDropDown;
-    public ComboBox customerScreenCountryDropDown;
     public Button customerScreenAddButton;
     public Button customerScreenUpdateButton;
     public Button customerScreenDeleteButton;
@@ -49,27 +35,6 @@ public class CustomerScreenController implements Initializable {
 
         return customerToModify;
 
-    }
-
-    public void onCustomerScreenID(ActionEvent actionEvent) {
-    }
-
-    public void onCustomerScreenName(ActionEvent actionEvent) {
-    }
-
-    public void onCustomerScreenAddress(ActionEvent actionEvent) {
-    }
-
-    public void onCustomerScreenPostalCode(ActionEvent actionEvent) {
-    }
-
-    public void onCustomerScreenPhoneNumber(ActionEvent actionEvent) {
-    }
-
-    public void onCustomerScreenStateDropDown(ActionEvent actionEvent) {
-    }
-
-    public void onCustomerScreenCountryDropDown(ActionEvent actionEvent) {
     }
 
     public void onCustomerScreenAddButton(ActionEvent actionEvent) throws IOException {
@@ -146,15 +111,13 @@ public class CustomerScreenController implements Initializable {
 
         customerTable.setItems(Customers.getAllCustomers());
 
-        //int customerId = Customers.getNewCustomerID();
-
         customerScreenIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
         customerScreenNameCol.setCellValueFactory(new PropertyValueFactory<>("customersName"));
         customerScreenAddressCol.setCellValueFactory(new PropertyValueFactory<>("customersAddress"));
         customerScreenPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("customersPostalCode"));
         customerScreenPhoneCol.setCellValueFactory(new PropertyValueFactory<>("customersPhoneNumber"));
-        customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("customersCountryData"));
-        customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customersDivisionID"));
+        customerScreenStateCol.setCellValueFactory(new PropertyValueFactory<>("customersCountryData"));
+        customerScreenCountryCol.setCellValueFactory(new PropertyValueFactory<>("customersDivisionID"));
 
     }
 }

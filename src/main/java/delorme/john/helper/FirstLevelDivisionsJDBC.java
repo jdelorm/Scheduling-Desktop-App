@@ -1,6 +1,5 @@
 package delorme.john.helper;
 
-import delorme.john.models.Appointments;
 import delorme.john.models.FirstLevelDivisions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,11 +24,10 @@ public class FirstLevelDivisionsJDBC {
 
             int divisionID = results.getInt("Division_ID");
             String divisionName = results.getString("Division");
-            int country_ID = results.getInt("COUNTRY_ID");
+            String country_ID = results.getString("COUNTRY_ID");
 
             FirstLevelDivisions newFirstLevelDivision = new FirstLevelDivisions(divisionID, divisionName, country_ID);
 
-            //firstLevelDivisionsListQuery.add(firstLevelDivision);
             FirstLevelDivisions.addFirstLevelDivisions(newFirstLevelDivision);
 
         }

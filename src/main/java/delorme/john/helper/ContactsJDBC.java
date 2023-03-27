@@ -1,6 +1,5 @@
 package delorme.john.helper;
 
-import delorme.john.models.Appointments;
 import delorme.john.models.Contacts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,8 +27,6 @@ public class ContactsJDBC {
             String contactEmail = results.getString("Email");
 
             Contacts newContact = new Contacts(contactID, contactName, contactEmail);
-
-            //contactsListQuery.add(contact);
 
             Contacts.addContacts(newContact);
 

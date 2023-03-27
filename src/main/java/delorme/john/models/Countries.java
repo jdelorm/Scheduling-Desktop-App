@@ -3,8 +3,6 @@ package delorme.john.models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.*;
-
 public class Countries {
 
     private int countriesID;
@@ -80,4 +78,32 @@ public class Countries {
         allCountries.add(newCountries);
 
     }
+
+
+
+
+
+
+
+    private static ObservableList<Countries> allCountriesID = FXCollections.observableArrayList();
+
+    public static ObservableList<Countries> getAllCountriesID() {
+
+        return allCountriesID;
+
+    }
+
+    public static void setAllCountriesID(ObservableList<Countries> allCountriesID) {
+
+        Countries.allCountriesID = allCountriesID;
+
+    }
+
+    public static void addCountriesID(Countries newCountriesID) {
+
+        allCountriesID.add(newCountriesID);
+
+    }
+
+
 }

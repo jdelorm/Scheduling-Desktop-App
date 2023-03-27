@@ -27,12 +27,11 @@ public class CountriesJDBC {
 
             Countries newCountry = new Countries(countryID, countryName);
 
-            //countriesListQuery.add(country);
-
             Countries.addCountries(newCountry);
 
         }
 
         return countriesListQuery;
+
     }
 }

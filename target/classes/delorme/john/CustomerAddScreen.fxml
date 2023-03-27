@@ -11,15 +11,15 @@
         <TextField fx:id="customerScreenAddress" layoutX="79.0" layoutY="275.0" onAction="#onCustomerScreenAddress" />
         <TextField fx:id="customerScreenPostalCode" layoutX="79.0" layoutY="308.0" onAction="#onCustomerScreenPostalCode" />
         <TextField fx:id="customerScreenPhoneNumber" layoutX="345.0" layoutY="211.0" onAction="#onCustomerScreenPhoneNumber" />
-        <ComboBox fx:id="customerScreenStateDropDown" layoutX="344.0" layoutY="275.0" onAction="#onCustomerScreenStateDropDown" prefWidth="150.0" />
+        <ComboBox fx:id="customerScreenCountryDropDown" layoutX="344.0" layoutY="243.0" onAction="#onCustomerScreenCountryDropDown" prefWidth="150.0" promptText="Select Country" />
+        <ComboBox fx:id="customerScreenStateDropDown" layoutX="344.0" layoutY="275.0" onAction="#onCustomerScreenStateDropDown" prefWidth="150.0" promptText="Select Country First" />
         <Label layoutX="14.0" layoutY="247.0" text="Name" />
         <Label layoutX="14.0" layoutY="279.0" text="Address" />
         <Label layoutX="14.0" layoutY="312.0" text="Postal Code" />
         <Label layoutX="262.0" layoutY="215.0" text="Phone Number" />
         <Label layoutX="262.0" layoutY="247.0" text="Country" />
         <Label layoutX="262.0" layoutY="279.0" text="State/Province" />
-        <ComboBox fx:id="customerScreenCountryDropDown" layoutX="344.0" layoutY="243.0" onAction="#onCustomerScreenCountryDropDown" prefWidth="150.0" />
-        <Button fx:id="customerScreenAddButton" layoutX="35.0" layoutY="347.0" mnemonicParsing="false" onAction="#onCustomerScreenAddButton" prefHeight="25.0" prefWidth="70.0" text="Add" />
-        <Button fx:id="customerScreenBackButton" layoutX="321.0" layoutY="347.0" mnemonicParsing="false" onAction="#onCustomerScreenBackButton" prefHeight="25.0" prefWidth="70.0" text="Back" />
+        <Button fx:id="customerScreenAddButton" layoutX="35.0" layoutY="347.0" mnemonicParsing="false" onAction="#onCustomerScreenAddButton" prefHeight="25.0" prefWidth="70.0" text="Save" />
+        <Button fx:id="customerScreenBackButton" layoutX="321.0" layoutY="347.0" mnemonicParsing="false" onAction="#onCustomerScreenBackButton" prefHeight="25.0" prefWidth="70.0" text="Cancel" />
     </children>
 </AnchorPane>

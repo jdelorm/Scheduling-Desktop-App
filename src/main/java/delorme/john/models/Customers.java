@@ -15,17 +15,33 @@ public class Customers {
 
     public Customers(int customersID, String customersName, String customersAddress, String customersPostalCode, String customersPhoneNumber, String customersDivisionID, String customersCountryData) {
 
+        String countryName = customersDivisionID;
+
+        if (customersDivisionID.equals("1") || customersDivisionID.equals("U.S")) {
+
+            countryName = "U.S";
+
+        } else if (customersDivisionID.equals("2") || customersDivisionID.equals("UK")) {
+
+            countryName = "UK";
+
+        } else {
+
+            countryName = "Canada";
+
+        }
+
         this.customersID = customersID;
         this.customersName = customersName;
         this.customersAddress = customersAddress;
         this.customersPostalCode = customersPostalCode;
         this.customersPhoneNumber = customersPhoneNumber;
-        this.customersDivisionID = customersDivisionID;
+        this.customersDivisionID = countryName;
         this.customersCountryData = customersCountryData;
 
     }
 
-    private static int customerID = 1;
+    private static int customerID = 4;
 
     public static int getNewCustomerID() {
 
@@ -122,6 +138,7 @@ public class Customers {
         if (allCustomers.contains(selectedCustomers)) {
 
             allCustomers.remove(selectedCustomers);
+
             return true;
 
         } else {

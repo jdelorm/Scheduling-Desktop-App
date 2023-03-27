@@ -15,7 +15,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="john" options="--add-exports javafx.controls/com.sun.javafx.charts=delorme.john" />
+      <module name="john" options="--add-exports javafx.controls/com.sun.javafx.charts=delorme.john --add-exports jdk.management.agent/jdk.internal.agent=delorme.john" />
     </option>
   </component>
 </project>

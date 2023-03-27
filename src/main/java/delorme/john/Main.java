@@ -1,7 +1,6 @@
 package delorme.john;
 
 import delorme.john.helper.*;
-import delorme.john.models.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

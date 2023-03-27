@@ -7,9 +7,9 @@ public class FirstLevelDivisions {
 
     private int divisionsID;
     private String divisions;
-    public int countriesID;
+    public String countriesID;
 
-    public FirstLevelDivisions(int divisionsID, String divisions, int countriesID) {
+    public FirstLevelDivisions(int divisionsID, String divisions, String countriesID) {
 
         this.divisionsID = divisionsID;
         this.divisions = divisions;
@@ -29,7 +29,7 @@ public class FirstLevelDivisions {
 
     }
 
-    public int getCountriesID() {
+    public String getCountriesID() {
 
         return countriesID;
     }
@@ -46,7 +46,7 @@ public class FirstLevelDivisions {
 
     }
 
-    public void setCountriesID(int countriesID) {
+    public void setCountriesID(String countriesID) {
 
         this.countriesID = countriesID;
 
@@ -89,6 +89,23 @@ public class FirstLevelDivisions {
     public static void addFirstLevelDivisions(FirstLevelDivisions newFirstLevelDivisions) {
 
         allFirstLevelDivisions.add(newFirstLevelDivisions);
+
+    }
+
+    public static ObservableList<FirstLevelDivisions> lookupProduct(String productName) {
+
+        ObservableList<FirstLevelDivisions> productNameSearch = FXCollections.observableArrayList();
+
+        for (delorme.john.models.FirstLevelDivisions firstLevelDivisions : allFirstLevelDivisions) {
+
+            if (firstLevelDivisions.getCountriesID().contains(productName)) {
+
+                productNameSearch.add(firstLevelDivisions);
+
+            }
+        }
+
+        return productNameSearch;
 
     }
 }

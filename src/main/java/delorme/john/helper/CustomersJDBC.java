@@ -1,6 +1,5 @@
 package delorme.john.helper;
 
-import delorme.john.models.Appointments;
 import delorme.john.models.Customers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,8 +14,8 @@ public class CustomersJDBC {
 
         ObservableList<Customers> customersListQuery = FXCollections.observableArrayList();
 
-            String query = "SELECT customers.Customer_ID, customers.Customer_Name, customers.Address, customers.Postal_Code, customers.Phone, customers.Division_ID, first_level_divisions.Division from customers INNER JOIN  first_level_divisions ON customers.Division_ID = first_level_divisions.Division_ID";
-
+            String query = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone," + "first_level_divisions.COUNTRY_ID, first_level_divisions.Division FROM customers, first_level_divisions WHERE customers.Division_ID = first_level_divisions.Division_ID ORDER BY Customer_ID";
+        /*customers.Division_ID,*/
             PreparedStatement preparedStatementCustomer = JDBC.getConnection().prepareStatement(query);
 
             ResultSet results = preparedStatementCustomer.executeQuery();
@@ -28,12 +27,11 @@ public class CustomersJDBC {
                 String customerAddress = results.getString("Address");
                 String customerPostalCode = results.getString("Postal_Code");
                 String customerPhone = results.getString("Phone");
-                String divisionID = results.getString("Division_ID");
+                String divisionID = results.getString("Country_ID");
                 String divisionName = results.getString("Division");
 
                 Customers newCustomer = new Customers(customerID, customerName, customerAddress, customerPostalCode, customerPhone, divisionID, divisionName);
 
-                //customersListQuery.add(customer);
                 Customers.addCustomers(newCustomer);
 
             }

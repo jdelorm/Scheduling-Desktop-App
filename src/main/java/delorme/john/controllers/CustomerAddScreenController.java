@@ -1,6 +1,5 @@
 package delorme.john.controllers;
 
-import delorme.john.models.Appointments;
 import delorme.john.models.Countries;
 import delorme.john.models.Customers;
 import delorme.john.models.FirstLevelDivisions;
@@ -21,6 +20,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static delorme.john.models.FirstLevelDivisions.lookupProduct;
 
 public class CustomerAddScreenController implements Initializable {
     public Button customerScreenBackButton;
@@ -48,10 +49,42 @@ public class CustomerAddScreenController implements Initializable {
     public void onCustomerScreenPhoneNumber(ActionEvent actionEvent) {
     }
 
-    public void onCustomerScreenStateDropDown(ActionEvent actionEvent) {
+    public void onCustomerScreenCountryDropDown(ActionEvent actionEvent) {
+
+        String q = customerScreenCountryDropDown.getValue().toString();
+
+        if (q.equals("1") || q.equals("U.S")) {
+
+            q = "1";
+
+        } else if (q.equals("2") || q.equals("UK")) {
+
+            q = "2";
+
+        } else {
+
+            q = "3";
+
+        }
+
+        ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
+
+        ObservableList<FirstLevelDivisions> searchedParts = lookupProduct(q);
+
+        if (searchedParts != null) {
+
+            for (FirstLevelDivisions division : searchedParts) {
+
+                firstLevelDivisionsList.add(division.getDivisions());
+
+            }
+        }
+
+        customerScreenStateDropDown.setItems(firstLevelDivisionsList);
+
     }
 
-    public void onCustomerScreenCountryDropDown(ActionEvent actionEvent) {
+    public void onCustomerScreenStateDropDown(ActionEvent actionEvent) {
     }
 
     public void onCustomerScreenAddButton(ActionEvent actionEvent) {
@@ -74,13 +107,13 @@ public class CustomerAddScreenController implements Initializable {
 
             try {
 
-                int customersID = Customers.getNewCustomerID() + Customers.getAllCustomers().size();
+                int customersID = Customers.getNewCustomerID();
                 String customersName = customerScreenName.getText();
                 String customersAddress = customerScreenAddress.getText();
                 String customersPostalCode = customerScreenPostalCode.getText();
                 String customersPhoneNumber = customerScreenPhoneNumber.getText();
-                String customersDivisionID = customerScreenStateDropDown.getValue().toString();
-                String customersCountryData = customerScreenCountryDropDown.getValue().toString();
+                String customersCountryData = customerScreenStateDropDown.getValue().toString();
+                String customersDivisionID = customerScreenCountryDropDown.getValue().toString();
 
                 if (customersName.isEmpty()) {
 
@@ -145,7 +178,7 @@ public class CustomerAddScreenController implements Initializable {
     }
 
     @Override
-    public void initialize (URL url, ResourceBundle resourceBundle){
+    public void initialize (URL url, ResourceBundle resourceBundle) {
 
         ObservableList<String> countryList = FXCollections.observableArrayList();
 
@@ -161,21 +194,6 @@ public class CustomerAddScreenController implements Initializable {
         }
 
         customerScreenCountryDropDown.setItems(countryList);
-
-        ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
-
-        ObservableList<FirstLevelDivisions> divisions = FirstLevelDivisions.getAllFirstLevelDivisions();
-
-        if (divisions != null) {
-
-            for (FirstLevelDivisions division : divisions) {
-
-                firstLevelDivisionsList.add(division.getDivisions());
-
-            }
-        }
-
-        customerScreenStateDropDown.setItems(firstLevelDivisionsList);
 
     }
 }

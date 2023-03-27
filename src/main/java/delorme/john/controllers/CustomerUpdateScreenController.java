@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static delorme.john.models.FirstLevelDivisions.lookupProduct;
+
 public class CustomerUpdateScreenController implements Initializable {
     public Button customerScreenBackButton;
     public Button customerScreenUpdateButton;
@@ -52,6 +54,38 @@ public class CustomerUpdateScreenController implements Initializable {
     }
 
     public void onCustomerScreenCountryDropDown(ActionEvent actionEvent) {
+
+        String q = customerScreenCountryDropDown.getValue().toString();
+
+        if (q.equals("1") || q.equals("U.S")) {
+
+            q = "1";
+
+        } else if (q.equals("2") || q.equals("UK")) {
+
+            q = "2";
+
+        } else {
+
+            q = "3";
+
+        }
+
+        ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
+
+        ObservableList<FirstLevelDivisions> searchedParts = lookupProduct(q);
+
+        if (searchedParts != null) {
+
+            for (FirstLevelDivisions division : searchedParts) {
+
+                firstLevelDivisionsList.add(division.getDivisions());
+
+            }
+        }
+
+        customerScreenStateDropDown.setItems(firstLevelDivisionsList);
+
     }
 
     public void onCustomerScreenUpdateButton(ActionEvent actionEvent) {
@@ -79,8 +113,8 @@ public class CustomerUpdateScreenController implements Initializable {
                 String customersAddress = customerScreenAddress.getText();
                 String customersPostalCode = customerScreenPostalCode.getText();
                 String customersPhoneNumber = customerScreenPhoneNumber.getText();
-                String customersDivisionID = customerScreenStateDropDown.getValue().toString();
-                String customersCountryData = customerScreenCountryDropDown.getValue().toString();
+                String customersCountryData = customerScreenStateDropDown.getValue().toString();
+                String customersDivisionID = customerScreenCountryDropDown.getValue().toString();
 
                 if (customersName.isEmpty()) {
 
@@ -112,9 +146,12 @@ public class CustomerUpdateScreenController implements Initializable {
 
                 } else {
 
+                    int index = Customers.getAllCustomers().indexOf(selectedCustomer);
+
                     Customers addNewCustomer = new Customers(customersID, customersName, customersAddress, customersPostalCode, customersPhoneNumber, customersDivisionID, customersCountryData);
 
-                    Customers.updateCustomers(customersID - 1, addNewCustomer);
+                    Customers.updateCustomers(index, addNewCustomer);
+
                     Customers.deleteCustomers(selectedCustomer);
 
                     Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/CustomerScreen.fxml"));
@@ -132,7 +169,6 @@ public class CustomerUpdateScreenController implements Initializable {
 
             }
         }
-
     }
 
     public void onCustomerScreenBackButton(ActionEvent actionEvent) throws IOException {
@@ -174,13 +210,29 @@ public class CustomerUpdateScreenController implements Initializable {
 
         customerScreenCountryDropDown.setItems(countryList);
 
+        String q = customerScreenCountryDropDown.getValue().toString();
+
+        if (q.equals("1") || q.equals("U.S")) {
+
+            q = "1";
+
+        } else if (q.equals("2") || q.equals("UK")) {
+
+            q = "2";
+
+        } else {
+
+            q = "3";
+
+        }
+
         ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
 
-        ObservableList<FirstLevelDivisions> divisions = FirstLevelDivisions.getAllFirstLevelDivisions();
+        ObservableList<FirstLevelDivisions> searchedParts = lookupProduct(q);
 
-        if (divisions != null) {
+        if (searchedParts != null) {
 
-            for (FirstLevelDivisions division : divisions) {
+            for (FirstLevelDivisions division : searchedParts) {
 
                 firstLevelDivisionsList.add(division.getDivisions());
 
@@ -188,8 +240,6 @@ public class CustomerUpdateScreenController implements Initializable {
         }
 
         customerScreenStateDropDown.setItems(firstLevelDivisionsList);
-
-
 
     }
 }
