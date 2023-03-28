@@ -23,18 +23,18 @@ public class AppointmentsJDBC {
 
         while (results.next()) {
 
-            int appointmentID = results.getInt("Appointment_ID");
-            String appointmentTitle = results.getString("Title");
-            String appointmentDescription = results.getString("Description");
-            String appointmentLocation = results.getString("Location");
-            String appointmentType = results.getString("Type");
-            LocalDateTime start = results.getTimestamp("Start").toLocalDateTime();
-            LocalDateTime end = results.getTimestamp("End").toLocalDateTime();
-            int customerID = results.getInt("Customer_ID");
-            int userID = results.getInt("User_ID");
-            int contactID = results.getInt("Contact_ID");
+            int appointmentsID = results.getInt("Appointment_ID");
+            String appointmentsTitle = results.getString("Title");
+            String appointmentsDescription = results.getString("Description");
+            String appointmentsLocation = results.getString("Location");
+            String appointmentsType = results.getString("Type");
+            LocalDateTime appointmentsStartTime = results.getTimestamp("Start").toLocalDateTime();
+            LocalDateTime appointmentsEndTime = results.getTimestamp("End").toLocalDateTime();
+            int customersID = results.getInt("Customer_ID");
+            int usersID = results.getInt("User_ID");
+            String contactsID = results.getString("Contact_ID");
 
-            Appointments newAppointment = new Appointments(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, start, end, customerID, userID, contactID);
+            Appointments newAppointment = new Appointments(appointmentsID, appointmentsTitle, appointmentsDescription, appointmentsLocation, appointmentsType, appointmentsStartTime, appointmentsEndTime, customersID, usersID, contactsID);
 
             Appointments.addAppointments(newAppointment);
 

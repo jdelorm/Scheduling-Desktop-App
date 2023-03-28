@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 public class Appointments {
 
+    private ObservableList<Customers> associatedCustomers = FXCollections.observableArrayList();
     private int appointmentsID;
     private String appointmentsTitle;
     private String appointmentsDescription;
@@ -19,9 +20,25 @@ public class Appointments {
     private LocalDateTime appointmentsEndTime;
     public int customersID;
     public int usersID;
-    public int contactsID;
+    public String contactsID;
 
-    public Appointments(int appointmentsID, String appointmentsTitle, String appointmentsDescription, String appointmentsLocation, String appointmentsType, /*LocalDate appointmentStartDate,*/ LocalDateTime appointmentsStartTime, /*LocalDate appointmentEndDate,*/ LocalDateTime appointmentsEndTime, int customersID, int usersID, int contactsID) {
+    public Appointments(int appointmentsID, String appointmentsTitle, String appointmentsDescription, String appointmentsLocation, String appointmentsType, LocalDateTime appointmentsStartTime, LocalDateTime appointmentsEndTime, int customersID, int usersID, String contactsID) {
+
+        String contactName = contactsID;
+
+        if (contactsID.equals("1") || contactsID.equals("Anita Costa")) {
+
+            contactName = "Anita Costa";
+
+        } else if (contactsID.equals("2") || contactsID.equals("Daniel Garcia")) {
+
+            contactName = "Daniel Garcia";
+
+        } else {
+
+            contactName = "Li Lee";
+
+        }
 
         this.appointmentsID = appointmentsID;
         this.appointmentsTitle = appointmentsTitle;
@@ -32,13 +49,13 @@ public class Appointments {
         this.appointmentsEndTime = appointmentsEndTime;
         this.customersID = customersID;
         this.usersID = usersID;
-        this.contactsID = contactsID;
+        this.contactsID = contactName;
 
     }
 
     private static int AppointmentID = 1000;
 
-    public static int getNewPartID() {
+    public static int getNewAppointmentID() {
 
         return AppointmentID++;
 
@@ -111,57 +128,79 @@ public class Appointments {
 
     }
 
-    public int getContactsID() {
+    public String getContactsID() {
 
         return contactsID;
 
     }
 
     public void setAppointmentsID(int appointmentsID) {
+
         this.appointmentsID = appointmentsID;
+
     }
 
     public void setAppointmentsTitle(String appointmentsTitle) {
+
         this.appointmentsTitle = appointmentsTitle;
+
     }
 
     public void setAppointmentsDescription(String appointmentsDescription) {
+
         this.appointmentsDescription = appointmentsDescription;
+
     }
 
     public void setAppointmentsLocation(String appointmentsLocation) {
+
         this.appointmentsLocation = appointmentsLocation;
+
     }
 
     public void setAppointmentsType(String appointmentsType) {
+
         this.appointmentsType = appointmentsType;
+
     }
 
     public void setAppointmentStartDate(LocalDate appointmentStartDate) {
+
         this.appointmentStartDate = appointmentStartDate;
+
     }
 
     public void setAppointmentsStartTime(LocalDateTime appointmentsStartTime) {
+
         this.appointmentsStartTime = appointmentsStartTime;
+
     }
 
     public void setAppointmentEndDate(LocalDate appointmentEndDate) {
+
         this.appointmentEndDate = appointmentEndDate;
+
     }
 
     public void setAppointmentsEndTime(LocalDateTime appointmentsEndTime) {
+
         this.appointmentsEndTime = appointmentsEndTime;
+
     }
 
     public void setCustomersID(int customersID) {
+
         this.customersID = customersID;
+
     }
 
     public void setUsersID(int usersID) {
+
         this.usersID = usersID;
+
     }
 
-    public void setContactsID(int contactsID) {
+    public void setContactsID(String contactsID) {
 
         this.contactsID = contactsID;
 
@@ -172,6 +211,7 @@ public class Appointments {
         if (allAppointments.contains(selectedAppointments)) {
 
             allAppointments.remove(selectedAppointments);
+
             return true;
 
         } else {
@@ -204,6 +244,24 @@ public class Appointments {
     public static void addAppointments(Appointments newAppointments) {
 
         allAppointments.add(newAppointments);
+
+    }
+
+    public void addAssociatedCustomers(Customers part) {
+
+        associatedCustomers.add(part);
+
+    }
+
+    public boolean deleteAssociatedCustomers(Customers deleteCustomer) {
+
+        return associatedCustomers.remove(deleteCustomer);
+
+    }
+
+    public ObservableList<Customers> getAllAssociatedCustomers() {
+
+        return associatedCustomers;
 
     }
 }

@@ -1,6 +1,5 @@
 package delorme.john.controllers;
 
-import delorme.john.helper.AppointmentsJDBC;
 import delorme.john.models.Appointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -14,27 +13,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
-    public DatePicker appointmentScreenEndDate;
-    public DatePicker appointmentScreenStartDate;
-    public TextField appointmentScreenUserID;
-    public TextField appointmentScreenCustomerID;
-    public TextField appointmentScreenType;
+
     public Button appointmentScreenBackButton;
     public Button appointmentScreenDeleteButton;
     public Button appointmentScreenUpdateButton;
     public Button appointmentScreenAddButton;
-    public ComboBox appointmentScreenEndTime;
-    public ComboBox appointmentScreenStartTime;
-    public TextField appointmentScreenContact;
-    public TextField appointmentScreenLocation;
-    public TextField appointmentScreenDescription;
-    public TextField appointmentScreenTitle;
-    public TextField appointmentScreenAptID;
     public TableColumn appointmentScreenUserIDCol;
     public TableColumn appointmentScreenCustomerIDCol;
     public TableColumn appointmentScreenEndDateTimeCol;
@@ -48,28 +35,14 @@ public class AppointmentScreenController implements Initializable {
     public RadioButton appointmentsScreenAllButton;
     public RadioButton appointmentsScreenWeeklyButton;
     public RadioButton appointmentsScreenMonthlyButton;
-    public ComboBox appointmentScreenContactDropDown;
     public TableView appointmentTable;
 
-    public void onAppointmentScreenAptID(ActionEvent actionEvent) {
-    }
+    private static Appointments appointmentToModify;
 
-    public void onAppointmentScreenTitle(ActionEvent actionEvent) {
-    }
+    public static Appointments getAppointmentToModify() {
 
-    public void onAppointmentScreenDescription(ActionEvent actionEvent) {
-    }
+        return appointmentToModify;
 
-    public void onAppointmentScreenLocation(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenContact(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenStartTime(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenEndTime(ActionEvent actionEvent) {
     }
 
     public void onAppointmentScreenAddButton(ActionEvent actionEvent) throws IOException {
@@ -85,7 +58,7 @@ public class AppointmentScreenController implements Initializable {
 
     public void onAppointmentScreenUpdateButton(ActionEvent actionEvent) throws IOException {
 
-        Appointments appointmentToModify = (Appointments) appointmentTable.getSelectionModel().getSelectedItem();
+        appointmentToModify = (Appointments) appointmentTable.getSelectionModel().getSelectedItem();
 
         if (appointmentToModify == null) {
 
@@ -141,21 +114,6 @@ public class AppointmentScreenController implements Initializable {
 
     }
 
-    public void onAppointmentScreenType(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenCustomerID(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenUserID(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenStartDate(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenEndDate(ActionEvent actionEvent) {
-    }
-
     public void onAppointmentScreenAllButton(ActionEvent actionEvent) {
     }
 
@@ -163,9 +121,6 @@ public class AppointmentScreenController implements Initializable {
     }
 
     public void onAppointmentScreenMonthlyButton(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenContactDropDown(ActionEvent actionEvent) {
     }
 
     @Override

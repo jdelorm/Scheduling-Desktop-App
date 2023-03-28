@@ -92,20 +92,20 @@ public class FirstLevelDivisions {
 
     }
 
-    public static ObservableList<FirstLevelDivisions> lookupProduct(String productName) {
+    public static ObservableList<FirstLevelDivisions> lookupDivisions(String divisionsToLookup) {
 
-        ObservableList<FirstLevelDivisions> productNameSearch = FXCollections.observableArrayList();
+        ObservableList<FirstLevelDivisions> filteredDivisions = FXCollections.observableArrayList();
 
         for (delorme.john.models.FirstLevelDivisions firstLevelDivisions : allFirstLevelDivisions) {
 
-            if (firstLevelDivisions.getCountriesID().contains(productName)) {
+            if (firstLevelDivisions.getCountriesID().contains(divisionsToLookup)) {
 
-                productNameSearch.add(firstLevelDivisions);
+                filteredDivisions.add(firstLevelDivisions);
 
             }
         }
 
-        return productNameSearch;
+        return filteredDivisions;
 
     }
 }

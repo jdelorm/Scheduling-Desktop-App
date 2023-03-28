@@ -67,13 +67,10 @@ public class ReportScreenController implements Initializable {
         reportScreenAptIDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsID"));
         reportScreenTitleCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsTitle"));
         reportScreenDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsDescription"));
-        //appointmentScreenLocationCol.setCellValueFactory(new PropertyValueFactory<>( "appointmentsLocation"));
         reportScreenTypeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsType"));
         reportScreenStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsStartTime"));
         reportScreenEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("appointmentsEndTime"));
         reportScreenCustomerIDCol.setCellValueFactory(new PropertyValueFactory<>("customersID"));
-        //appointmentScreenUserIDCol.setCellValueFactory(new PropertyValueFactory<>("usersID"));
-        //appointmentScreenContactCol.setCellValueFactory(new PropertyValueFactory<>("contactsID"));
 
     }
 }

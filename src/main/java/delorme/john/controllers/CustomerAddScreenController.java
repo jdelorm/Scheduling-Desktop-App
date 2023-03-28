@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static delorme.john.models.FirstLevelDivisions.lookupProduct;
+import static delorme.john.models.FirstLevelDivisions.lookupDivisions;
 
 public class CustomerAddScreenController implements Initializable {
     public Button customerScreenBackButton;
@@ -69,11 +69,11 @@ public class CustomerAddScreenController implements Initializable {
 
         ObservableList<String> firstLevelDivisionsList = FXCollections.observableArrayList();
 
-        ObservableList<FirstLevelDivisions> searchedParts = lookupProduct(q);
+        ObservableList<FirstLevelDivisions> filteredDivisions = lookupDivisions(q);
 
-        if (searchedParts != null) {
+        if (filteredDivisions != null) {
 
-            for (FirstLevelDivisions division : searchedParts) {
+            for (FirstLevelDivisions division : filteredDivisions) {
 
                 firstLevelDivisionsList.add(division.getDivisions());
 
