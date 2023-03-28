@@ -1,7 +1,12 @@
 package delorme.john.models;
 
+import delorme.john.helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Countries {
 
@@ -12,6 +17,31 @@ public class Countries {
 
         this.countriesID = countriesID;
         this.countries = countries;
+
+    }
+
+    public static ObservableList<Countries> getAllDataBaseCountries() throws SQLException {
+
+        ObservableList<Countries> countriesListQuery = FXCollections.observableArrayList();
+
+        String sql = "SELECT Country_ID, Country from countries";
+
+        PreparedStatement preparedStatementCountry = JDBC.getConnection().prepareStatement(sql);
+
+        ResultSet results = preparedStatementCountry.executeQuery();
+
+        while (results.next()) {
+
+            int countryID = results.getInt("Country_ID");
+            String countryName = results.getString("Country");
+
+            Countries newCountry = new Countries(countryID, countryName);
+
+            Countries.addCountries(newCountry);
+
+        }
+
+        return countriesListQuery;
 
     }
 

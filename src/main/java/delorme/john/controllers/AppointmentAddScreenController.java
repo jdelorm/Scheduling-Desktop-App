@@ -59,21 +59,21 @@ public class AppointmentAddScreenController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error");
-            alert.setContentText("Must enter a Contact from the dropdown menu to update appointment");
+            alert.setContentText("Must enter a Contact from the dropdown menu to add appointment");
             alert.showAndWait();
 
         } else if (appointmentScreenStartDate.getValue() == null) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error");
-            alert.setContentText("Must enter a Start Date from the date picker to update appointment");
+            alert.setContentText("Must enter a Start Date from the date picker to add appointment");
             alert.showAndWait();
 
         } else if (appointmentScreenStartTime.getValue() == null) {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error");
-            alert.setContentText("Must enter a Start Time from the dropdown menu to update appointment");
+            alert.setContentText("Must enter a Start Time from the dropdown menu to add appointment");
             alert.showAndWait();
 
         } else if (appointmentScreenEndDate.getValue() == null) {
@@ -87,7 +87,7 @@ public class AppointmentAddScreenController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error");
-            alert.setContentText("Must enter a End Time from the dropdown menu to update appointment");
+            alert.setContentText("Must enter a End Time from the dropdown menu to add appointment");
             alert.showAndWait();
 
         } else {
@@ -202,21 +202,24 @@ public class AppointmentAddScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ObservableList<String> timesForBoxes = FXCollections.observableArrayList();
-        LocalTime startTimeForPrePopBox = LocalTime.of(7, 0);
-        LocalTime endTimeForPrePopBox = LocalTime.of(23, 0);
+        ObservableList<String> appointmentTimesList = FXCollections.observableArrayList();
 
-        timesForBoxes.add(startTimeForPrePopBox.toString());
+        LocalTime startTimes = LocalTime.of(1, 0);
 
-        while (startTimeForPrePopBox.isBefore(endTimeForPrePopBox)) {
+        LocalTime endTimes = LocalTime.of(23, 0);
 
-            startTimeForPrePopBox = startTimeForPrePopBox.plusMinutes(15);
-            timesForBoxes.add(startTimeForPrePopBox.toString());
+        appointmentTimesList.add(startTimes.toString());
+
+        while (startTimes.isBefore(endTimes)) {
+
+            startTimes = startTimes.plusMinutes(15);
+
+            appointmentTimesList.add(startTimes.toString());
 
         }
 
-        appointmentScreenStartTime.setItems(timesForBoxes);
-        appointmentScreenEndTime.setItems(timesForBoxes);
+        appointmentScreenStartTime.setItems(appointmentTimesList);
+        appointmentScreenEndTime.setItems(appointmentTimesList);
 
         ObservableList<String> contactList = FXCollections.observableArrayList();
 

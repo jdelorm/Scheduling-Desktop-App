@@ -207,21 +207,24 @@ public class AppointmentUpdateScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ObservableList<String> timesForBoxes = FXCollections.observableArrayList();
-        LocalTime startTimeForPrePopBox = LocalTime.of(7, 0);
-        LocalTime endTimeForPrePopBox = LocalTime.of(23, 0);
+        ObservableList<String> appointmentTimesList = FXCollections.observableArrayList();
 
-        timesForBoxes.add(startTimeForPrePopBox.toString());
+        LocalTime startTimes = LocalTime.of(7, 0);
 
-        while (startTimeForPrePopBox.isBefore(endTimeForPrePopBox)) {
+        LocalTime endTimes = LocalTime.of(23, 0);
 
-            startTimeForPrePopBox = startTimeForPrePopBox.plusMinutes(15);
-            timesForBoxes.add(startTimeForPrePopBox.toString());
+        appointmentTimesList.add(startTimes.toString());
+
+        while (startTimes.isBefore(endTimes)) {
+
+            startTimes = startTimes.plusMinutes(15);
+
+            appointmentTimesList.add(startTimes.toString());
 
         }
 
-        appointmentScreenStartTime.setItems(timesForBoxes);
-        appointmentScreenEndTime.setItems(timesForBoxes);
+        appointmentScreenStartTime.setItems(appointmentTimesList);
+        appointmentScreenEndTime.setItems(appointmentTimesList);
 
         selectedAppointments = AppointmentScreenController.getAppointmentToModify();
 

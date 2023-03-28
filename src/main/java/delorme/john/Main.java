@@ -1,6 +1,7 @@
 package delorme.john;
 
 import delorme.john.helper.*;
+import delorme.john.models.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,37 +28,37 @@ public class Main extends Application {
         JDBC.openConnection();
 
         try {
-            AppointmentsJDBC.getAllAppointments();
+            Appointments.getAllDataBaseAppointments();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            ContactsJDBC.getAllContacts();
+            Contacts.getAllDataBaseContacts();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            CountriesJDBC.getAllCountries();
+            Countries.getAllDataBaseCountries();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            CustomersJDBC.getAllCustomers();
+            Customers.getAllDataBaseCustomers();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            FirstLevelDivisionsJDBC.getAllFirstLevelDivisions();
+            FirstLevelDivisions.getAllDataBaseFirstLevelDivisions();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         try {
-            UsersJDBC.getAllUsers();
+            Users.getAllDataBaseUsers();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
