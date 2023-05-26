@@ -11,7 +11,7 @@
                 <TableColumn fx:id="appointmentScreenTitleCol" prefWidth="62.33332824707031" text="Title" />
                 <TableColumn fx:id="appointmentScreenDescriptionCol" prefWidth="92.0" text="Description" />
                 <TableColumn fx:id="appointmentScreenLocationCol" prefWidth="63.333343505859375" text="Location" />
-                <TableColumn fx:id="appointmentScreenContactCol" minWidth="0.0" prefWidth="75.99996948242188" text="Contact" />
+                <TableColumn fx:id="appointmentScreenContactCol" minWidth="0.0" prefWidth="75.99996948242188" text="Contact ID" />
                 <TableColumn fx:id="appointmentScreenTypeCol" minWidth="0.0" prefWidth="60.0" text="Type" />
                 <TableColumn fx:id="appointmentScreenStartDateTimeCol" prefWidth="114.0" text="Start Date/Time" />
             <TableColumn fx:id="appointmentScreenEndDateTimeCol" prefWidth="109.0" text="End Date/Time" />

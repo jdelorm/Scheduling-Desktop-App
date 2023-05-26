@@ -16,18 +16,20 @@
                 <TableColumn fx:id="reportScreenCustomerIDCol" prefWidth="81.0" text="Customer ID" />
             </columns>
         </TableView>
-        <Label layoutX="14.0" layoutY="215.0" text="Contact Schedule" />
+        <Label layoutX="14.0" layoutY="215.0" text="Contact_ID" />
         <Label layoutX="14.0" layoutY="247.0" text="Apt Type" />
         <Label layoutX="14.0" layoutY="279.0" text="Apt by Month" />
         <Button fx:id="reportScreenBackButton" layoutX="35.0" layoutY="347.0" mnemonicParsing="false" onAction="#onReportScreenBackButton" prefHeight="25.0" prefWidth="70.0" text="Back" />
       <ComboBox fx:id="reportScreenContactSchedule" layoutX="114.0" layoutY="211.0" onAction="#onReportScreenContactSchedule" prefWidth="150.0" />
-      <TextField fx:id="reportScreenTypeTotal" layoutX="342.0" layoutY="243.0" onAction="#onReportScreenTypeTotal" />
-      <TextField fx:id="reportScreenMonthTotal" layoutX="342.0" layoutY="275.0" onAction="#onReportScreenMonthTotal" />
+      <TextField fx:id="reportScreenTypeTotal" disable="true" layoutX="342.0" layoutY="243.0" onAction="#onReportScreenTypeTotal" />
+      <TextField fx:id="reportScreenMonthTotal" disable="true" layoutX="342.0" layoutY="275.0" onAction="#onReportScreenMonthTotal" />
       <Label layoutX="272.0" layoutY="247.0" text="Type Total" />
       <Label layoutX="272.0" layoutY="279.0" text="Month Total" />
+      <Label layoutX="272.0" layoutY="311.0" text="Select a Apt Type and/or Month to calculate the total appointments" />
+        <Label layoutX="272.0" layoutY="215.0" text="Select a Contact_ID from the dropdown to display a list of the Contact's appointments" />
       <ComboBox fx:id="reportScreenAptType" layoutX="114.0" layoutY="243.0" onAction="#onReportScreenAptType" prefWidth="150.0" />
       <ComboBox fx:id="reportScreenAptMonth" layoutX="114.0" layoutY="275.0" onAction="#onReportScreenAptMonth" prefWidth="150.0" />
-      <TextField fx:id="recordsScreenTotalApts" layoutX="115.0" layoutY="307.0" onAction="#onRecordsScreenTotalApts" />
+      <TextField fx:id="recordsScreenTotalApts" disable="true" layoutX="115.0" layoutY="307.0" onAction="#onRecordsScreenTotalApts" />
       <Label layoutX="14.0" layoutY="311.0" text="Total Apts" />
     </children>
 </AnchorPane>

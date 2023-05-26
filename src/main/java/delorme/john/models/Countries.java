@@ -74,6 +74,7 @@ public class Countries {
         if (allCountries.contains(selectedCountries)) {
 
             allCountries.remove(selectedCountries);
+
             return true;
 
         } else {
@@ -109,12 +110,6 @@ public class Countries {
 
     }
 
-
-
-
-
-
-
     private static ObservableList<Countries> allCountriesID = FXCollections.observableArrayList();
 
     public static ObservableList<Countries> getAllCountriesID() {
@@ -134,6 +129,4 @@ public class Countries {
         allCountriesID.add(newCountriesID);
 
     }
-
-
 }

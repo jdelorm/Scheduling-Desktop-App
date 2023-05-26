@@ -1,6 +1,8 @@
 package delorme.john.controllers;
 
 import delorme.john.models.Appointments;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -47,12 +50,12 @@ public class AppointmentScreenController implements Initializable {
 
     public void onAppointmentScreenAddButton(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/AppointmentAddScreen.fxml"));
-        Stage stage = (Stage)((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 775, 400);
-        stage.setTitle("Add Customer Appointment");
-        stage.setScene(scene);
-        stage.show();
+            Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/AppointmentAddScreen.fxml"));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 775, 400);
+            stage.setTitle("Add Customer Appointment");
+            stage.setScene(scene);
+            stage.show();
 
     }
 
@@ -99,6 +102,9 @@ public class AppointmentScreenController implements Initializable {
 
                 Appointments.deleteAppointments(selectedAppointments);
 
+                Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Appointment ID: " + selectedAppointments.getAppointmentsID() + " Type: " + selectedAppointments.getAppointmentsType() + " has been removed.");
+                Optional<ButtonType> result2 = alert2.showAndWait();
+
             }
         }
     }
@@ -115,12 +121,86 @@ public class AppointmentScreenController implements Initializable {
     }
 
     public void onAppointmentScreenAllButton(ActionEvent actionEvent) {
+
+        try {
+
+            ObservableList<Appointments> appointmentsListAll = Appointments.getAllAppointments();
+
+            if (appointmentsListAll != null)
+
+                    appointmentTable.setItems(appointmentsListAll);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
     }
 
     public void onAppointmentsScreenWeeklyButton(ActionEvent actionEvent) {
+
+        try {
+
+            ObservableList<Appointments> appointmentsListAll = Appointments.getAllAppointments();
+            ObservableList<Appointments> appointmentsListWeekly = FXCollections.observableArrayList();
+
+            LocalDateTime startWeekly = LocalDateTime.now().minusWeeks(1);
+            LocalDateTime endWeekly = LocalDateTime.now().plusWeeks(1);
+
+            if (appointmentsListAll != null)
+
+                for (Appointments appointments : appointmentsListAll) {
+
+                    if (appointments.getAppointmentsStartTime().isAfter(startWeekly) &&
+
+                            appointments.getAppointmentsEndTime().isBefore(endWeekly)) {
+
+                        appointmentsListWeekly.add(appointments);
+
+                    }
+
+                    appointmentTable.setItems(appointmentsListWeekly);
+
+                };
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
     }
 
     public void onAppointmentScreenMonthlyButton(ActionEvent actionEvent) {
+
+        try {
+
+            ObservableList<Appointments> appointmentsListAll = Appointments.getAllAppointments();
+            ObservableList<Appointments> appointmentsListMonthly = FXCollections.observableArrayList();
+
+            LocalDateTime startMonthly = LocalDateTime.now().minusMonths(1);
+            LocalDateTime endMonthly = LocalDateTime.now().plusMonths(1);
+
+            if (appointmentsListAll != null)
+
+                     for (Appointments appointments : appointmentsListAll) {
+
+                    if (appointments.getAppointmentsEndTime().isAfter(startMonthly) &&
+
+                            appointments.getAppointmentsEndTime().isBefore(endMonthly)) {
+
+                        appointmentsListMonthly.add(appointments);
+
+                    }
+
+                    appointmentTable.setItems(appointmentsListMonthly);
+
+                };
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
     }
 
     @Override

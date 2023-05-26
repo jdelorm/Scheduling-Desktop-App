@@ -97,6 +97,7 @@ public class Contacts {
         if (allContacts.contains(selectedContacts)) {
 
             allContacts.remove(selectedContacts);
+
             return true;
 
         } else {

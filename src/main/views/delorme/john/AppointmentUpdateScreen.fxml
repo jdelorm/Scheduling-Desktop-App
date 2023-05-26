@@ -16,12 +16,12 @@
         <ComboBox fx:id="appointmentScreenStartTime" layoutX="344.0" layoutY="308.0" onAction="#onAppointmentScreenStartTime" prefWidth="150.0" />
         <DatePicker fx:id="appointmentScreenEndDate" layoutX="600.0" layoutY="211.0" onAction="#onAppointmentScreenEndDate" prefHeight="25.0" prefWidth="150.0" />
         <ComboBox fx:id="appointmentScreenEndTime" layoutX="600.0" layoutY="243.0" onAction="#onAppointmentScreenEndTime" prefWidth="150.0" />
-        <TextField fx:id="appointmentScreenCustomerID" layoutX="601.0" layoutY="275.0" onAction="#onAppointmentScreenCustomerID" />
-        <TextField fx:id="appointmentScreenUserID" layoutX="601.0" layoutY="308.0" onAction="#onAppointmentScreenUserID" />
+        <ComboBox fx:id="customerIDCombo" layoutX="600.0" layoutY="275.0" onAction="#onCustomerIDCombo" prefWidth="150.0" />
+        <ComboBox fx:id="usersIDCombo" layoutX="600.0" layoutY="308.0" onAction="#onUserIDCombo" prefWidth="150.0" />
         <Label layoutX="14.0" layoutY="247.0" text="Title" />
         <Label layoutX="14.0" layoutY="279.0" text="Description" />
         <Label layoutX="14.0" layoutY="312.0" text="Location" />
-        <Label layoutX="262.0" layoutY="215.0" text="Contact" />
+        <Label layoutX="262.0" layoutY="215.0" text="Contact_ID" />
         <Label layoutX="262.0" layoutY="247.0" text="Type" />
         <Label layoutX="262.0" layoutY="279.0" text="Start Date" />
         <Button fx:id="appointmentScreenUpdateButton" layoutX="134.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAppointmentScreenUpdateButton" prefHeight="25.0" prefWidth="70.0" text="Save" />

@@ -88,6 +88,7 @@ public class FirstLevelDivisions {
         if (allFirstLevelDivisions.contains(selectedFirstLevelDivisions)) {
 
             allFirstLevelDivisions.remove(selectedFirstLevelDivisions);
+
             return true;
 
         } else {

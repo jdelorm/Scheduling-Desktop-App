@@ -3,14 +3,17 @@ package delorme.john.models;
 import delorme.john.helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 public class Customers {
 
-    private int customersID;
+    private Integer customersID;
     private String customersName;
     private String customersAddress;
     private String customersPostalCode;
@@ -51,7 +54,7 @@ public class Customers {
         ObservableList<Customers> customersListQuery = FXCollections.observableArrayList();
 
         String query = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone," + "first_level_divisions.COUNTRY_ID, first_level_divisions.Division FROM customers, first_level_divisions WHERE customers.Division_ID = first_level_divisions.Division_ID ORDER BY Customer_ID";
-        /*customers.Division_ID,*/
+
         PreparedStatement preparedStatementCustomer = JDBC.getConnection().prepareStatement(query);
 
         ResultSet results = preparedStatementCustomer.executeQuery();
@@ -76,9 +79,9 @@ public class Customers {
 
     }
 
-    private static int customerID = 4;
+    private static Integer customerID = 4;
 
-    public static int getNewCustomerID() {
+    public static Integer getNewCustomerID() {
 
         return customerID++;
 
@@ -180,6 +183,30 @@ public class Customers {
 
             return false;
 
+        }
+    }
+
+    public static void deleteAssociatedAppointments(Customers selectedCustomers) {
+
+
+        Integer selectedCustomersID = selectedCustomers.getCustomersID();
+
+        Appointments appointment = null;
+
+        for (Iterator<Appointments> i = Appointments.getAllAppointments().iterator(); i.hasNext(); ) {
+
+            appointment = i.next();
+
+            if (appointment.getCustomersID().equals(selectedCustomersID)) {
+
+                i.remove();
+
+                Appointments selectedAppointment = appointment;
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment ID: " + selectedAppointment.getAppointmentsID() + " Type: " + selectedAppointment.getAppointmentsType() + " has been removed.");
+                Optional<ButtonType> result = alert.showAndWait();
+
+            }
         }
     }
 

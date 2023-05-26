@@ -89,25 +89,52 @@ public class CustomerAddScreenController implements Initializable {
 
     public void onCustomerScreenAddButton(ActionEvent actionEvent) {
 
-        if (customerScreenCountryDropDown.getValue() == null) {
+        try {
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setContentText("Must enter a Country from the dropdown menu to create customer record");
-            alert.showAndWait();
+            if (customerScreenName.getText().isEmpty()) {
 
-        } else if (customerScreenStateDropDown.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Name field should not be empty");
+                alert.showAndWait();
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setContentText("Must enter a State/Province from the dropdown menu to create customer record");
-            alert.showAndWait();
+            } else if (customerScreenAddress.getText().isEmpty()) {
 
-        } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Address field should not be empty");
+                alert.showAndWait();
 
-            try {
+            } else if (customerScreenPostalCode.getText().isEmpty()) {
 
-                int customersID = Customers.getNewCustomerID();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Postal Code field should not be empty");
+                alert.showAndWait();
+
+            } else if (customerScreenPhoneNumber.getText().isEmpty()) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Phone Number field should not be empty");
+                alert.showAndWait();
+
+            } else if (customerScreenCountryDropDown.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Must enter a Country from the dropdown menu to create customer record");
+                alert.showAndWait();
+
+            } else if (customerScreenStateDropDown.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Must enter a State/Province from the dropdown menu to create customer record");
+                alert.showAndWait();
+
+            } else {
+
                 String customersName = customerScreenName.getText();
                 String customersAddress = customerScreenAddress.getText();
                 String customersPostalCode = customerScreenPostalCode.getText();
@@ -115,54 +142,25 @@ public class CustomerAddScreenController implements Initializable {
                 String customersCountryData = customerScreenStateDropDown.getValue().toString();
                 String customersDivisionID = customerScreenCountryDropDown.getValue().toString();
 
-                if (customersName.isEmpty()) {
+                int customersID = Customers.getNewCustomerID();
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Error");
-                    alert.setContentText("Name field should not be empty");
-                    alert.showAndWait();
+                Customers addNewCustomer = new Customers(customersID, customersName, customersAddress, customersPostalCode, customersPhoneNumber, customersDivisionID, customersCountryData);
 
-                } else if (customersAddress.isEmpty()) {
+                Customers.addCustomers(addNewCustomer);
 
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Error");
-                    alert.setContentText("Address field should not be empty");
-                    alert.showAndWait();
-
-                } else if (customersPostalCode.isEmpty()) {
-
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Error");
-                    alert.setContentText("Postal Code field should not be empty");
-                    alert.showAndWait();
-
-                } else if (customersPhoneNumber.isEmpty()) {
-
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Error");
-                    alert.setContentText("Phone Number field should not be empty");
-                    alert.showAndWait();
-
-                } else {
-
-                    Customers addNewCustomer = new Customers(customersID, customersName, customersAddress, customersPostalCode, customersPhoneNumber, customersDivisionID, customersCountryData);
-
-                    Customers.addCustomers(addNewCustomer);
-
-                    Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/CustomerScreen.fxml"));
-                    Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root, 775, 400);
-                    stage.setTitle("Customer Records");
-                    stage.setScene(scene);
-                    stage.show();
-
-                }
-
-            } catch (IOException e) {
-
-                throw new RuntimeException(e);
+                Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/CustomerScreen.fxml"));
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root, 775, 400);
+                stage.setTitle("Customer Records");
+                stage.setScene(scene);
+                stage.show();
 
             }
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
         }
     }
 

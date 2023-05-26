@@ -97,6 +97,7 @@ public class Users {
         if (allUsers.contains(selectedUsers)) {
 
             allUsers.remove(selectedUsers);
+
             return true;
 
         } else {

@@ -3,17 +3,20 @@ package delorme.john.models;
 import delorme.john.helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.text.DateFormatSymbols;
+import java.text.spi.DateFormatProvider;
+import java.time.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Appointments {
 
-    private ObservableList<Customers> associatedCustomers = FXCollections.observableArrayList();
-    private int appointmentsID;
+    private Integer appointmentsID;
     private String appointmentsTitle;
     private String appointmentsDescription;
     private String appointmentsLocation;
@@ -22,27 +25,11 @@ public class Appointments {
     private LocalDateTime appointmentsStartTime;
     private LocalDate appointmentEndDate;
     private LocalDateTime appointmentsEndTime;
-    public int customersID;
-    public int usersID;
+    public Integer customersID;
+    public Integer usersID;
     public String contactsID;
 
     public Appointments(int appointmentsID, String appointmentsTitle, String appointmentsDescription, String appointmentsLocation, String appointmentsType, LocalDateTime appointmentsStartTime, LocalDateTime appointmentsEndTime, int customersID, int usersID, String contactsID) {
-
-        String contactName = contactsID;
-
-        if (contactsID.equals("1") || contactsID.equals("Anita Costa")) {
-
-            contactName = "Anita Costa";
-
-        } else if (contactsID.equals("2") || contactsID.equals("Daniel Garcia")) {
-
-            contactName = "Daniel Garcia";
-
-        } else {
-
-            contactName = "Li Lee";
-
-        }
 
         this.appointmentsID = appointmentsID;
         this.appointmentsTitle = appointmentsTitle;
@@ -53,7 +40,7 @@ public class Appointments {
         this.appointmentsEndTime = appointmentsEndTime;
         this.customersID = customersID;
         this.usersID = usersID;
-        this.contactsID = contactName;
+        this.contactsID = contactsID;
 
     }
 
@@ -90,15 +77,15 @@ public class Appointments {
 
     }
 
-    private static int AppointmentID = 3;
+    private static Integer AppointmentID = 3;
 
-    public static int getNewAppointmentID() {
+    public static Integer getNewAppointmentID() {
 
         return AppointmentID++;
 
     }
 
-    public int getAppointmentsID() {
+    public Integer getAppointmentsID() {
 
         return appointmentsID;
 
@@ -152,14 +139,14 @@ public class Appointments {
 
     }
 
-    public int getCustomersID () {
+    public Integer getCustomersID () {
 
 
         return customersID;
 
     }
 
-    public int getUsersID() {
+    public Integer getUsersID() {
 
         return usersID;
 
@@ -284,21 +271,191 @@ public class Appointments {
 
     }
 
-    public void addAssociatedCustomers(Customers part) {
+    public static ObservableList timeDropDownPopulate() {
 
-        associatedCustomers.add(part);
+        ObservableList<String> appointmentsTimesList = FXCollections.observableArrayList();
+
+        LocalTime startTimes = LocalTime.of(0, 0);
+
+        LocalTime endTimes = LocalTime.of(23, 45);
+
+        appointmentsTimesList.add(startTimes.toString());
+
+        while (startTimes.isBefore(endTimes)) {
+
+            startTimes = startTimes.plusMinutes(15);
+
+            appointmentsTimesList.add(startTimes.toString());
+
+        }
+
+        return appointmentsTimesList;
+    }
+
+    public static boolean businessTimeAppointmentsVerification(LocalDateTime localStart, LocalDateTime localEnd) {
+
+        boolean appointmentCheck = false;
+
+        ZoneId localTime = ZoneId.systemDefault();
+        ZoneId localDate = ZoneId.systemDefault();
+
+        ZonedDateTime zonedStartTime = localStart.atZone(localTime);
+        ZonedDateTime zonedEndTime = localEnd.atZone(localTime);
+
+        ZonedDateTime zonedStartDate = localStart.atZone(localDate);
+        ZonedDateTime zonedEndDate = localEnd.atZone(localDate);
+
+        ZonedDateTime zonedEasternStartTime = zonedStartTime.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        ZonedDateTime zonedEasternEndTime = zonedEndTime.withZoneSameInstant(ZoneId.of("US/Eastern"));
+
+        ZonedDateTime zonedEasternStartDate = zonedStartDate.withZoneSameInstant(ZoneId.of("US/Eastern"));
+        ZonedDateTime zonedEasternEndDate = zonedEndDate.withZoneSameInstant(ZoneId.of("US/Eastern"));
+
+        LocalTime localStartTime = zonedEasternStartTime.toLocalTime();
+        LocalTime localEndTime = zonedEasternEndTime.toLocalTime();
+
+        LocalDate localStartDate = zonedEasternStartDate.toLocalDate();
+        LocalDate localEndDate = zonedEasternEndDate.toLocalDate();
+
+
+        if (localEndDate.isAfter(localStartDate) ||
+
+                localEndDate.isEqual(localStartDate) &&
+
+                localStartTime.isAfter(LocalTime.of(7, 59, 59)) &&
+
+                localStartTime.isBefore(LocalTime.of(21, 45, 1)) &&
+
+                localEndTime.isAfter(LocalTime.of(8, 14, 59)) &&
+
+                localEndTime.isBefore(LocalTime.of(22, 0, 1)) &&
+
+                localEndTime.isAfter(localStartTime)) {
+
+            appointmentCheck = true;
+
+        }
+
+        return appointmentCheck;
 
     }
 
-    public boolean deleteAssociatedCustomers(Customers deleteCustomer) {
+    public static boolean overlappingAppointmentVerification(LocalDateTime appointmentsStartTime, LocalDateTime appointmentsEndTime) {
 
-        return associatedCustomers.remove(deleteCustomer);
+        boolean appointmentCheck = false;
+
+        ObservableList<Appointments> getAllAppointments = Appointments.getAllAppointments();
+
+        for (Appointments appointmentsOverlapCheck : getAllAppointments) {
+
+            LocalDateTime appointmentsOverlapCheckStart = appointmentsOverlapCheck.getAppointmentsStartTime();
+            LocalDateTime appointmentsOverlapCheckEnd = appointmentsOverlapCheck.getAppointmentsEndTime();
+
+            if (appointmentsOverlapCheckStart.equals(appointmentsEndTime) &&
+
+                    appointmentsOverlapCheckEnd.isAfter(appointmentsOverlapCheckStart) &&
+
+                    appointmentsOverlapCheckEnd.isAfter(appointmentsStartTime)) {
+
+                return true;
+
+            } else if (appointmentsOverlapCheckEnd.equals(appointmentsStartTime) &&
+
+                    appointmentsOverlapCheckStart.isBefore(appointmentsOverlapCheckEnd) &&
+
+                    appointmentsOverlapCheckStart.isBefore(appointmentsEndTime)) {
+
+                return true;
+
+            } else if ((appointmentsOverlapCheckStart.isBefore(appointmentsStartTime)) &&
+
+                    (appointmentsOverlapCheckEnd.isAfter(appointmentsEndTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckStart.isBefore(appointmentsEndTime)) &&
+
+                    (appointmentsOverlapCheckStart.isAfter(appointmentsStartTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckEnd.isBefore(appointmentsEndTime)) &&
+
+                    (appointmentsOverlapCheckEnd.isAfter(appointmentsStartTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckStart.isEqual(appointmentsStartTime)) &&
+
+                    (appointmentsOverlapCheckEnd.isAfter(appointmentsEndTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckStart.isEqual(appointmentsEndTime)) &&
+
+                    (appointmentsOverlapCheckStart.isAfter(appointmentsStartTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckEnd.isEqual(appointmentsEndTime)) &&
+
+                    (appointmentsOverlapCheckEnd.isAfter(appointmentsStartTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckStart.isBefore(appointmentsStartTime)) &&
+
+                    (appointmentsOverlapCheckEnd.isEqual(appointmentsEndTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckStart.isBefore(appointmentsEndTime)) &&
+
+                    (appointmentsOverlapCheckStart.isEqual(appointmentsStartTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckEnd.isBefore(appointmentsEndTime)) &&
+
+                    (appointmentsOverlapCheckEnd.isEqual(appointmentsStartTime))) {
+
+                return false;
+
+            } else if ((appointmentsOverlapCheckStart.isEqual(appointmentsStartTime)) &&
+
+                    (appointmentsOverlapCheckEnd.isEqual(appointmentsEndTime))) {
+
+                return false;
+
+            } else {
+
+                appointmentCheck = true;
+
+            }
+        }
+
+        return appointmentCheck;
 
     }
 
-    public ObservableList<Customers> getAllAssociatedCustomers() {
+    public static ObservableList monthDropDownPopulate() {
 
-        return associatedCustomers;
+        ObservableList<String> monthEnumNameList = FXCollections.observableArrayList();
+
+        monthEnumNameList.add("January");
+        monthEnumNameList.add("February");
+        monthEnumNameList.add("March");
+        monthEnumNameList.add("April");
+        monthEnumNameList.add("May");
+        monthEnumNameList.add("June");
+        monthEnumNameList.add("July");
+        monthEnumNameList.add("August");
+        monthEnumNameList.add("September");
+        monthEnumNameList.add("October");
+        monthEnumNameList.add("November");
+        monthEnumNameList.add("December");
+
+        return monthEnumNameList;
 
     }
 }

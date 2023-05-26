@@ -89,6 +89,7 @@ public class CustomerScreenController implements Initializable {
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
+                Customers.deleteAssociatedAppointments(selectedCustomers);
                 Customers.deleteCustomers(selectedCustomers);
 
             }

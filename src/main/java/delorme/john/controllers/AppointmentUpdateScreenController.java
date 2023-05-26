@@ -2,6 +2,8 @@ package delorme.john.controllers;
 
 import delorme.john.models.Appointments;
 import delorme.john.models.Contacts;
+import delorme.john.models.Customers;
+import delorme.john.models.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
@@ -23,8 +26,6 @@ public class AppointmentUpdateScreenController implements Initializable {
     public ComboBox appointmentScreenContactDropDown;
     public DatePicker appointmentScreenEndDate;
     public DatePicker appointmentScreenStartDate;
-    public TextField appointmentScreenUserID;
-    public TextField appointmentScreenCustomerID;
     public TextField appointmentScreenType;
     public Button appointmentScreenBackButton;
     public Button appointmentScreenUpdateButton;
@@ -34,6 +35,8 @@ public class AppointmentUpdateScreenController implements Initializable {
     public TextField appointmentScreenDescription;
     public TextField appointmentScreenTitle;
     public TextField appointmentScreenAptID;
+    public ComboBox customerIDCombo;
+    public ComboBox usersIDCombo;
     private Appointments selectedAppointments;
 
     public void onAppointmentScreenAptID(ActionEvent actionEvent) {
@@ -56,44 +59,86 @@ public class AppointmentUpdateScreenController implements Initializable {
 
     public void onAppointmentScreenUpdateButton(ActionEvent actionEvent) {
 
-        if (appointmentScreenContactDropDown.getValue() == null) {
+        try {
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setContentText("Must enter a Contact from the dropdown menu to update appointment");
-            alert.showAndWait();
+            if (appointmentScreenTitle.getText().isEmpty()) {
 
-        } else if (appointmentScreenStartDate.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Title field should not be empty");
+                alert.showAndWait();
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setContentText("Must enter a Start Date from the date picker to update appointment");
-            alert.showAndWait();
+            } else if (appointmentScreenDescription.getText().isEmpty()) {
 
-        } else if (appointmentScreenStartTime.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Description field should not be empty");
+                alert.showAndWait();
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setContentText("Must enter a Start Time from the dropdown menu to update appointment");
-            alert.showAndWait();
+            } else if (appointmentScreenLocation.getText().isEmpty()) {
 
-        } else if (appointmentScreenEndDate.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Location field should not be empty");
+                alert.showAndWait();
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setContentText("Must enter a End Date from the date picker to update appointment");
-            alert.showAndWait();
+            } else if (appointmentScreenContactDropDown.getValue() == null) {
 
-        } else if (appointmentScreenEndTime.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Must enter a Contact from the dropdown menu to add appointment");
+                alert.showAndWait();
 
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setContentText("Must enter a End Time from the dropdown menu to update appointment");
-            alert.showAndWait();
+            } else if (appointmentScreenType.getText().isEmpty()) {
 
-        } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Type field should not be empty");
+                alert.showAndWait();
 
-            try {
+            } else if (appointmentScreenStartDate.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Must enter a Start Date from the date picker to add appointment");
+                alert.showAndWait();
+
+            } else if (appointmentScreenStartTime.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Must enter a Start Time from the dropdown menu to add appointment");
+                alert.showAndWait();
+
+            } else if (appointmentScreenEndDate.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Must enter a End Date from the date picker to update appointment");
+                alert.showAndWait();
+
+            } else if (appointmentScreenEndTime.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Must enter a End Time from the dropdown menu to add appointment");
+                alert.showAndWait();
+
+            } else if (customerIDCombo.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Must enter a CustomerID from the dropdown menu to add appointment");
+                alert.showAndWait();
+
+            } else if (usersIDCombo.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("UserID field should not be empty");
+                alert.showAndWait();
+
+            } else {
 
                 int appointmentsID = Integer.parseInt(appointmentScreenAptID.getText());
                 String appointmentsTitle = appointmentScreenTitle.getText();
@@ -102,50 +147,65 @@ public class AppointmentUpdateScreenController implements Initializable {
                 String appointmentsType = appointmentScreenType.getText();
                 LocalDateTime appointmentsStartTime = LocalDateTime.of(appointmentScreenStartDate.getValue(), LocalTime.parse(appointmentScreenStartTime.getValue().toString()));
                 LocalDateTime appointmentsEndTime = LocalDateTime.of(appointmentScreenEndDate.getValue(), LocalTime.parse(appointmentScreenEndTime.getValue().toString()));
-                int customersID = Integer.parseInt(appointmentScreenCustomerID.getText());
-                int usersID = Integer.parseInt(appointmentScreenUserID.getText());
+                int customersID = Integer.parseInt(customerIDCombo.getValue().toString());
+                int usersID = Integer.parseInt(usersIDCombo.getValue().toString());
                 String contactsID = appointmentScreenContactDropDown.getValue().toString();
 
-                if (appointmentsTitle.isEmpty()) {
+                boolean appointmentTimeCheck = Appointments.businessTimeAppointmentsVerification(appointmentsStartTime, appointmentsEndTime);
+
+                boolean appointmentOverlapCheck = true;
+
+                selectedAppointments = AppointmentScreenController.getAppointmentToModify();
+
+                if ((selectedAppointments.getAppointmentsID()).equals(appointmentsID)) {
+
+                    if (selectedAppointments.getAppointmentsTitle().equals(appointmentsTitle) &&
+                            selectedAppointments.getAppointmentsDescription().equals(appointmentsDescription) &&
+                            selectedAppointments.getAppointmentsLocation().equals(appointmentsLocation) &&
+                            selectedAppointments.getAppointmentsType().equals(appointmentsType) &&
+                            selectedAppointments.getContactsID().equals(contactsID) &&
+                            selectedAppointments.getUsersID().equals(usersID) &&
+                            selectedAppointments.getCustomersID().equals(customersID) &&
+                            selectedAppointments.getAppointmentsStartTime().toLocalDate() != appointmentsStartTime.toLocalDate() ||
+                            selectedAppointments.getAppointmentsStartTime().toLocalTime() != appointmentsStartTime.toLocalTime() ||
+                            selectedAppointments.getAppointmentsEndTime().toLocalDate() != appointmentsEndTime.toLocalDate() ||
+                            selectedAppointments.getAppointmentsEndTime().toLocalTime() != appointmentsEndTime.toLocalTime()) {
+
+                        appointmentOverlapCheck = Appointments.overlappingAppointmentVerification(appointmentsStartTime, appointmentsEndTime);
+
+                    }
+                }
+
+                if ((selectedAppointments.getAppointmentsID()).equals(appointmentsID) &&
+                        selectedAppointments.getAppointmentsTitle().equals(appointmentsTitle) &&
+                        selectedAppointments.getAppointmentsDescription().equals(appointmentsDescription) &&
+                        selectedAppointments.getAppointmentsLocation().equals(appointmentsLocation) &&
+                        selectedAppointments.getAppointmentsType().equals(appointmentsType) &&
+                        selectedAppointments.getContactsID().equals(contactsID) &&
+                        selectedAppointments.getCustomersID().equals(customersID) &&
+                        selectedAppointments.getUsersID().equals(usersID) &&
+                        selectedAppointments.getAppointmentsStartTime().toLocalDate().equals(appointmentsStartTime.toLocalDate()) &&
+                        selectedAppointments.getAppointmentsStartTime().toLocalTime().equals(appointmentsStartTime.toLocalTime()) &&
+                        selectedAppointments.getAppointmentsEndTime().toLocalDate().equals(appointmentsEndTime.toLocalDate()) &&
+                        selectedAppointments.getAppointmentsEndTime().toLocalTime().equals(appointmentsEndTime.toLocalTime())) {
 
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error");
-                    alert.setContentText("Title field should not be empty");
+                    alert.setContentText("No changes made");
                     alert.showAndWait();
 
-                } else if (appointmentsDescription.isEmpty()) {
+                } else if (appointmentTimeCheck == false) {
 
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error");
-                    alert.setContentText("Description field should not be empty");
+                    alert.setContentText("Appointment Date/Time Input Error. Please ensure that:\n\nInput times are within business hours\nAppointment end date/time is AFTER start date/time\nAppointment end time is NOT at the same start time\n\nBusiness hours are between 8:00am to 10:00pm EST.");
                     alert.showAndWait();
 
-                } else if (appointmentsLocation.isEmpty()) {
+                } else if (appointmentOverlapCheck == false) {
 
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error");
-                    alert.setContentText("Location field should not be empty");
-                    alert.showAndWait();
-
-                } else if (appointmentsType.isEmpty()) {
-
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Error");
-                    alert.setContentText("Type field should not be empty");
-                    alert.showAndWait();
-
-                } else if (customersID == 0) {
-
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Error");
-                    alert.setContentText("Customer ID field should not be empty");
-                    alert.showAndWait();
-
-                } else if (usersID == 0) {
-
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Error");
-                    alert.setContentText("Users field should not be empty");
+                    alert.setContentText("Appointment Overlap Error.\n\nThere is already an appointment for the selected customer at the selected date/time.");
                     alert.showAndWait();
 
                 } else {
@@ -166,12 +226,12 @@ public class AppointmentUpdateScreenController implements Initializable {
                     stage.show();
 
                 }
-
-            } catch (IOException e) {
-
-                throw new RuntimeException(e);
-
             }
+
+        } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
         }
     }
 
@@ -189,12 +249,6 @@ public class AppointmentUpdateScreenController implements Initializable {
     public void onAppointmentScreenType(ActionEvent actionEvent) {
     }
 
-    public void onAppointmentScreenCustomerID(ActionEvent actionEvent) {
-    }
-
-    public void onAppointmentScreenUserID(ActionEvent actionEvent) {
-    }
-
     public void onAppointmentScreenStartDate(ActionEvent actionEvent) {
     }
 
@@ -204,27 +258,41 @@ public class AppointmentUpdateScreenController implements Initializable {
     public void onAppointmentScreenContactDropDown(ActionEvent actionEvent) {
     }
 
+    public void onCustomerIDCombo(ActionEvent actionEvent) {
+    }
+
+    public void onUserIDCombo(ActionEvent actionEvent) {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ObservableList<String> appointmentTimesList = FXCollections.observableArrayList();
+        appointmentScreenEndDate.setDayCellFactory(picker -> new DateCell() {
 
-        LocalTime startTimes = LocalTime.of(7, 0);
+            @Override
+            public void updateItem(LocalDate datePickerDates, boolean empty) {
 
-        LocalTime endTimes = LocalTime.of(23, 0);
+                super.updateItem(datePickerDates, empty);
 
-        appointmentTimesList.add(startTimes.toString());
+                setDisable(empty || datePickerDates.compareTo(LocalDate.now()) < 0);
 
-        while (startTimes.isBefore(endTimes)) {
+            }
+        });
 
-            startTimes = startTimes.plusMinutes(15);
+        appointmentScreenStartDate.setDayCellFactory(picker -> new DateCell() {
 
-            appointmentTimesList.add(startTimes.toString());
+            @Override
+            public void updateItem(LocalDate datePickerDates, boolean empty) {
 
-        }
+                super.updateItem(datePickerDates, empty);
 
-        appointmentScreenStartTime.setItems(appointmentTimesList);
-        appointmentScreenEndTime.setItems(appointmentTimesList);
+                setDisable(empty || datePickerDates.compareTo(LocalDate.now()) < 0);
+
+            }
+        });
+
+        appointmentScreenStartTime.setItems(Appointments.timeDropDownPopulate());
+        appointmentScreenEndTime.setItems(Appointments.timeDropDownPopulate());
 
         selectedAppointments = AppointmentScreenController.getAppointmentToModify();
 
@@ -238,23 +306,48 @@ public class AppointmentUpdateScreenController implements Initializable {
         appointmentScreenStartTime.setValue(selectedAppointments.getAppointmentsStartTime().toLocalTime());
         appointmentScreenEndDate.setValue(selectedAppointments.getAppointmentsEndTime().toLocalDate());
         appointmentScreenEndTime.setValue(selectedAppointments.getAppointmentsEndTime().toLocalTime());
-        appointmentScreenCustomerID.setText(String.valueOf(selectedAppointments.getCustomersID()));
-        appointmentScreenUserID.setText(String.valueOf(selectedAppointments.getUsersID()));
+        customerIDCombo.setValue(selectedAppointments.getCustomersID());
+        usersIDCombo.setValue(selectedAppointments.getUsersID());
 
         ObservableList<String> contactList = FXCollections.observableArrayList();
-
         ObservableList<Contacts> contacts = Contacts.getAllContacts();
 
         if (contacts != null) {
 
             for (Contacts contact : contacts) {
 
-                contactList.add(contact.getContactsName());
-
+                contactList.add(String.valueOf(contact.getContactsID()));
             }
         }
 
         appointmentScreenContactDropDown.setItems(contactList);
+
+        ObservableList<String> customerIDList = FXCollections.observableArrayList();
+        ObservableList<Customers> customersID = Customers.getAllCustomers();
+
+        if (customersID != null) {
+
+            for (Customers customers : customersID) {
+
+                customerIDList.add(String.valueOf(customers.getCustomersID()));
+
+            }
+        }
+
+        customerIDCombo.setItems(customerIDList);
+
+        ObservableList<String> userIDList = FXCollections.observableArrayList();
+        ObservableList<Users> usersID = Users.getAllUsers();
+
+        if (usersID != null) {
+
+            for (Users users : usersID) {
+
+                userIDList.add(String.valueOf(users.getUsersID()));
+            }
+        }
+
+        usersIDCombo.setItems(userIDList);
 
     }
 }
