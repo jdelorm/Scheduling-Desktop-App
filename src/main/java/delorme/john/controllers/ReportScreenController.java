@@ -52,10 +52,12 @@ public class ReportScreenController implements Initializable {
     public void onReportScreenAptMonth(ActionEvent actionEvent) {
 
         ObservableList<Appointments> appointmentsListAll = FXCollections.observableArrayList();
+        ObservableList<Appointments> appointmentsListAllRemoveDupes = FXCollections.observableArrayList();
 
         String selectedMonth = reportScreenAptMonth.getValue().toString();
 
         Integer totalAppointmentsByMonth = 0;
+        Integer totalAppointments = 0;
 
         for (Iterator<Appointments> i = Appointments.getAllAppointments().iterator(); i.hasNext();) {
 
@@ -74,27 +76,39 @@ public class ReportScreenController implements Initializable {
 
         if (reportScreenTypeTotal.getText().isEmpty()) {
 
-            int typeTotalNumber = 0;
             int monthTotalNumber = Integer.parseInt(reportScreenMonthTotal.getText());
-            int totalNumber = monthTotalNumber + typeTotalNumber;
 
-            recordsScreenTotalApts.setText(String.valueOf(totalNumber));
+            recordsScreenTotalApts.setText(String.valueOf(monthTotalNumber));
 
-        } else if (reportScreenMonthTotal.getText().isEmpty()) {
+        } else if (!reportScreenTypeTotal.getText().isEmpty()) {
 
-            int monthTotalNumber = 0;
-            int typeTotalNumber = Integer.parseInt(reportScreenTypeTotal.getText());
-            int totalNumber = monthTotalNumber + typeTotalNumber;
+            String selectedContactsType = reportScreenAptType.getValue().toString();
 
-            recordsScreenTotalApts.setText(String.valueOf(totalNumber));
+            for (Iterator<Appointments> i = Appointments.getAllAppointments().iterator(); i.hasNext();) {
 
-        } else {
+                Appointments appointment = i.next();
 
-            int typeTotalNumber = Integer.parseInt(reportScreenTypeTotal.getText());
-            int monthTotalNumber = Integer.parseInt(reportScreenMonthTotal.getText());
-            int totalNumber = monthTotalNumber + typeTotalNumber;
+                if (appointment.getAppointmentsType().equals(selectedContactsType) &&
+                        (appointment.getAppointmentsStartTime().getMonth().toString().equalsIgnoreCase(selectedMonth))) {
 
-            recordsScreenTotalApts.setText(String.valueOf(totalNumber));
+                    appointmentsListAll.add(appointment);
+
+                }
+            }
+
+            for (Iterator<Appointments> i = appointmentsListAll.iterator(); i.hasNext();) {
+
+                Appointments appointment = i.next();
+
+                if ((!appointmentsListAllRemoveDupes.contains(appointment)) && (appointment.getAppointmentsType().equals(selectedContactsType))) {
+
+                    appointmentsListAllRemoveDupes.add(appointment);
+
+                }
+            }
+
+            totalAppointments = appointmentsListAllRemoveDupes.size();
+            recordsScreenTotalApts.setText(String.valueOf(totalAppointments));
 
         }
     }
@@ -108,6 +122,7 @@ public class ReportScreenController implements Initializable {
     public void onReportScreenAptType(ActionEvent actionEvent) {
 
         ObservableList<Appointments> appointmentsListAll = FXCollections.observableArrayList();
+        ObservableList<Appointments> appointmentsListAllRemoveDupes = FXCollections.observableArrayList();
 
         String selectedContactsType = reportScreenAptType.getValue().toString();
 
@@ -128,29 +143,44 @@ public class ReportScreenController implements Initializable {
 
         reportScreenTypeTotal.setText(totalAppointmentsByType.toString());
 
-        if (reportScreenTypeTotal.getText().isEmpty()) {
-
-            int typeTotalNumber = 0;
-            int monthTotalNumber = Integer.parseInt(reportScreenMonthTotal.getText());
-            int totalNumber = monthTotalNumber + typeTotalNumber;
-
-            recordsScreenTotalApts.setText(String.valueOf(totalNumber));
-
-        } else if (reportScreenMonthTotal.getText().isEmpty()) {
-
-            int monthTotalNumber = 0;
-            int typeTotalNumber = Integer.parseInt(reportScreenTypeTotal.getText());
-            int totalNumber = monthTotalNumber + typeTotalNumber;
-
-            recordsScreenTotalApts.setText(String.valueOf(totalNumber));
-
-        } else {
+        if (reportScreenMonthTotal.getText().isEmpty()) {
 
             int typeTotalNumber = Integer.parseInt(reportScreenTypeTotal.getText());
-            int monthTotalNumber = Integer.parseInt(reportScreenMonthTotal.getText());
-            int totalNumber = monthTotalNumber + typeTotalNumber;
+            int totalNumber = typeTotalNumber;
 
             recordsScreenTotalApts.setText(String.valueOf(totalNumber));
+
+        } else if (!reportScreenMonthTotal.getText().isEmpty()) {
+
+            String selectedMonth = reportScreenAptMonth.getValue().toString();
+
+            Integer totalAppointments = 0;
+
+            for (Iterator<Appointments> i = Appointments.getAllAppointments().iterator(); i.hasNext();) {
+
+                Appointments appointment = i.next();
+
+                if (appointment.getAppointmentsStartTime().getMonth().toString().equalsIgnoreCase(selectedMonth) &&
+                        appointment.getAppointmentsType().equals(selectedContactsType)) {
+
+                    appointmentsListAll.add(appointment);
+
+                }
+            }
+
+            for (Iterator<Appointments> i = appointmentsListAll.iterator(); i.hasNext();) {
+
+                Appointments appointment = i.next();
+
+                if ((!appointmentsListAllRemoveDupes.contains(appointment)) && (appointment.getAppointmentsType().equals(selectedContactsType))){
+
+                    appointmentsListAllRemoveDupes.add(appointment);
+
+                }
+            }
+
+            totalAppointments = appointmentsListAllRemoveDupes.size();
+            recordsScreenTotalApts.setText(String.valueOf(totalAppointments));
 
         }
     }
@@ -226,6 +256,11 @@ public class ReportScreenController implements Initializable {
     }
 
     /**
+     * LAMBDA #1
+     *
+     * Replaced an enhanced for loop that populated the contact id dropdown combo box which
+     * uses less code and is easier to read and understand
+     *
      * Initializes the ReportScreen scene
      * Populates dropdowns, tables, rows, and columns from database
      * @param url
@@ -252,11 +287,8 @@ public class ReportScreenController implements Initializable {
 
         if (contacts != null) {
 
-            for (Contacts contact : contacts) {
+            contacts.forEach(Contacts -> contactList.add(String.valueOf(Contacts.getContactsID())));
 
-                contactList.add(String.valueOf(contact.getContactsID()));
-
-            }
         }
 
         reportScreenContactSchedule.setItems(contactList);

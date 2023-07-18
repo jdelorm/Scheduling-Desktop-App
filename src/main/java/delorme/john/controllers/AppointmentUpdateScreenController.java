@@ -344,6 +344,10 @@ public class AppointmentUpdateScreenController implements Initializable {
     }
 
     /**
+     * LAMBDA #2
+     *
+     * Makes the code look cleaner, is easier to follow, and uses much less code
+     *
      * Initializes the AppointmentUpdateScreen scene
      * Populates the combo boxes, dropdowns, date pickers, and text fields with appointment selection to update
      * @param url
