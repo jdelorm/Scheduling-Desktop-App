@@ -19,7 +19,13 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
+/**
+ * @author John DeLorme
+ * This class controls the ReportScreen Scene
+ */
+
 public class ReportScreenController implements Initializable {
+
     public TableColumn reportScreenAptIDCol;
     public TableColumn reportScreenTitleCol;
     public TableColumn reportScreenTypeCol;
@@ -35,6 +41,13 @@ public class ReportScreenController implements Initializable {
     public ComboBox reportScreenAptMonth;
     public TextField recordsScreenTotalApts;
     public TableView reportTable;
+
+    /**
+     * Method for on action event for onReportsScreenAptMonth
+     * Iterates through the list of appointments by month and displays the total
+     * amount of appointments based on the selected month for all years
+     * @param actionEvent
+     */
 
     public void onReportScreenAptMonth(ActionEvent actionEvent) {
 
@@ -86,6 +99,12 @@ public class ReportScreenController implements Initializable {
         }
     }
 
+    /**
+     * Method for on action event for onReportScreenAptType
+     * Iterates through list of appointments by type and displays the total amount
+     * @param actionEvent
+     */
+
     public void onReportScreenAptType(ActionEvent actionEvent) {
 
         ObservableList<Appointments> appointmentsListAll = FXCollections.observableArrayList();
@@ -136,11 +155,28 @@ public class ReportScreenController implements Initializable {
         }
     }
 
+    /**
+     * Method for on action event for onReportScreenMonthTotal
+     * @param actionEvent
+     */
+
     public void onReportScreenMonthTotal(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onReportScreenTypeTotal
+     * @param actionEvent
+     */
+
     public void onReportScreenTypeTotal(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onReportScreenContactSchedule
+     * Iterates through list of appointments based on contacts ID and displays all
+     * appointments for selected contacts ID to the table on the ReportsScreen scene
+     * @param actionEvent
+     */
 
     public void onReportScreenContactSchedule(ActionEvent actionEvent) {
 
@@ -163,6 +199,13 @@ public class ReportScreenController implements Initializable {
 
     }
 
+    /**
+     * Method for on action event for onReportScreenBackButton
+     * Loads the DirectoryScreen scene upon pressing the back button
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void onReportScreenBackButton(ActionEvent actionEvent) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/DirectoryScreen.fxml"));
@@ -174,8 +217,20 @@ public class ReportScreenController implements Initializable {
 
     }
 
+    /**
+     * Method for on action event for onRecordsScreenTotalApts
+     * @param actionEvent
+     */
+
     public void onRecordsScreenTotalApts(ActionEvent actionEvent) {
     }
+
+    /**
+     * Initializes the ReportScreen scene
+     * Populates dropdowns, tables, rows, and columns from database
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

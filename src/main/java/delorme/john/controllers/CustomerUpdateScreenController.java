@@ -23,6 +23,11 @@ import java.util.ResourceBundle;
 
 import static delorme.john.models.FirstLevelDivisions.lookupDivisions;
 
+/**
+ * @author John DeLorme
+ * This class controls the CustomerUpdateScreen Scene
+ */
+
 public class CustomerUpdateScreenController implements Initializable {
     public Button customerScreenBackButton;
     public Button customerScreenUpdateButton;
@@ -35,23 +40,60 @@ public class CustomerUpdateScreenController implements Initializable {
     public TextField customerScreenID;
     private Customers selectedCustomer;
 
+    /**
+     * Method for on action event for onCustomerScreenID
+     * @param actionEvent
+     */
+
     public void onCustomerScreenID(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onCustomerScreenName
+     * @param actionEvent
+     */
 
     public void onCustomerScreenName(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onCustomerScreenAddress
+     * @param actionEvent
+     */
+
     public void onCustomerScreenAddress(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onCustomerScreenPostalCode
+     * @param actionEvent
+     */
 
     public void onCustomerScreenPostalCode(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onCustomerScreenPhoneNumber
+     * @param actionEvent
+     */
+
     public void onCustomerScreenPhoneNumber(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onCustomerScreenStateDropDown
+     * @param actionEvent
+     */
+
     public void onCustomerScreenStateDropDown(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onCustomerScreenCountryDropDown
+     * Converts country code to country abbreviations and filters the state selection dropdown based on
+     * the selection made in the country selection dropdown
+     * @param actionEvent
+     */
 
     public void onCustomerScreenCountryDropDown(ActionEvent actionEvent) {
 
@@ -87,6 +129,13 @@ public class CustomerUpdateScreenController implements Initializable {
         customerScreenStateDropDown.setItems(firstLevelDivisionsList);
 
     }
+
+    /**
+     * Method for on action event for onCustomerScreenUpdateButton
+     * Checks fields for proper selection, displays warnings if applicable,
+     * updates customer in database, and then loads the CustomerScreen scene
+     * @param actionEvent
+     */
 
     public void onCustomerScreenUpdateButton(ActionEvent actionEvent) {
 
@@ -168,6 +217,13 @@ public class CustomerUpdateScreenController implements Initializable {
         }
     }
 
+    /**
+     * Method for on action event for onCustomerScreenBackButton
+     * Loads the CustomerScreen scene upon pressing the back button
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void onCustomerScreenBackButton(ActionEvent actionEvent) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/CustomerScreen.fxml"));
@@ -178,6 +234,13 @@ public class CustomerUpdateScreenController implements Initializable {
         stage.show();
 
     }
+
+    /**
+     * Initializes the CustomerUpdateScreen scene
+     * Populates the text fields, combo boxes, dropdowns from the database, and converts country codes
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

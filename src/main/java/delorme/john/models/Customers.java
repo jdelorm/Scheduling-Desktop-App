@@ -11,6 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ * @author John DeLorme
+ * Customers class that contains getters, setters, customer data pulled from
+ * database and stored in a list, and various methods to manipulate the data
+ */
+
 public class Customers {
 
     private Integer customersID;
@@ -49,6 +55,12 @@ public class Customers {
 
     }
 
+    /**
+     * Method that pulls customer info from database and stores it in a list
+     * @return
+     * @throws SQLException
+     */
+
     public static ObservableList<Customers> getAllDataBaseCustomers() throws SQLException {
 
         ObservableList<Customers> customersListQuery = FXCollections.observableArrayList();
@@ -81,11 +93,21 @@ public class Customers {
 
     private static Integer customerID = 4;
 
+    /**
+     * Getter method for getNewCustomersID
+     * @return
+     */
+
     public static Integer getNewCustomerID() {
 
         return customerID++;
 
     }
+
+    /**
+     * Getter method for getCustomersID
+     * @return
+     */
 
     public Integer getCustomersID() {
 
@@ -93,11 +115,21 @@ public class Customers {
 
     }
 
+    /**
+     * Getter method for getCustomersName
+     * @return
+     */
+
     public String getCustomersName() {
 
         return customersName;
 
     }
+
+    /**
+     * Getter method for getCustomersAddress
+     * @return
+     */
 
     public String getCustomersAddress() {
 
@@ -105,11 +137,21 @@ public class Customers {
 
     }
 
+    /***
+     * Getter method for getCustomersPostalCode
+     * @return
+     */
+
     public String getCustomersPostalCode() {
 
         return customersPostalCode;
 
     }
+
+    /**
+     * Getter method for getCustomersPhoneNumber
+     * @return
+     */
 
     public String getCustomersPhoneNumber() {
 
@@ -117,11 +159,21 @@ public class Customers {
 
     }
 
+    /**
+     * Getter method for getCustomersCountryData
+     * @return
+     */
+
     public String getCustomersCountryData() {
 
         return customersCountryData;
 
     }
+
+    /**
+     * Getter method for getCustomersDivisionID
+     * @return
+     */
 
     public String getCustomersDivisionID() {
 
@@ -129,11 +181,21 @@ public class Customers {
 
     }
 
+    /**
+     * Setter method for setCustomersID
+     * @param customersID
+     */
+
     public void setCustomersID(int customersID) {
 
         this.customersID = customersID;
 
     }
+
+    /**
+     * Setter method for setCustomersName
+     * @param customersName
+     */
 
     public void setCustomersName(String customersName) {
 
@@ -141,11 +203,21 @@ public class Customers {
 
     }
 
+    /**
+     * Setter method for setCustomersAddress
+     * @param customersAddress
+     */
+
     public void setCustomersAddress(String customersAddress) {
 
         this.customersAddress = customersAddress;
 
     }
+
+    /**
+     * Setter method for setCustomersPostalCode
+     * @param customersPostalCode
+     */
 
     public void setCustomersPostalCode(String customersPostalCode) {
 
@@ -153,11 +225,21 @@ public class Customers {
 
     }
 
+    /**
+     * Setter method for setCustomersPhoneNumber
+     * @param customersPhoneNumber
+     */
+
     public void setCustomersPhoneNumber(String customersPhoneNumber) {
 
         this.customersPhoneNumber = customersPhoneNumber;
 
     }
+
+    /**
+     * Setter method for setCustomersCountryData
+     * @param customersCountryData
+     */
 
     public void setCustomersCountryData(String customersCountryData) {
 
@@ -165,11 +247,22 @@ public class Customers {
 
     }
 
+    /**
+     * Setter method for setCustomersDivisionID
+     * @param customersDivisionID
+     */
+
     public void setCustomersDivisionID(String customersDivisionID) {
 
         this.customersDivisionID = customersDivisionID;
 
     }
+
+    /**
+     * Method for deleting a customer
+     * @param selectedCustomers
+     * @return
+     */
 
     public static boolean deleteCustomers(Customers selectedCustomers) {
 
@@ -185,6 +278,11 @@ public class Customers {
 
         }
     }
+
+    /**
+     * Method for deleting a appointment that is associated with a customer
+     * @param selectedCustomers
+     */
 
     public static void deleteAssociatedAppointments(Customers selectedCustomers) {
 
@@ -210,6 +308,12 @@ public class Customers {
         }
     }
 
+    /**
+     * Method to update a customer
+     * @param index
+     * @param selectedCustomers
+     */
+
     public static void updateCustomers(int index, Customers selectedCustomers) {
 
         allCustomers.set(index, selectedCustomers);
@@ -218,17 +322,32 @@ public class Customers {
 
     private static ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
 
+    /**
+     * Getter method for getAllCustomers
+     * @return
+     */
+
     public static ObservableList<Customers> getAllCustomers() {
 
         return allCustomers;
 
     }
 
+    /**
+     * Setter method for setAllCustomers
+     * @param allCustomers
+     */
+
     public static void setAllCustomers(ObservableList<Customers> allCustomers) {
 
         Customers.allCustomers = allCustomers;
 
     }
+
+    /**
+     * Method to add a customer
+     * @param newCustomers
+     */
 
     public static void addCustomers(Customers newCustomers) {
 

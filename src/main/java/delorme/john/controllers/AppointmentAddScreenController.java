@@ -20,6 +20,11 @@ import java.net.URL;
 import java.time.*;
 import java.util.ResourceBundle;
 
+/**
+ * @author John DeLorme
+ * This class controls the AppointmentAddScreen Scene
+ */
+
 public class AppointmentAddScreenController implements Initializable {
     public ComboBox appointmentScreenContactDropDown;
     public DatePicker appointmentScreenEndDate;
@@ -36,26 +41,68 @@ public class AppointmentAddScreenController implements Initializable {
     public ComboBox customerIDCombo;
     public ComboBox usersIDCombo;
 
+    /**
+     * Method for on action event for onAppointmentScreenAptID
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenAptID(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenTitle
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenTitle(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenDescription
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenDescription(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenLocation
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenLocation(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenStartTime
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenStartTime(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenEndTime
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenEndTime(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onCustomerIDCombo
+     * @param actionEvent
+     */
+
     public void onCustomerIDCombo(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onCustomerIDCombo
+     * Checks AddScreen fields for proper inputs and populates them into the AppointmentScreen table
+     * Then loads the AppointmentScreen scene after successful appointment creation
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenAddButton(ActionEvent actionEvent) {
 
@@ -192,6 +239,13 @@ public class AppointmentAddScreenController implements Initializable {
         }
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenBackButton
+     * Loads the AppointmentScreen scene after pressing the back button
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void onAppointmentScreenBackButton(ActionEvent actionEvent) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/AppointmentScreen.fxml"));
@@ -203,20 +257,53 @@ public class AppointmentAddScreenController implements Initializable {
 
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenType
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenType(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenStartDate
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenStartDate(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenEndDate
+     * @param actionEvent
+     */
+
+
     public void onAppointmentScreenEndDate(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenContactDropDown
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenContactDropDown(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onUserIDCombo
+     * @param actionEvent
+     */
+
     public void onUserIDCombo(ActionEvent actionEvent) {
     }
+
+    /**
+     * Initializes the AppointmentAddScreen scene
+     * Populates the various combo boxes, drop down menus, and date pickers
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -22,6 +22,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/**
+ * @author John DeLorme
+ * This class controls the AppointmentUpdateScreen Scene
+ */
+
 public class AppointmentUpdateScreenController implements Initializable {
     public ComboBox appointmentScreenContactDropDown;
     public DatePicker appointmentScreenEndDate;
@@ -39,23 +44,60 @@ public class AppointmentUpdateScreenController implements Initializable {
     public ComboBox usersIDCombo;
     private Appointments selectedAppointments;
 
+    /**
+     * Method for on action event for onAppointmentScreenAptID
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenAptID(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenTitle
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenTitle(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenDescription
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenDescription(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenLocation
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenLocation(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenStartTime
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenStartTime(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event onAppointmentScreenEndTime
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenEndTime(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenUpdateButton
+     * Checks all fields for proper inputs, displays error/confirmation messages if applicable,
+     * updates the selected appointment and loads the AppointmentScreen scene
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenUpdateButton(ActionEvent actionEvent) {
 
@@ -235,6 +277,13 @@ public class AppointmentUpdateScreenController implements Initializable {
         }
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenBackButton
+     * Loads the AppointmentScreen scene after pressing the back button
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void onAppointmentScreenBackButton(ActionEvent actionEvent) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/AppointmentScreen.fxml"));
@@ -246,23 +295,60 @@ public class AppointmentUpdateScreenController implements Initializable {
 
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenType
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenType(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenStartDate
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenStartDate(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenEndDate
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenEndDate(ActionEvent actionEvent) {
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenContactDropDown
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenContactDropDown(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onCustomerIDCombo
+     * @param actionEvent
+     */
+
     public void onCustomerIDCombo(ActionEvent actionEvent) {
     }
 
+    /**
+     * Method for on action event for onUserIDCombo
+     * @param actionEvent
+     */
+
     public void onUserIDCombo(ActionEvent actionEvent) {
     }
+
+    /**
+     * Initializes the AppointmentUpdateScreen scene
+     * Populates the combo boxes, dropdowns, date pickers, and text fields with appointment selection to update
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

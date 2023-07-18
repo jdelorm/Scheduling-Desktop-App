@@ -8,6 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author John DeLorme
+ * Contacts class that contains the setters, getters, and contact information
+ * pulled from the database and stores them in lists
+ */
+
 public class Contacts {
 
     public int contactsID;
@@ -21,6 +27,12 @@ public class Contacts {
         this.contactsEmail = contactsEmail;
 
     }
+
+    /**
+     * Method that pulls contact information from database and stores them in lists
+     * @return
+     * @throws SQLException
+     */
 
     public static ObservableList<Contacts> getAllDataBaseContacts() throws SQLException {
 
@@ -50,11 +62,21 @@ public class Contacts {
 
     private static int contactID = 1000;
 
-    public static int getNewPartID() {
+    /**
+     * Getter method for getNewContactID
+     * @return
+     */
+
+    public static int getNewContactID() {
 
         return contactID++;
 
     }
+
+    /**
+     * Getter method for getContactsID
+     * @return
+     */
 
     public int getContactsID() {
 
@@ -62,11 +84,21 @@ public class Contacts {
 
     }
 
+    /**
+     * Getter method for getContactsName
+     * @return
+     */
+
     public String getContactsName() {
 
         return contactsName;
 
     }
+
+    /**
+     * Getter method for getContactsEmail
+     * @return
+     */
 
     public String getContactsEmail() {
 
@@ -74,11 +106,21 @@ public class Contacts {
 
     }
 
+    /**
+     * Setter method for setContactsID
+     * @param contactsID
+     */
+
     public void setContactsID(int contactsID) {
 
         this.contactsID = contactsID;
 
     }
+
+    /**
+     * Setter method for setContactsName
+     * @param contactsName
+     */
 
     public void setContactsName(String contactsName) {
 
@@ -86,11 +128,22 @@ public class Contacts {
 
     }
 
+    /**
+     * Setter method for setContactsEmail
+     * @param contactsName
+     */
+
     public void setContactsEmail(String contactsName) {
 
         this.contactsEmail = contactsEmail;
 
     }
+
+    /**
+     * Method to delete contacts
+     * @param selectedContacts
+     * @return
+     */
 
     public static boolean deleteContacts(Contacts selectedContacts) {
 
@@ -107,6 +160,12 @@ public class Contacts {
         }
     }
 
+    /**
+     * Method to update contacts
+     * @param index
+     * @param selectedContacts
+     */
+
     public static void updateContacts(int index, Contacts selectedContacts) {
 
         allContacts.set(index, selectedContacts);
@@ -115,17 +174,32 @@ public class Contacts {
 
     private static ObservableList<Contacts> allContacts = FXCollections.observableArrayList();
 
+    /**
+     * Getter method for getAllContacts
+     * @return
+     */
+
     public static ObservableList<Contacts> getAllContacts() {
 
         return allContacts;
 
     }
 
+    /**
+     * Setter method for setAllContacts
+     * @param allContacts
+     */
+
     public static void setAllContacts(ObservableList<Contacts> allContacts) {
 
         Contacts.allContacts = allContacts;
 
     }
+
+    /**
+     * Method to add contacts
+     * @param newContacts
+     */
 
     public static void addContacts(Contacts newContacts) {
 

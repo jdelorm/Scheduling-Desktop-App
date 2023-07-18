@@ -8,6 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author John DeLorme
+ * FirstLevelDiviions class that contains getters, setters, and info pulled from the database
+ * and stored in a list
+ */
+
 public class FirstLevelDivisions {
 
     private int divisionsID;
@@ -21,6 +27,12 @@ public class FirstLevelDivisions {
         this.countriesID = countriesID;
 
     }
+
+    /**
+     * Method that pulls first level divisions info from database and stores it in a list
+     * @return
+     * @throws SQLException
+     */
 
     public static ObservableList<FirstLevelDivisions> getAllDataBaseFirstLevelDivisions() throws SQLException {
 
@@ -48,11 +60,21 @@ public class FirstLevelDivisions {
 
     }
 
+    /**
+     * Getter method for getDivisionsID
+     * @return
+     */
+
     public int getDivisionsID() {
 
         return divisionsID;
 
     }
+
+    /**
+     * Getter method for getDivisions
+     * @return
+     */
 
     public String getDivisions() {
 
@@ -60,10 +82,20 @@ public class FirstLevelDivisions {
 
     }
 
+    /**
+     * Getter method for getCountriesID
+     * @return
+     */
+
     public String getCountriesID() {
 
         return countriesID;
     }
+
+    /**
+     * Setter method for setDivisionsID
+     * @param divisionsID
+     */
 
     public void setDivisionsID(int divisionsID) {
 
@@ -71,17 +103,33 @@ public class FirstLevelDivisions {
 
     }
 
+    /**
+     * Setter method for setDivisions
+     * @param divisions
+     */
+
     public void setDivisions(String divisions) {
 
         this.divisions = divisions;
 
     }
 
+    /**
+     * Setter method for setCountriesID
+     * @param countriesID
+     */
+
     public void setCountriesID(String countriesID) {
 
         this.countriesID = countriesID;
 
     }
+
+    /**
+     * Method to delete a first level division
+     * @param selectedFirstLevelDivisions
+     * @return
+     */
 
     public static boolean deleteFirstLevelDivisions(FirstLevelDivisions selectedFirstLevelDivisions) {
 
@@ -98,6 +146,12 @@ public class FirstLevelDivisions {
         }
     }
 
+    /**
+     * Method to update a first level division
+     * @param index
+     * @param selectedFirstLevelDivisions
+     */
+
     public static void updateFirstLevelDivisions(int index, FirstLevelDivisions selectedFirstLevelDivisions) {
 
         allFirstLevelDivisions.set(index, selectedFirstLevelDivisions);
@@ -106,11 +160,21 @@ public class FirstLevelDivisions {
 
     private static ObservableList<FirstLevelDivisions> allFirstLevelDivisions = FXCollections.observableArrayList();
 
+    /**
+     * Getter method for allFirstLevelDisions
+     * @return
+     */
+
     public static ObservableList<FirstLevelDivisions> getAllFirstLevelDivisions() {
 
         return allFirstLevelDivisions;
 
     }
+
+    /**
+     * Setter method for setAllFirstLevelDivisions
+     * @param allFirstLevelDivisions
+     */
 
     public static void setAllFirstLevelDivisions(ObservableList<FirstLevelDivisions> allFirstLevelDivisions) {
 
@@ -118,11 +182,22 @@ public class FirstLevelDivisions {
 
     }
 
+    /**
+     * Method to add a first level division
+     * @param newFirstLevelDivisions
+     */
+
     public static void addFirstLevelDivisions(FirstLevelDivisions newFirstLevelDivisions) {
 
         allFirstLevelDivisions.add(newFirstLevelDivisions);
 
     }
+
+    /**
+     * Method to filter list of first level divisions data by country ID
+     * @param divisionsToLookup
+     * @return
+     */
 
     public static ObservableList<FirstLevelDivisions> lookupDivisions(String divisionsToLookup) {
 

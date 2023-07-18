@@ -3,16 +3,17 @@ package delorme.john.models;
 import delorme.john.helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormatSymbols;
-import java.text.spi.DateFormatProvider;
 import java.time.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+
+/**
+ * @author John DeLorme
+ * Appointments class that contains the setters, getters, arrayLists, populate data,
+ * and various time check methods for appointments
+ */
 
 public class Appointments {
 
@@ -43,6 +44,12 @@ public class Appointments {
         this.contactsID = contactsID;
 
     }
+
+    /**
+     * Method that pulls allDataBaseAppointments and stores them in a list
+     * @return
+     * @throws SQLException
+     */
 
     public static ObservableList<Appointments> getAllDataBaseAppointments() throws SQLException {
 
@@ -79,11 +86,21 @@ public class Appointments {
 
     private static Integer AppointmentID = 3;
 
+    /**
+     * Getter method for getNewAppointmentID
+     * @return
+     */
+
     public static Integer getNewAppointmentID() {
 
         return AppointmentID++;
 
     }
+
+    /**
+     * Getter method for getAppointmentsID
+     * @return
+     */
 
     public Integer getAppointmentsID() {
 
@@ -91,11 +108,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Getter method for getAppointmentsTitle
+     * @return
+     */
+
     public String getAppointmentsTitle() {
 
         return appointmentsTitle;
 
     }
+
+    /**
+     * Getter method for getAppointmentsDescription
+     * @return
+     */
 
     public String getAppointmentsDescription() {
 
@@ -103,11 +130,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Getter method for getAppontmentsLocation
+     * @return
+     */
+
     public String getAppointmentsLocation() {
 
         return appointmentsLocation;
 
     }
+
+    /**
+     * Getter method for getAppointmentsType
+     * @return
+     */
 
     public String getAppointmentsType() {
 
@@ -115,11 +152,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Getter method for getAppointmentStartDate
+     * @return
+     */
+
     public LocalDate getAppointmentStartDate() {
 
         return appointmentStartDate;
 
     }
+
+    /**
+     * Getter method for getAppointmentsStartTime
+     * @return
+     */
 
     public LocalDateTime getAppointmentsStartTime() {
 
@@ -127,17 +174,32 @@ public class Appointments {
 
     }
 
+    /**
+     * Getter Method for getAppointmentEndDate
+     * @return
+     */
+
     public LocalDate getAppointmentEndDate() {
 
         return appointmentEndDate;
 
     }
 
+    /**
+     * Getter method for getAppointmentsEndTime
+     * @return
+     */
+
     public LocalDateTime getAppointmentsEndTime() {
 
         return appointmentsEndTime;
 
     }
+
+    /**
+     * Getter method for getCustomersID
+     * @return
+     */
 
     public Integer getCustomersID () {
 
@@ -146,11 +208,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Getter method for getUsersID
+     * @return
+     */
+
     public Integer getUsersID() {
 
         return usersID;
 
     }
+
+    /**
+     * Getter method for getContactsID
+     * @return
+     */
 
     public String getContactsID() {
 
@@ -158,11 +230,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Setter method for setAppointmentsID
+     * @param appointmentsID
+     */
+
     public void setAppointmentsID(int appointmentsID) {
 
         this.appointmentsID = appointmentsID;
 
     }
+
+    /**
+     * Setter method for setAppointmentsTitle
+     * @param appointmentsTitle
+     */
 
     public void setAppointmentsTitle(String appointmentsTitle) {
 
@@ -170,11 +252,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Setter method for setAppointmentsDescription
+     * @param appointmentsDescription
+     */
+
     public void setAppointmentsDescription(String appointmentsDescription) {
 
         this.appointmentsDescription = appointmentsDescription;
 
     }
+
+    /**
+     * Setter method for setAppointmentsLocation
+     * @param appointmentsLocation
+     */
 
     public void setAppointmentsLocation(String appointmentsLocation) {
 
@@ -182,11 +274,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Setter method for setAppointmentsType
+     * @param appointmentsType
+     */
+
     public void setAppointmentsType(String appointmentsType) {
 
         this.appointmentsType = appointmentsType;
 
     }
+
+    /**
+     * Setter method for setAppointmentStartDate
+     * @param appointmentStartDate
+     */
 
     public void setAppointmentStartDate(LocalDate appointmentStartDate) {
 
@@ -194,11 +296,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Setter method for setAppointmentsStartTime
+     * @param appointmentsStartTime
+     */
+
     public void setAppointmentsStartTime(LocalDateTime appointmentsStartTime) {
 
         this.appointmentsStartTime = appointmentsStartTime;
 
     }
+
+    /**
+     * Setter method for setAppointmentEndDate
+     * @param appointmentEndDate
+     */
 
     public void setAppointmentEndDate(LocalDate appointmentEndDate) {
 
@@ -206,11 +318,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Setter method for setAppointmentsEndTime
+     * @param appointmentsEndTime
+     */
+
     public void setAppointmentsEndTime(LocalDateTime appointmentsEndTime) {
 
         this.appointmentsEndTime = appointmentsEndTime;
 
     }
+
+    /**
+     * Setter method for setCustomersID
+     * @param customersID
+     */
 
     public void setCustomersID(int customersID) {
 
@@ -218,17 +340,33 @@ public class Appointments {
 
     }
 
+    /**
+     * Setter method for setUsersID
+     * @param usersID
+     */
+
     public void setUsersID(int usersID) {
 
         this.usersID = usersID;
 
     }
 
+    /**
+     * Setter method for setContactsID
+     * @param contactsID
+     */
+
     public void setContactsID(String contactsID) {
 
         this.contactsID = contactsID;
 
     }
+
+    /**
+     * Method to delete appointments
+     * @param selectedAppointments
+     * @return
+     */
 
     public static boolean deleteAppointments(Appointments selectedAppointments) {
 
@@ -245,6 +383,12 @@ public class Appointments {
         }
     }
 
+    /**
+     * Method to updateAppointments
+     * @param index
+     * @param selectedAppointments
+     */
+
     public static void updateAppointments(int index, Appointments selectedAppointments) {
 
         allAppointments.set(index, selectedAppointments);
@@ -253,11 +397,21 @@ public class Appointments {
 
     private static ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
 
+    /**
+     * Getter method for getAllAppointments
+     * @return
+     */
+
     public static ObservableList<Appointments> getAllAppointments() {
 
         return allAppointments;
 
     }
+
+    /**
+     * Setter method for setAllAppointments
+     * @param allAppointments
+     */
 
     public static void setAllAppointments(ObservableList<Appointments> allAppointments) {
 
@@ -265,11 +419,21 @@ public class Appointments {
 
     }
 
+    /**
+     * Method to add an appointment
+     * @param newAppointments
+     */
+
     public static void addAppointments(Appointments newAppointments) {
 
         allAppointments.add(newAppointments);
 
     }
+
+    /**
+     * Method to populate timeDropDown combo box
+     * @return
+     */
 
     public static ObservableList timeDropDownPopulate() {
 
@@ -291,6 +455,13 @@ public class Appointments {
 
         return appointmentsTimesList;
     }
+
+    /**
+     * Method to verify appointments are within business hours
+     * @param localStart
+     * @param localEnd
+     * @return
+     */
 
     public static boolean businessTimeAppointmentsVerification(LocalDateTime localStart, LocalDateTime localEnd) {
 
@@ -339,6 +510,13 @@ public class Appointments {
         return appointmentCheck;
 
     }
+
+    /**
+     * Method to verify there are no overlapping appointments
+     * @param appointmentsStartTime
+     * @param appointmentsEndTime
+     * @return
+     */
 
     public static boolean overlappingAppointmentVerification(LocalDateTime appointmentsStartTime, LocalDateTime appointmentsEndTime) {
 
@@ -437,6 +615,11 @@ public class Appointments {
         return appointmentCheck;
 
     }
+
+    /**
+     * Method to populate monthDropDown combo box
+     * @return
+     */
 
     public static ObservableList monthDropDownPopulate() {
 

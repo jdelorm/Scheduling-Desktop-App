@@ -15,6 +15,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * @author John DeLorme
+ * This class controls the CustomerScreen Scene
+ */
+
 public class CustomerScreenController implements Initializable {
 
     public TableColumn customerScreenIDCol;
@@ -31,11 +36,23 @@ public class CustomerScreenController implements Initializable {
     public TableView customerTable;
     private static Customers customerToModify;
 
+    /**
+     * Method to get and return customerToModify
+     * @return
+     */
+
     public static Customers getCustomerToModify() {
 
         return customerToModify;
 
     }
+
+    /**
+     * Method for on action event for onCustomerScreenAddButton
+     * Loads the CustomerAddScreen scene upon clicking the add button
+     * @param actionEvent
+     * @throws IOException
+     */
 
     public void onCustomerScreenAddButton(ActionEvent actionEvent) throws IOException {
 
@@ -47,6 +64,13 @@ public class CustomerScreenController implements Initializable {
         stage.show();
 
     }
+
+    /**
+     * Method for on action event for onCustomerScreenUpdateButton
+     * Checks for customer to update and then loads the CustomerUpdateScreen scene
+     * @param actionEvent
+     * @throws IOException
+     */
 
     public void onCustomerScreenUpdateButton(ActionEvent actionEvent) throws IOException {
 
@@ -70,6 +94,13 @@ public class CustomerScreenController implements Initializable {
 
         }
     }
+
+    /**
+     * Method for on action event for onCustomerScreenDeleteButton
+     * Checks for a selection, displays warnings/confirmation dialog boxes if applicable,
+     * and then deletes customer and any associated appointments
+     * @param actionEvent
+     */
 
     public void onCustomerScreenDeleteButton(ActionEvent actionEvent) {
 
@@ -96,6 +127,13 @@ public class CustomerScreenController implements Initializable {
         }
     }
 
+    /**
+     * Method for on action event for onCustomerScreenBackButton
+     * Loads the DirectoryScreen scene upon pressing the back button
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void onCustomerScreenBackButton(ActionEvent actionEvent) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/DirectoryScreen.fxml"));
@@ -106,6 +144,13 @@ public class CustomerScreenController implements Initializable {
         stage.show();
 
     }
+
+    /**
+     * Initializes the CustomerScreen scene
+     * Populates the CustomerScreen tables, rows, and columns from database
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

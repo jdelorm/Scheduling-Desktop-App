@@ -19,6 +19,11 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * @author John DeLorme
+ * This class controls the AppointmentScreen Scene
+ */
+
 public class AppointmentScreenController implements Initializable {
 
     public Button appointmentScreenBackButton;
@@ -42,11 +47,23 @@ public class AppointmentScreenController implements Initializable {
 
     private static Appointments appointmentToModify;
 
+    /**
+     * Method to get and return appointmentToModify
+     * @return
+     */
+
     public static Appointments getAppointmentToModify() {
 
         return appointmentToModify;
 
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenAddButton
+     * Loads the AppointmentAddScreen scene on button press
+     * @param actionEvent
+     * @throws IOException
+     */
 
     public void onAppointmentScreenAddButton(ActionEvent actionEvent) throws IOException {
 
@@ -58,6 +75,13 @@ public class AppointmentScreenController implements Initializable {
             stage.show();
 
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenUpdateButton
+     * Upon clicking the update button, the method checks for a selection and then opens the AppointmentUpdateScreen scene
+     * @param actionEvent
+     * @throws IOException
+     */
 
     public void onAppointmentScreenUpdateButton(ActionEvent actionEvent) throws IOException {
 
@@ -81,6 +105,12 @@ public class AppointmentScreenController implements Initializable {
 
         }
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenDeleteButton
+     * Checks for a selection, then asks for confirmation of decision, and then removes appointment from system
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenDeleteButton(ActionEvent actionEvent) {
 
@@ -109,6 +139,13 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenBackButton
+     * Returns user to the DirectoryScreen scene
+     * @param actionEvent
+     * @throws IOException
+     */
+
     public void onAppointmentScreenBackButton(ActionEvent actionEvent) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/DirectoryScreen.fxml"));
@@ -119,6 +156,12 @@ public class AppointmentScreenController implements Initializable {
         stage.show();
 
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenAllButton radio button
+     * Radio button is pre-selected at load to display all appointments in database in table
+     * @param actionEvent
+     */
 
     public void onAppointmentScreenAllButton(ActionEvent actionEvent) {
 
@@ -136,6 +179,12 @@ public class AppointmentScreenController implements Initializable {
 
         }
     }
+
+    /**
+     * Method for on action event for onAppointmentScreenWeeklyButton
+     * Filters the appointments in database by a weekly basis and displays them in table
+     * @param actionEvent
+     */
 
     public void onAppointmentsScreenWeeklyButton(ActionEvent actionEvent) {
 
@@ -170,6 +219,12 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
+    /**
+     * Method for on action event for onAppointmentScreenMonthlyButton
+     * Filters the appointments in database on a monthly basis and displays them in the table
+     * @param actionEvent
+     */
+
     public void onAppointmentScreenMonthlyButton(ActionEvent actionEvent) {
 
         try {
@@ -202,6 +257,13 @@ public class AppointmentScreenController implements Initializable {
 
         }
     }
+
+    /**
+     * Initializes the AppointmentScreen scene
+     * Populates the table, rows, and columns with appointments in database
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -9,6 +9,7 @@
       <Button fx:id="customersDirectory" layoutX="228.0" layoutY="99.0" mnemonicParsing="false" onAction="#onCustomersDirectory" prefHeight="25.0" prefWidth="146.0" text="Customer Records" />
       <Button fx:id="appointmentsDirectory" layoutX="228.0" layoutY="159.0" mnemonicParsing="false" onAction="#onAppointmentsDirectory" prefHeight="25.0" prefWidth="146.0" text="Customer Appointments" />
       <Button fx:id="reportsDirectory" layoutX="252.0" layoutY="218.0" mnemonicParsing="false" onAction="#onReportsDirectory" prefHeight="25.0" prefWidth="99.0" text="Reports" />
-      <Button fx:id="exitDirectory" layoutX="252.0" layoutY="273.0" mnemonicParsing="false" onAction="#onExitDirectory" text="Logout and Exit" />
+      <Button fx:id="exitDirectory" layoutX="275.0" layoutY="273.0" mnemonicParsing="false" onAction="#onExitDirectory" text="Logout" />
+      <Button fx:id="exit" layoutX="260.0" layoutY="320.0" mnemonicParsing="false" onAction="#onExit" text="Exit Program" />
    </children>
 </AnchorPane>

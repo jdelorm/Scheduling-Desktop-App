@@ -8,6 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author John DeLorme
+ * Countries class that contains the setters, getters, and
+ * country data pulled from the database and stored in lists
+ */
+
 public class Countries {
 
     private int countriesID;
@@ -19,6 +25,12 @@ public class Countries {
         this.countries = countries;
 
     }
+
+    /**
+     * Method that pulls country data from database and stores it in a list
+     * @return
+     * @throws SQLException
+     */
 
     public static ObservableList<Countries> getAllDataBaseCountries() throws SQLException {
 
@@ -45,11 +57,21 @@ public class Countries {
 
     }
 
+    /**
+     * Getter method for getCountriesID
+     * @return
+     */
+
     public int getCountriesID() {
 
         return countriesID;
 
     }
+
+    /**
+     * Getter method for getCountries
+     * @return
+     */
 
     public String getCountries() {
 
@@ -57,17 +79,33 @@ public class Countries {
 
     }
 
+    /**
+     * Setter method for setCountriesID
+     * @param countriesID
+     */
+
     public void setCountriesID(int countriesID) {
 
         this.countriesID = countriesID;
 
     }
 
+    /**
+     * Setter method for setCountries
+     * @param countries
+     */
+
     public void setCountries(String countries) {
 
         this.countries = countries;
 
     }
+
+    /**
+     * Method to delete countries
+     * @param selectedCountries
+     * @return
+     */
 
     public static boolean deleteCountries(Countries selectedCountries) {
 
@@ -84,6 +122,12 @@ public class Countries {
         }
     }
 
+    /**
+     * Method to update countries
+     * @param index
+     * @param selectedCountries
+     */
+
     public static void updateCountries(int index, Countries selectedCountries) {
 
         allCountries.set(index, selectedCountries);
@@ -92,17 +136,32 @@ public class Countries {
 
     private static ObservableList<Countries> allCountries = FXCollections.observableArrayList();
 
+    /**
+     * Getter method for getAllCountries
+     * @return
+     */
+
     public static ObservableList<Countries> getAllCountries() {
 
         return allCountries;
 
     }
 
+    /**
+     * Setter method for setAllCountries
+     * @param allCountries
+     */
+
     public static void setAllCountries(ObservableList<Countries> allCountries) {
 
         Countries.allCountries = allCountries;
 
     }
+
+    /**
+     * Method to add countries
+     * @param newCountries
+     */
 
     public static void addCountries(Countries newCountries) {
 
@@ -112,17 +171,32 @@ public class Countries {
 
     private static ObservableList<Countries> allCountriesID = FXCollections.observableArrayList();
 
+    /**
+     * Getter method for getAllCountriesID
+     * @return
+     */
+
     public static ObservableList<Countries> getAllCountriesID() {
 
         return allCountriesID;
 
     }
 
+    /**
+     * Setter method for setAllCountriesID
+     * @param allCountriesID
+     */
+
     public static void setAllCountriesID(ObservableList<Countries> allCountriesID) {
 
         Countries.allCountriesID = allCountriesID;
 
     }
+
+    /**
+     * Method to add countries ID
+     * @param newCountriesID
+     */
 
     public static void addCountriesID(Countries newCountriesID) {
 

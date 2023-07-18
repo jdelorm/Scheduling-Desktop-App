@@ -8,6 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author John DeLorme
+ * Users class that contains getters, setters, and users info pulled from the database and stores it in a list
+ */
+
 public class Users {
 
     public int usersID;
@@ -21,6 +26,12 @@ public class Users {
         this.usersPassword = usersPassword;
 
     }
+
+    /**
+     * Method that pulls user info from datbase and stores it in a list
+     * @return
+     * @throws SQLException
+     */
 
     public static ObservableList<Users> getAllDataBaseUsers() throws SQLException {
 
@@ -50,11 +61,21 @@ public class Users {
 
     private static int userID = 1000;
 
+    /**
+     * Getter method for getNewPartID
+     * @return
+     */
+
     public static int getNewPartID() {
 
         return userID++;
 
     }
+
+    /**
+     * Getter method for getUsersID
+     * @return
+     */
 
     public int getUsersID() {
 
@@ -62,11 +83,21 @@ public class Users {
 
     }
 
+    /**
+     * Getter method for getUsersName
+     * @return
+     */
+
     public String getUsersName() {
 
         return usersName;
 
     }
+
+    /**
+     * Getter method for getUsersPassword
+     * @return
+     */
 
     public String getUsersPassword() {
 
@@ -74,11 +105,21 @@ public class Users {
 
     }
 
+    /**
+     * Setter method for setUsersID
+     * @param usersID
+     */
+
     public void setUsersID(int usersID) {
 
         this.usersID = usersID;
 
     }
+
+    /**
+     * Setter method for setUsersName
+     * @param usersName
+     */
 
     public void setUsersName(String usersName) {
 
@@ -86,11 +127,22 @@ public class Users {
 
     }
 
+    /**
+     * Setter method for setUsersPassword
+     * @param usersPassword
+     */
+
     public void setUsersPassword(String usersPassword) {
 
         this.usersPassword = usersPassword;
 
     }
+
+    /**
+     * Method to delete a user
+     * @param selectedUsers
+     * @return
+     */
 
     public static boolean deleteUsers(Users selectedUsers) {
 
@@ -107,6 +159,12 @@ public class Users {
         }
     }
 
+    /**
+     * Method to update a user
+     * @param index
+     * @param selectedUsers
+     */
+
     public static void updateUsers(int index, Users selectedUsers) {
 
         allUsers.set(index, selectedUsers);
@@ -115,15 +173,30 @@ public class Users {
 
     private static ObservableList<Users> allUsers = FXCollections.observableArrayList();
 
+    /**
+     * Getter method for getAllUsers
+     * @return
+     */
+
     public static ObservableList<Users> getAllUsers() {
 
         return allUsers;
 
     }
 
+    /**
+     * Setter method for setAllUsers
+     * @param allUsers
+     */
+
     public static void setAllUsers(ObservableList<Users> allUsers) {
         Users.allUsers = allUsers;
     }
+
+    /**
+     * Method to add a user
+     * @param newUsers
+     */
 
     public static void addUsers(Users newUsers) {
 
