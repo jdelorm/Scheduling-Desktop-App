@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -112,7 +113,7 @@ public class AppointmentScreenController implements Initializable {
      * @param actionEvent
      */
 
-    public void onAppointmentScreenDeleteButton(ActionEvent actionEvent) {
+    public void onAppointmentScreenDeleteButton(ActionEvent actionEvent) throws SQLException {
 
         delorme.john.models.Appointments selectedAppointments = (Appointments) appointmentTable.getSelectionModel().getSelectedItem();
 
@@ -131,6 +132,8 @@ public class AppointmentScreenController implements Initializable {
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
                 Appointments.deleteAppointments(selectedAppointments);
+
+                Appointments.deleteDataBaseAppointment(selectedAppointments.getAppointmentsID());
 
                 Alert alert2 = new Alert(Alert.AlertType.CONFIRMATION, "Appointment ID: " + selectedAppointments.getAppointmentsID() + " Type: " + selectedAppointments.getAppointmentsType() + " has been removed.");
                 Optional<ButtonType> result2 = alert2.showAndWait();

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -102,7 +103,7 @@ public class CustomerScreenController implements Initializable {
      * @param actionEvent
      */
 
-    public void onCustomerScreenDeleteButton(ActionEvent actionEvent) {
+    public void onCustomerScreenDeleteButton(ActionEvent actionEvent) throws SQLException {
 
         delorme.john.models.Customers selectedCustomers = (Customers) customerTable.getSelectionModel().getSelectedItem();
 
@@ -122,6 +123,7 @@ public class CustomerScreenController implements Initializable {
 
                 Customers.deleteAssociatedAppointments(selectedCustomers);
                 Customers.deleteCustomers(selectedCustomers);
+                Customers.deleteDataBaseCustomer(selectedCustomers.getCustomersID());
 
             }
         }

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 
 /**
  * @author John DeLorme
@@ -30,6 +31,7 @@ public class FirstLevelDivisions {
 
     /**
      * Method that pulls first level divisions info from database and stores it in a list
+     *
      * @return
      * @throws SQLException
      */
@@ -62,6 +64,7 @@ public class FirstLevelDivisions {
 
     /**
      * Getter method for getDivisionsID
+     *
      * @return
      */
 
@@ -73,6 +76,7 @@ public class FirstLevelDivisions {
 
     /**
      * Getter method for getDivisions
+     *
      * @return
      */
 
@@ -84,6 +88,7 @@ public class FirstLevelDivisions {
 
     /**
      * Getter method for getCountriesID
+     *
      * @return
      */
 
@@ -94,6 +99,7 @@ public class FirstLevelDivisions {
 
     /**
      * Setter method for setDivisionsID
+     *
      * @param divisionsID
      */
 
@@ -105,6 +111,7 @@ public class FirstLevelDivisions {
 
     /**
      * Setter method for setDivisions
+     *
      * @param divisions
      */
 
@@ -116,6 +123,7 @@ public class FirstLevelDivisions {
 
     /**
      * Setter method for setCountriesID
+     *
      * @param countriesID
      */
 
@@ -127,6 +135,7 @@ public class FirstLevelDivisions {
 
     /**
      * Method to delete a first level division
+     *
      * @param selectedFirstLevelDivisions
      * @return
      */
@@ -148,6 +157,7 @@ public class FirstLevelDivisions {
 
     /**
      * Method to update a first level division
+     *
      * @param index
      * @param selectedFirstLevelDivisions
      */
@@ -162,6 +172,7 @@ public class FirstLevelDivisions {
 
     /**
      * Getter method for allFirstLevelDisions
+     *
      * @return
      */
 
@@ -173,6 +184,7 @@ public class FirstLevelDivisions {
 
     /**
      * Setter method for setAllFirstLevelDivisions
+     *
      * @param allFirstLevelDivisions
      */
 
@@ -184,6 +196,7 @@ public class FirstLevelDivisions {
 
     /**
      * Method to add a first level division
+     *
      * @param newFirstLevelDivisions
      */
 
@@ -195,6 +208,7 @@ public class FirstLevelDivisions {
 
     /**
      * Method to filter list of first level divisions data by country ID
+     *
      * @param divisionsToLookup
      * @return
      */
@@ -213,6 +227,32 @@ public class FirstLevelDivisions {
         }
 
         return filteredDivisions;
+
+    }
+
+    /**
+     * Method that takes the selected division name and converts it to its division ID number
+     *
+     * @param countryDataToLookup
+     * @return
+     */
+
+    public static int lookupCountryData(String countryDataToLookup) {
+
+        FirstLevelDivisions firstLevelDivisions = null;
+
+        for (Iterator<FirstLevelDivisions> i = FirstLevelDivisions.getAllFirstLevelDivisions().iterator(); i.hasNext(); ) {
+
+            firstLevelDivisions = i.next();
+
+            if (firstLevelDivisions.getDivisions().equals(countryDataToLookup)) {
+
+                return firstLevelDivisions.divisionsID;
+
+            }
+        }
+
+        return firstLevelDivisions.divisionsID;
 
     }
 }

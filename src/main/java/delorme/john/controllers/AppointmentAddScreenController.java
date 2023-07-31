@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.*;
 import java.util.ResourceBundle;
 
@@ -211,7 +212,7 @@ public class AppointmentAddScreenController implements Initializable {
 
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error");
-                    alert.setContentText("Appointment Overlap Error.\n\nThere is already an appointment for the selected customer at the selected date/time.");
+                    alert.setContentText("Appointment Overlap Error.\n\nThere is already an existing appointment for the selected date/time.");
                     alert.showAndWait();
 
                 } else {
@@ -221,6 +222,8 @@ public class AppointmentAddScreenController implements Initializable {
                     Appointments addNewAppointment = new Appointments(appointmentsID, appointmentsTitle, appointmentsDescription, appointmentsLocation, appointmentsType, appointmentsStartTime, appointmentsEndTime, customersID, usersID, contactsID);
 
                     Appointments.addAppointments(addNewAppointment);
+
+                    Appointments.addNewDataBaseAppointment(appointmentsID, appointmentsTitle, appointmentsDescription, appointmentsLocation, appointmentsType, appointmentsStartTime, appointmentsEndTime, customersID, usersID, contactsID);
 
                     Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/AppointmentScreen.fxml"));
                     Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -233,6 +236,10 @@ public class AppointmentAddScreenController implements Initializable {
             }
 
         } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
+        } catch (SQLException e) {
 
             throw new RuntimeException(e);
 

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static delorme.john.models.FirstLevelDivisions.lookupDivisions;
@@ -201,6 +202,8 @@ public class CustomerUpdateScreenController implements Initializable {
 
                 Customers.deleteCustomers(selectedCustomer);
 
+                Customers.updateDataBaseCustomer(customersID, customersName, customersAddress, customersPostalCode, customersPhoneNumber, customersCountryData);
+
                 Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/CustomerScreen.fxml"));
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root, 775, 400);
@@ -211,6 +214,10 @@ public class CustomerUpdateScreenController implements Initializable {
             }
 
         } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
+        } catch (SQLException e) {
 
             throw new RuntimeException(e);
 

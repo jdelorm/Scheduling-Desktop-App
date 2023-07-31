@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -199,23 +200,21 @@ public class AppointmentUpdateScreenController implements Initializable {
 
                 selectedAppointments = AppointmentScreenController.getAppointmentToModify();
 
-                if ((selectedAppointments.getAppointmentsID()).equals(appointmentsID)) {
+                if ((selectedAppointments.getAppointmentsTitle() != (appointmentsTitle) ||
+                        selectedAppointments.getAppointmentsDescription() != (appointmentsDescription) ||
+                        selectedAppointments.getAppointmentsLocation() != (appointmentsLocation) ||
+                        selectedAppointments.getAppointmentsType() != (appointmentsType) ||
+                        selectedAppointments.getContactsID() != (contactsID) ||
+                        selectedAppointments.getUsersID() != (usersID) ||
+                        selectedAppointments.getCustomersID() != (customersID)) &&
+                        (selectedAppointments.getAppointmentsStartTime().toLocalDate().equals(appointmentsStartTime.toLocalDate()) && selectedAppointments.getAppointmentsStartTime().toLocalTime().equals(appointmentsStartTime.toLocalTime()) && selectedAppointments.getAppointmentsEndTime().toLocalDate().equals(appointmentsEndTime.toLocalDate()) && selectedAppointments.getAppointmentsEndTime().toLocalTime().equals(appointmentsEndTime.toLocalTime()))) {
 
-                    if (selectedAppointments.getAppointmentsTitle().equals(appointmentsTitle) &&
-                            selectedAppointments.getAppointmentsDescription().equals(appointmentsDescription) &&
-                            selectedAppointments.getAppointmentsLocation().equals(appointmentsLocation) &&
-                            selectedAppointments.getAppointmentsType().equals(appointmentsType) &&
-                            selectedAppointments.getContactsID().equals(contactsID) &&
-                            selectedAppointments.getUsersID().equals(usersID) &&
-                            selectedAppointments.getCustomersID().equals(customersID) &&
-                            selectedAppointments.getAppointmentsStartTime().toLocalDate() != appointmentsStartTime.toLocalDate() ||
-                            selectedAppointments.getAppointmentsStartTime().toLocalTime() != appointmentsStartTime.toLocalTime() ||
-                            selectedAppointments.getAppointmentsEndTime().toLocalDate() != appointmentsEndTime.toLocalDate() ||
-                            selectedAppointments.getAppointmentsEndTime().toLocalTime() != appointmentsEndTime.toLocalTime()) {
+                    appointmentOverlapCheck = true;
 
-                        appointmentOverlapCheck = Appointments.overlappingAppointmentVerification(appointmentsStartTime, appointmentsEndTime);
+                } else {
 
-                    }
+                    appointmentOverlapCheck = Appointments.overlappingAppointmentVerification(appointmentsStartTime, appointmentsEndTime);
+
                 }
 
                 if ((selectedAppointments.getAppointmentsID()).equals(appointmentsID) &&
@@ -247,7 +246,7 @@ public class AppointmentUpdateScreenController implements Initializable {
 
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error");
-                    alert.setContentText("Appointment Overlap Error.\n\nThere is already an appointment for the selected customer at the selected date/time.");
+                    alert.setContentText("Appointment Overlap Error.\n\nThere is already an existing appointment for the selected date/time.");
                     alert.showAndWait();
 
                 } else {
@@ -260,6 +259,8 @@ public class AppointmentUpdateScreenController implements Initializable {
 
                     Appointments.deleteAppointments(selectedAppointments);
 
+                    Appointments.updateDataBaseAppointment(appointmentsID, appointmentsTitle, appointmentsDescription, appointmentsLocation, appointmentsType, appointmentsStartTime, appointmentsEndTime, customersID, usersID, contactsID);
+
                     Parent root = FXMLLoader.load(getClass().getResource("/delorme/john/AppointmentScreen.fxml"));
                     Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root, 775, 400);
@@ -271,6 +272,10 @@ public class AppointmentUpdateScreenController implements Initializable {
             }
 
         } catch (IOException e) {
+
+            throw new RuntimeException(e);
+
+        } catch (SQLException e) {
 
             throw new RuntimeException(e);
 

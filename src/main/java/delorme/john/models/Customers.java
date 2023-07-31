@@ -57,6 +57,7 @@ public class Customers {
 
     /**
      * Method that pulls customer info from database and stores it in a list
+     *
      * @return
      * @throws SQLException
      */
@@ -91,21 +92,40 @@ public class Customers {
 
     }
 
-    private static Integer customerID = 4;
+    /**
+     * Initializes customerID variable
+     */
+
+    private static Integer customerID = 0;
 
     /**
      * Getter method for getNewCustomersID
+     * Creates a unique customerID based on the current highest customerID
      * @return
      */
 
     public static Integer getNewCustomerID() {
 
-        return customerID++;
+        Integer maxValue = Integer.MIN_VALUE;
+
+        for (Iterator<Customers> i = Customers.getAllCustomers().iterator(); i.hasNext();) {
+
+            Customers customers = i.next();
+
+            if (customers.getCustomersID() > (maxValue)) {
+
+                maxValue = customers.getCustomersID();
+
+            }
+        }
+
+        return maxValue + 1;
 
     }
 
     /**
      * Getter method for getCustomersID
+     *
      * @return
      */
 
@@ -117,6 +137,7 @@ public class Customers {
 
     /**
      * Getter method for getCustomersName
+     *
      * @return
      */
 
@@ -128,6 +149,7 @@ public class Customers {
 
     /**
      * Getter method for getCustomersAddress
+     *
      * @return
      */
 
@@ -150,6 +172,7 @@ public class Customers {
 
     /**
      * Getter method for getCustomersPhoneNumber
+     *
      * @return
      */
 
@@ -161,6 +184,7 @@ public class Customers {
 
     /**
      * Getter method for getCustomersCountryData
+     *
      * @return
      */
 
@@ -172,6 +196,7 @@ public class Customers {
 
     /**
      * Getter method for getCustomersDivisionID
+     *
      * @return
      */
 
@@ -183,6 +208,7 @@ public class Customers {
 
     /**
      * Setter method for setCustomersID
+     *
      * @param customersID
      */
 
@@ -194,6 +220,7 @@ public class Customers {
 
     /**
      * Setter method for setCustomersName
+     *
      * @param customersName
      */
 
@@ -205,6 +232,7 @@ public class Customers {
 
     /**
      * Setter method for setCustomersAddress
+     *
      * @param customersAddress
      */
 
@@ -216,6 +244,7 @@ public class Customers {
 
     /**
      * Setter method for setCustomersPostalCode
+     *
      * @param customersPostalCode
      */
 
@@ -227,6 +256,7 @@ public class Customers {
 
     /**
      * Setter method for setCustomersPhoneNumber
+     *
      * @param customersPhoneNumber
      */
 
@@ -238,6 +268,7 @@ public class Customers {
 
     /**
      * Setter method for setCustomersCountryData
+     *
      * @param customersCountryData
      */
 
@@ -249,6 +280,7 @@ public class Customers {
 
     /**
      * Setter method for setCustomersDivisionID
+     *
      * @param customersDivisionID
      */
 
@@ -260,6 +292,7 @@ public class Customers {
 
     /**
      * Method for deleting a customer
+     *
      * @param selectedCustomers
      * @return
      */
@@ -281,10 +314,11 @@ public class Customers {
 
     /**
      * Method for deleting a appointment that is associated with a customer
+     *
      * @param selectedCustomers
      */
 
-    public static void deleteAssociatedAppointments(Customers selectedCustomers) {
+    public static void deleteAssociatedAppointments(Customers selectedCustomers) throws SQLException {
 
 
         Integer selectedCustomersID = selectedCustomers.getCustomersID();
@@ -301,6 +335,8 @@ public class Customers {
 
                 Appointments selectedAppointment = appointment;
 
+                Appointments.deleteDataBaseAppointment(selectedAppointment.getAppointmentsID());
+
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment ID: " + selectedAppointment.getAppointmentsID() + " Type: " + selectedAppointment.getAppointmentsType() + " has been removed.");
                 Optional<ButtonType> result = alert.showAndWait();
 
@@ -310,6 +346,7 @@ public class Customers {
 
     /**
      * Method to update a customer
+     *
      * @param index
      * @param selectedCustomers
      */
@@ -324,6 +361,7 @@ public class Customers {
 
     /**
      * Getter method for getAllCustomers
+     *
      * @return
      */
 
@@ -335,6 +373,7 @@ public class Customers {
 
     /**
      * Setter method for setAllCustomers
+     *
      * @param allCustomers
      */
 
@@ -346,12 +385,94 @@ public class Customers {
 
     /**
      * Method to add a customer
+     *
      * @param newCustomers
      */
 
     public static void addCustomers(Customers newCustomers) {
 
         allCustomers.add(newCustomers);
+
+    }
+
+    /**
+     * Method that adds the new customer to the sql database
+     *
+     * @param selectedCustomersID
+     * @param selectedCustomersName
+     * @param selectedCustomersAddress
+     * @param selectedCustomersPostalCode
+     * @param selectedCustomersPhoneNumber
+     * @param selectedCustomerCountryData
+     * @throws SQLException
+     */
+
+    public static void addNewDataBaseCustomer(Integer selectedCustomersID, String selectedCustomersName, String selectedCustomersAddress, String selectedCustomersPostalCode, String selectedCustomersPhoneNumber, String selectedCustomerCountryData) throws SQLException {
+
+        int customerDatabaseCountryID = FirstLevelDivisions.lookupCountryData(selectedCustomerCountryData);
+
+        String addCustomerStatement = "INSERT INTO customers (Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStatementCustomer = JDBC.getConnection().prepareStatement(addCustomerStatement);
+
+        preparedStatementCustomer.setString(1, String.valueOf(selectedCustomersID));
+        preparedStatementCustomer.setString(2, String.valueOf(selectedCustomersName));
+        preparedStatementCustomer.setString(3, String.valueOf(selectedCustomersAddress));
+        preparedStatementCustomer.setString(4, String.valueOf(selectedCustomersPostalCode));
+        preparedStatementCustomer.setString(5, String.valueOf(selectedCustomersPhoneNumber));
+        preparedStatementCustomer.setInt(6, customerDatabaseCountryID);
+
+        preparedStatementCustomer.execute();
+
+    }
+
+    /**
+     * Method that deletes the selected customer from the sql database
+     *
+     * @param selectedCustomersID
+     * @throws SQLException
+     */
+
+    public static void deleteDataBaseCustomer(Integer selectedCustomersID) throws SQLException {
+
+        String deleteCustomerStatement = "DELETE from customers WHERE Customer_ID=?";
+
+        PreparedStatement preparedStatementDeleteCustomer = JDBC.getConnection().prepareStatement(deleteCustomerStatement);
+
+        preparedStatementDeleteCustomer.setInt(1, selectedCustomersID);
+
+        preparedStatementDeleteCustomer.execute();
+
+    }
+
+    /**
+     * Method that updates the selected customer in the sql database
+     *
+     * @param selectedCustomersID
+     * @param selectedCustomersName
+     * @param selectedCustomersAddress
+     * @param selectedCustomersPostalCode
+     * @param selectedCustomersPhoneNumber
+     * @param selectedCustomerCountryData
+     * @throws SQLException
+     */
+
+    public static void updateDataBaseCustomer(Integer selectedCustomersID, String selectedCustomersName, String selectedCustomersAddress, String selectedCustomersPostalCode, String selectedCustomersPhoneNumber, String selectedCustomerCountryData) throws SQLException {
+
+        int customerDatabaseCountryID = FirstLevelDivisions.lookupCountryData(selectedCustomerCountryData);
+
+        String updateCustomerStatement = "UPDATE customers SET Customer_Name=?, Address=?, Postal_Code=?, Phone=?, Division_ID=? WHERE Customer_ID=?";
+
+        PreparedStatement preparedStatementCustomer = JDBC.getConnection().prepareStatement(updateCustomerStatement);
+
+        preparedStatementCustomer.setString(1, String.valueOf(selectedCustomersName));
+        preparedStatementCustomer.setString(2, String.valueOf(selectedCustomersAddress));
+        preparedStatementCustomer.setString(3, String.valueOf(selectedCustomersPostalCode));
+        preparedStatementCustomer.setString(4, String.valueOf(selectedCustomersPhoneNumber));
+        preparedStatementCustomer.setInt(5, customerDatabaseCountryID);
+        preparedStatementCustomer.setString(6, String.valueOf(selectedCustomersID));
+
+        preparedStatementCustomer.execute();
 
     }
 }

@@ -7,7 +7,9 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.*;
+import java.util.Iterator;
 
 /**
  * @author John DeLorme
@@ -84,16 +86,34 @@ public class Appointments {
 
     }
 
-    private static Integer AppointmentID = 3;
+    /**
+     * Initializes appointmentID variable
+     */
+
+    private static Integer AppointmentID = 0;
 
     /**
      * Getter method for getNewAppointmentID
+     * Creates a unique appointmentID based on the current highest appointmentID
      * @return
      */
 
     public static Integer getNewAppointmentID() {
 
-        return AppointmentID++;
+        Integer maxValue = Integer.MIN_VALUE;
+
+        for (Iterator<Appointments> i = Appointments.getAllAppointments().iterator(); i.hasNext();) {
+
+            Appointments appointment = i.next();
+
+            if (appointment.getAppointmentsID() > (maxValue)) {
+
+                maxValue = appointment.getAppointmentsID();
+
+            }
+        }
+
+        return maxValue + 1;
 
     }
 
@@ -639,6 +659,99 @@ public class Appointments {
         monthEnumNameList.add("December");
 
         return monthEnumNameList;
+
+    }
+
+    /**
+     * Method that adds an appointment to the sql database
+     *
+     * @param selectedAppointmentID
+     * @param selectedAppointmentTitle
+     * @param selectedAppointmentDescription
+     * @param selectedAppointmentLocation
+     * @param selectedAppointmentType
+     * @param selectedAppointmentStartTime
+     * @param selectedAppointmentEndTime
+     * @param selectedCustomersID
+     * @param selectedUsersID
+     * @param selectedContactsID
+     * @throws SQLException
+     */
+
+    public static void addNewDataBaseAppointment(Integer selectedAppointmentID, String selectedAppointmentTitle, String selectedAppointmentDescription, String selectedAppointmentLocation, String selectedAppointmentType, LocalDateTime selectedAppointmentStartTime, LocalDateTime selectedAppointmentEndTime, Integer selectedCustomersID, Integer selectedUsersID, String selectedContactsID) throws SQLException {
+
+        String addAppointmentStatement = "INSERT INTO appointments (Appointment_ID, Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStatementAppointment = JDBC.getConnection().prepareStatement(addAppointmentStatement);
+
+        preparedStatementAppointment.setInt(1, selectedAppointmentID);
+        preparedStatementAppointment.setString(2, selectedAppointmentTitle);
+        preparedStatementAppointment.setString(3, selectedAppointmentDescription);
+        preparedStatementAppointment.setString(4, selectedAppointmentLocation);
+        preparedStatementAppointment.setString(5, selectedAppointmentType);
+        preparedStatementAppointment.setTimestamp(6, Timestamp.valueOf(selectedAppointmentStartTime));
+        preparedStatementAppointment.setTimestamp(7, Timestamp.valueOf(selectedAppointmentEndTime));
+        preparedStatementAppointment.setInt(8, selectedCustomersID);
+        preparedStatementAppointment.setInt(9, selectedUsersID);
+        preparedStatementAppointment.setInt(10, Integer.parseInt(selectedContactsID));
+
+        preparedStatementAppointment.execute();
+
+    }
+
+    /**
+     * Method that deletes appointments from the sql database
+     *
+     * @param selectedAppointmentID
+     * @throws SQLException
+     */
+
+    public static void deleteDataBaseAppointment(Integer selectedAppointmentID) throws SQLException {
+
+        String deleteAppointmentStatement = "DELETE from appointments WHERE Appointment_ID=?";
+
+        PreparedStatement preparedStatementDeleteAppointment = JDBC.getConnection().prepareStatement(deleteAppointmentStatement);
+
+        preparedStatementDeleteAppointment.setInt(1, selectedAppointmentID);
+
+        preparedStatementDeleteAppointment.execute();
+
+    }
+
+    /**
+     * Method that updates the sql database appointments
+     *
+     * @param selectedAppointmentID
+     * @param selectedAppointmentTitle
+     * @param selectedAppointmentDescription
+     * @param selectedAppointmentLocation
+     * @param selectedAppointmentType
+     * @param selectedAppointmentStartTime
+     * @param selectedAppointmentEndTime
+     * @param selectedCustomersID
+     * @param selectedUsersID
+     * @param selectedContactsID
+     * @throws SQLException
+     */
+
+    public static void updateDataBaseAppointment(Integer selectedAppointmentID, String selectedAppointmentTitle, String selectedAppointmentDescription, String selectedAppointmentLocation, String selectedAppointmentType, LocalDateTime selectedAppointmentStartTime, LocalDateTime selectedAppointmentEndTime, Integer selectedCustomersID, Integer selectedUsersID, String selectedContactsID) throws SQLException {
+
+        String updateAppointmentStatement = "UPDATE appointments SET Title=?, Description=?, Location=?, Type=?, Start=?, End=?, Customer_ID=?, User_ID=?, Contact_ID=? WHERE Appointment_ID=?";
+
+        PreparedStatement preparedStatementAppointment = JDBC.getConnection().prepareStatement(updateAppointmentStatement);
+
+        preparedStatementAppointment.setString(1, selectedAppointmentTitle);
+        preparedStatementAppointment.setString(2, selectedAppointmentDescription);
+        preparedStatementAppointment.setString(3, selectedAppointmentLocation);
+        preparedStatementAppointment.setString(4, selectedAppointmentType);
+        preparedStatementAppointment.setTimestamp(5, Timestamp.valueOf(selectedAppointmentStartTime));
+        preparedStatementAppointment.setTimestamp(6, Timestamp.valueOf(selectedAppointmentEndTime));
+        preparedStatementAppointment.setInt(7, selectedCustomersID);
+        preparedStatementAppointment.setInt(8, selectedUsersID);
+        preparedStatementAppointment.setInt(9, Integer.parseInt(selectedContactsID));
+        preparedStatementAppointment.setInt(10, selectedAppointmentID);
+
+        preparedStatementAppointment.execute();
 
     }
 }
