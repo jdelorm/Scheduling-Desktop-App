@@ -11,5 +11,5 @@
    <Label fx:id="password" layoutX="226.0" layoutY="161.0" text="Password" />
    <Label fx:id="schedulingDesktopApplication" layoutX="14.0" layoutY="14.0" text="Scheduling Desktop Application" />
    <Label fx:id="userLocationMain" layoutX="226.0" layoutY="304.0" text="Operating System's Zone ID" />
-   <TextField fx:id="zoneIdMain" layoutX="226.0" layoutY="330.0" onAction="#onZoneIdMain" />
+   <TextField fx:id="zoneIdMain" editable="false" layoutX="226.0" layoutY="330.0" onAction="#onZoneIdMain" />
 </AnchorPane>
