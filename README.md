@@ -2,9 +2,9 @@ Title: Desktop Scheduling Application
 
 Purpose: To build a scheduling application using data pulled from a database
 
-Author : John DeLorme
+Author : jdelorm
 
-Contact: jdelorm@wgu.edu
+Contact: jdelorm@bot.com
 
 Version: 1.3
 
